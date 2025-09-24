@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Data Sehari-hari</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Form Input Data Sehari-hari</h1>
+        
+        <form id="dataForm">
+            <div class="form-group">
+                <label for="tanggal" class="required">Tanggal</label>
+                <input type="date" id="tanggal" name="tanggal" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="kategori" class="required">Kategori</label>
+                <select id="kategori" name="kategori" required>
+                    <option value="">Pilih Kategori</option>
+                    <option value="Makanan">Makanan</option>
+                    <option value="Transportasi">Transportasi</option>
+                    <option value="Belanja">Belanja</option>
+                    <option value="Hiburan">Hiburan</option>
+                    <option value="Kesehatan">Kesehatan</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="deskripsi" class="required">Deskripsi</label>
+                <input type="text" id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi pengeluaran" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="jumlah" class="required">Jumlah (Rp)</label>
+                <input type="number" id="jumlah" name="jumlah" placeholder="Masukkan jumlah" min="0" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="catatan">Catatan Tambahan</label>
+                <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika diperlukan"></textarea>
+            </div>
+            
+            <button type="submit">Simpan Data</button>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+            Data berhasil disimpan!
+        </div>
+        
+        <div id="errorMessage" class="error-message">
+            Terjadi kesalahan saat menyimpan data. Silakan coba lagi.
+        </div>
+    </div>
+
+    <script>
+        // URL Google Apps Script yang akan dibuat
+        const scriptURL = 'URL_APPS_SCRIPT_ANDA_DISINI';
+        
+        document.getElementById('dataForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Tampilkan loading state
+            const submitButton = document.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Menyimpan...';
+            submitButton.disabled = true;
+            
+            // Ambil data dari form
+            const formData = new FormData(this);
+            
+            // Kirim data ke Google Apps Script
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData 
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Tampilkan pesan sukses
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    
+                    // Reset form
+                    document.getElementById('dataForm').reset();
+                } else {
+                    throw new Error('Gagal menyimpan data');
+                }
+            })
+            .catch(error => {
+                // Tampilkan pesan error
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Kembalikan tombol ke keadaan semula
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                // Sembunyikan pesan setelah 5 detik
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
