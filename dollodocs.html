@@ -1,189 +1,2478 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Input Data Sehari-hari</title>
+    <title>Seputar Permainan - LINE X Dashboard</title>
+    <link rel="icon" type="image/png" href="https://line30479.com/assets/img/ei/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        /* ===== GLOBAL ===== */
         body {
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            background: url('https://i.postimg.cc/Ghhs3wXd/image.jpg') fixed center/cover no-repeat #0a0a0a !important;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        .dashboard {
+            background: rgba(0,0,0,0.65) !important;
+            backdrop-filter: none !important;
         }
-        h1 {
+        .card, .panel-card, .login-box, .modal-content, .content-header, .sidebar {
+            backdrop-filter: none !important;
+        }
+
+        /* ===== HEADER PREMIUM ===== */
+        .premium-header {
+            background: linear-gradient(135deg, rgba(241,196,15,0.2) 0%, rgba(0,0,0,0.85) 100%);
+            border: 1px solid rgba(241,196,15,0.4);
+            border-radius: 40px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
             text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(241,196,15,0.2) inset;
         }
-        .form-group {
-            margin-bottom: 20px;
+        .premium-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(241,196,15,0.15) 0%, transparent 70%);
+            animation: rotateSlow 20s linear infinite;
         }
-        label {
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .header-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(145deg, #f1c40f, #e67e22);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 0 20px rgba(241,196,15,0.6);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        .header-icon i {
+            font-size: 3rem;
+            color: #000;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .premium-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, #f7dc6f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(241,196,15,0.3);
+            letter-spacing: 2px;
+        }
+        .header-subtitle {
+            color: #ddd;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== SEARCH BAR ===== */
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
+        .search-input {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(241,196,15,0.4);
+            border-radius: 50px;
+            padding: 0.7rem 1.2rem;
+            width: 300px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .search-input:focus {
+            border-color: #f1c40f;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(241,196,15,0.2);
+        }
+        @media (max-width: 768px) {
+            .search-input { width: 100%; }
+        }
+
+        /* ===== TAB NAVIGASI ===== */
+        .tab-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(12px);
+            padding: 0.6rem;
+            border-radius: 80px;
+            border: 1px solid rgba(241,196,15,0.3);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tab-btn {
+            padding: 0.8rem 1.8rem;
+            background: rgba(20,20,30,0.6);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        .tab-btn i { color: #f1c40f; }
+        .tab-btn:hover {
+            background: rgba(241,196,15,0.2);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .tab-btn.active {
+            background: linear-gradient(145deg, #f1c40f, #f39c12);
+            color: #000;
+            box-shadow: 0 8px 20px rgba(241,196,15,0.5);
+        }
+        .tab-btn.active i { color: #000; }
+        .tab-pane {
+            display: none;
+            animation: fadeSlideUp 0.4s ease;
+        }
+        .tab-pane.active {
             display: block;
-            margin-bottom: 8px;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== KONTEN UMUM CARD (4 KOLOM, CARD BESAR) ===== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        .content-card {
+            background: rgba(20,20,30,0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+            border: 1px solid rgba(241,196,15,0.3);
+            position: relative;
+        }
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f1c40f, #e67e22, #f1c40f);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .content-card:hover::before {
+            opacity: 1;
+        }
+        .content-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(241,196,15,0.7);
+            box-shadow: 0 25px 40px -12px rgba(241,196,15,0.3);
+        }
+        .card-inner {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .card-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .card-header .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, rgba(241,196,15,0.2), rgba(230,126,34,0.05));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+            border: 2px solid rgba(241,196,15,0.6);
+            transition: all 0.3s;
+        }
+        .content-card:hover .icon-wrapper {
+            transform: scale(1.05);
+            border-color: #f1c40f;
+            box-shadow: 0 0 15px rgba(241,196,15,0.4);
+        }
+        .card-header .icon-wrapper i {
+            font-size: 1.8rem;
+            color: #f1c40f;
+        }
+        .card-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #f7dc6f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            line-height: 1.3;
+        }
+        .card-content p {
+            color: #eaeaea;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            text-align: justify;
+            white-space: pre-line;
+            background: rgba(0,0,0,0.3);
+            padding: 0.9rem;
+            border-radius: 20px;
+            border-left: 3px solid #f1c40f;
+            transition: all 0.2s;
+            margin-bottom: 1rem;
+            max-height: 130px;
+            overflow-y: auto;
+        }
+        .card-content p:hover {
+            background: rgba(0,0,0,0.4);
+            border-left-width: 4px;
+            padding-left: 1rem;
+        }
+        .copy-btn {
+            background: rgba(241,196,15,0.1);
+            border: 1px solid rgba(241,196,15,0.5);
+            color: #f1c40f;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+            margin-top: 0.2rem;
+        }
+        .copy-btn:hover {
+            background: #f1c40f;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(241,196,15,0.3);
+        }
+
+        /* ===== GALERI GAMBAR PERMAINAN ===== */
+        .gallery-section {
+            background: rgba(20,20,30,0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 2rem;
+            border: 1px solid rgba(241,196,15,0.4);
+            margin-top: 1rem;
+        }
+        .gallery-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #f1c40f;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px dashed rgba(241,196,15,0.5);
+            display: inline-block;
+            padding-bottom: 0.6rem;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .gallery-item {
+            background: rgba(0,0,0,0.5);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(241,196,15,0.3);
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            border-color: #f1c40f;
+            box-shadow: 0 20px 30px -10px rgba(241,196,15,0.4);
+        }
+        .gallery-image-wrapper {
+            width: 100%;
+            height: 260px;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .gallery-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.03);
+        }
+        .gallery-image-wrapper::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(0,0,0,0.8);
+            color: #f1c40f;
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        .gallery-item:hover .gallery-image-wrapper::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        .gallery-content {
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.5));
+        }
+        .gallery-content h4 {
+            color: #f1c40f;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .gallery-content p {
+            color: #ddd;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .gallery-copy-btn {
+            background: transparent;
+            border: 1px solid #f1c40f;
+            color: #f1c40f;
+            padding: 0.35rem 0.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.7rem;
+        }
+        .gallery-copy-btn:hover {
+            background: #f1c40f;
+            color: #000;
+            transform: scale(1.02);
+        }
+
+        /* ===== MODAL PREVIEW ===== */
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(25px);
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .preview-modal.active {
+            display: flex;
+        }
+        .preview-content {
+            background: linear-gradient(145deg, #2a2a1f, #1a1a0f);
+            border: 2px solid #f1c40f;
+            border-radius: 60px;
+            max-width: 950px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            animation: modalPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.8), 0 0 0 2px rgba(241,196,15,0.3) inset;
+        }
+        .preview-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #f1c40f;
+            color: #f1c40f;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .preview-close:hover {
+            background: #ff6b6b;
+            border-color: #ff6b6b;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+        .preview-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .preview-header h2 {
+            color: #f1c40f;
+            font-size: 2rem;
+            font-weight: 700;
+            border-bottom: 3px dashed #f1c40f;
+            padding-bottom: 0.8rem;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .preview-image-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-radius: 45px;
+            overflow: hidden;
+            border: 2px solid #f1c40f;
+            background: #0a0a0a;
+            padding: 15px;
+            max-height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .preview-image {
+            max-width: 100%;
+            max-height: 50vh;
+            object-fit: contain;
+        }
+        .preview-description {
+            background: rgba(0,0,0,0.6);
+            border-radius: 40px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.8rem;
+            border-left: 6px solid #f1c40f;
+            color: #f0f0f0;
+            font-size: 1rem;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .preview-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .preview-btn {
+            background: rgba(0,0,0,0.6);
+            border: 2px solid #f1c40f;
+            color: #f1c40f;
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
             font-weight: 600;
         }
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+        .preview-btn:hover {
+            background: #f1c40f;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(241,196,15,0.4);
         }
-        textarea {
-            height: 100px;
-            resize: vertical;
+
+        /* ===== EMPTY STATE & TOAST ===== */
+        .empty-card {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #f1c40f;
+            border: 2px dashed currentColor;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.4);
         }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s;
+        .copy-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            animation: slideInRight 0.3s, fadeOut 0.3s 1.7s forwards;
         }
-        button:hover {
-            background-color: #2980b9;
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
-        .success-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
         }
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1400px) {
+            .content-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        .required::after {
-            content: " *";
-            color: red;
+        @media (max-width: 1100px) {
+            .content-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .premium-header h1 { font-size: 2rem; }
+            .content-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Form Input Data Sehari-hari</h1>
-        
-        <form id="dataForm">
-            <div class="form-group">
-                <label for="tanggal" class="required">Tanggal</label>
-                <input type="date" id="tanggal" name="tanggal" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="kategori" class="required">Kategori</label>
-                <select id="kategori" name="kategori" required>
-                    <option value="">Pilih Kategori</option>
-                    <option value="Makanan">Makanan</option>
-                    <option value="Transportasi">Transportasi</option>
-                    <option value="Belanja">Belanja</option>
-                    <option value="Hiburan">Hiburan</option>
-                    <option value="Kesehatan">Kesehatan</option>
-                    <option value="Lainnya">Lainnya</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="deskripsi" class="required">Deskripsi</label>
-                <input type="text" id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi pengeluaran" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="jumlah" class="required">Jumlah (Rp)</label>
-                <input type="number" id="jumlah" name="jumlah" placeholder="Masukkan jumlah" min="0" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="catatan">Catatan Tambahan</label>
-                <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika diperlukan"></textarea>
-            </div>
-            
-            <button type="submit">Simpan Data</button>
-        </form>
-        
-        <div id="successMessage" class="success-message">
-            Data berhasil disimpan!
+<div class="dashboard">
+    <div class="sidebar">
+    <div class="sidebar-header">
+        <img src="https://line30479.com/assets/img/ei/logo.png" alt="LINE X Logo" class="sidebar-logo" loading="lazy">
+        <h3>LINE X</h3>
+    </div>
+    
+    <ul class="sidebar-menu">
+        <li><a href="dashboard" class=""><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
+        <li><a href="pkcs" class=""><i class="fas fa-headset"></i> <span>All Pk Cs</span></a></li>
+        <li><a href="bonus" class=""><i class="fas fa-gift"></i> <span>All Bonus Situs</span></a></li>
+        <li><a href="qris" class=""><i class="fas fa-qrcode"></i> <span>All Qris</span></a></li>
+        <li><a href="galeri_cs" class=""><i class="fas fa-images"></i> <span>Galeri Cs</span></a></li>
+        <li><a href="pasaran" class=""><i class="fas fa-calendar-alt"></i> <span>Pasaran line</span></a></li>
+        <li><a href="prediksi" class=""><i class="fas fa-chart-line"></i> <span>Prediksi Togel</span></a></li>
+        <li><a href="event" class=""><i class="fas fa-gamepad"></i> <span>Event Line</span></a></li>
+        <li><a href="seputar_permainan" class="active"><i class="fas fa-gamepad"></i> <span>Seputar Permainan</span></a></li>
+        <li>
+                            <a href="javascript:void(0);" onclick="showAccessDenied()" class="disabled-link"><i class="fas fa-cog"></i> <span>Pengaturan</span></a>
+                    </li>
+    </ul>
+</div>
+
+<!-- Modal Akses Ditolak -->
+<div id="accessDeniedModal" class="modal">
+    <div class="modal-content modal-danger" style="text-align: center; max-width: 400px;">
+        <div class="modal-header" style="justify-content: center; border-bottom: none; padding-bottom: 0;">
+            <i class="fas fa-lock" style="font-size: 4rem; color: #ff6b6b; background: rgba(255,107,107,0.2); padding: 20px; border-radius: 50%;"></i>
         </div>
-        
-        <div id="errorMessage" class="error-message">
-            Terjadi kesalahan saat menyimpan data. Silakan coba lagi.
+        <div class="modal-body" style="text-align: center;">
+            <h3 style="margin: 0 0 10px 0; font-size: 1.8rem;">Akses Ditolak</h3>
+            <p style="font-size: 1rem; margin-bottom: 20px;">Anda tidak memiliki izin untuk mengakses menu <strong>Pengaturan</strong>.</p>
+            <p style="color: #b0b0b0; font-size: 0.9rem;">Halaman ini hanya untuk administrator.</p>
+        </div>
+        <div class="modal-footer" style="justify-content: center; border-top: none; padding-top: 0;">
+            <button class="btn-submit" onclick="closeAccessDeniedModal()" style="background: #ff6b6b; color: #fff;">Tutup</button>
         </div>
     </div>
+</div>
 
-    <script>
-        // URL Google Apps Script yang akan dibuat
-        const scriptURL = 'URL_APPS_SCRIPT_ANDA_DISINI';
-        
-        document.getElementById('dataForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Tampilkan loading state
-            const submitButton = document.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            submitButton.textContent = 'Menyimpan...';
-            submitButton.disabled = true;
-            
-            // Ambil data dari form
-            const formData = new FormData(this);
-            
-            // Kirim data ke Google Apps Script
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: formData 
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Tampilkan pesan sukses
-                    document.getElementById('successMessage').style.display = 'block';
-                    document.getElementById('errorMessage').style.display = 'none';
-                    
-                    // Reset form
-                    document.getElementById('dataForm').reset();
-                } else {
-                    throw new Error('Gagal menyimpan data');
-                }
-            })
-            .catch(error => {
-                // Tampilkan pesan error
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'none';
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                // Kembalikan tombol ke keadaan semula
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-                
-                // Sembunyikan pesan setelah 5 detik
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                    document.getElementById('errorMessage').style.display = 'none';
-                }, 5000);
-            });
+<style>
+.sidebar {
+    background: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(8px);
+    border-right: 1px solid rgba(241,196,15,0.3);
+}
+.sidebar-header h3 {
+    color: #f1c40f;
+    text-shadow: 0 0 5px rgba(241,196,15,0.5);
+}
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    color: #ccc;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.sidebar-menu li a:hover {
+    background: rgba(241,196,15,0.1);
+    color: #fff;
+    transform: translateX(5px);
+}
+.sidebar-menu li a.active {
+    background: linear-gradient(145deg, #f1c40f, #e67e22);
+    color: #000;
+    box-shadow: 0 5px 15px rgba(241,196,15,0.5);
+}
+.disabled-link {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.modal-content.modal-danger {
+    background: linear-gradient(145deg, #2a1f1f, #1a1212);
+    border: 1px solid rgba(255,107,107,0.5);
+    border-radius: 30px;
+    animation: modalPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.modal-content.modal-danger .btn-submit {
+    background: linear-gradient(145deg, #ff6b6b, #ff4444);
+    border: none;
+    padding: 12px 30px;
+}
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.7) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+</style>
+
+<script>
+function showAccessDenied() {
+    document.getElementById('accessDeniedModal').style.display = 'flex';
+}
+function closeAccessDeniedModal() {
+    document.getElementById('accessDeniedModal').style.display = 'none';
+}
+window.addEventListener('click', function(e) {
+    if (e.target == document.getElementById('accessDeniedModal')) {
+        closeAccessDeniedModal();
+    }
+});
+
+// Prefetch semua tautan sidebar saat hover
+document.querySelectorAll('.sidebar-menu a:not(.disabled-link)').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('javascript')) {
+            let prefetchLink = document.querySelector(`link[rel="prefetch"][href="${href}"]`);
+            if (!prefetchLink) {
+                prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = href;
+                document.head.appendChild(prefetchLink);
+            }
+        }
+    });
+});
+</script>    <main class="content">
+        <div class="content-header">
+    <div class="header-left">
+        <h1>Seputar Permainan</h1>
+    </div>
+    <div class="header-right">
+        <div class="user-info">
+            <span class="user-name">Selamat Datang, wecaaakasfarma!</span>
+            <i class="fas fa-user-circle user-avatar"></i>
+        </div>
+        <div class="live-datetime">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="liveDate"></span>
+            <i class="fas fa-clock"></i>
+            <span id="liveTime"></span>
+        </div>
+        <button id="refreshBtn" class="refresh-btn" title="Refresh halaman">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+        <a href="logout" class="logout-btn" title="Logout">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </div>
+</div>
+
+<style>
+.refresh-btn, .logout-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(241,196,15,0.4);
+    color: #f1c40f;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+    margin-left: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+.refresh-btn:hover, .logout-btn:hover {
+    transform: scale(1.08);
+    background: rgba(241,196,15,0.15);
+    border-color: #f1c40f;
+    box-shadow: 0 0 12px rgba(241,196,15,0.5);
+}
+.logout-btn:hover {
+    background: rgba(255,68,68,0.2);
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+    box-shadow: 0 0 12px rgba(255,107,107,0.5);
+}
+.refresh-btn:active i {
+    transform: rotate(180deg);
+    transition: transform 0.3s;
+}
+.live-datetime {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,0,0,0.4);
+    padding: 5px 12px;
+    border-radius: 30px;
+    margin-left: 15px;
+    border: 1px solid rgba(241,196,15,0.3);
+    font-size: 0.85rem;
+    backdrop-filter: blur(4px);
+}
+.live-datetime i {
+    color: #f1c40f;
+}
+.live-datetime span {
+    color: #ddd;
+    font-weight: 500;
+}
+@media (max-width: 768px) {
+    .live-datetime { display: none; }
+    .refresh-btn, .logout-btn { width: 36px; height: 36px; font-size: 1rem; }
+}
+</style>
+
+<script>
+document.getElementById('refreshBtn').addEventListener('click', () => window.location.reload());
+
+function updateLiveDateTime() {
+    const now = new Date();
+    const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    document.getElementById('liveDate').innerHTML = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+    document.getElementById('liveTime').innerHTML = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')} WIB`;
+}
+updateLiveDateTime();
+setInterval(updateLiveDateTime, 1000);
+</script>        <div class="content-body">
+            <div class="gallery-wrapper">
+                <div class="premium-header">
+                    <div class="header-icon"><i class="fas fa-gamepad"></i></div>
+                    <h1>SEPUTAR PERMAINAN</h1>
+                    <div class="header-subtitle">Informasi lengkap seputar permainan & galeri gambar</div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari judul atau deskripsi...">
+                </div>
+
+                <!-- Tab Navigasi -->
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="konten-umum"><i class="fas fa-file-alt"></i> Konten Umum</button>
+                    <button class="tab-btn" data-tab="gambar-permainan"><i class="fas fa-images"></i> Gambar Permainan</button>
+                </div>
+
+                <!-- Konten Umum (multiple cards) -->
+                <div id="konten-umum" class="tab-pane active">
+                                            <div class="content-grid" id="contentGrid">
+                                                            <div class="content-card" data-judul="cara betting 4d 3d 2d" data-deskripsi="cara betting 4d 3d 2d
+berikut cara pembelian 4d 3d 2d:
+1. pilih pasaran yang ingin anda mainkan.
+
+2. pilih menu 4d 3d 2d
+
+3. lalu pilih tipe bettingan yang ingin anda gunakan ( discount - full - bb - prize123 )
+4. silahkan isi kolom pertama dengan angka yang ingin anda beli. contoh: &quot;&quot;1234&quot;&quot;
+
+5. pada kolom berikutnya (kolom 4d/3d/2d) diisi dengan nominal/ jumlah bettingan anda, angka yang anda isi pada kolom nominal akan otomatis dikalikan dengan rp. 1,000
+contoh:
+pembelian rp.100,- untuk 4d maka pada kolom 4d cukup diisi dengan angka &quot;&quot;0.1&quot;&quot; (tanpa tanda petik)
+pembelian rp.500,- untuk 3d maka pada kolom 3d cukup diisi dengan angka &quot;&quot;0.5&quot;&quot; (tanpa tanda petik)
+- pembelian rp. 1,000,- untuk 2d pada kolom 2d cukup diisi dengan angka &quot;&quot;1&quot;&quot; (tanpa tanda petik)
+
+6. klik submit
+
+7. periksa kembali seluruh rincian pembelian anda, jika semua sudah benar &amp; sesuai, tekan kirim">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>CARA BETTING 4D 3D 2D</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>CARA BETTING 4D 3D 2D<br />
+Berikut Cara pembelian 4D 3D 2D:<br />
+1. Pilih pasaran yang ingin anda mainkan.<br />
+<br />
+2. Pilih menu 4D 3D 2D<br />
+<br />
+3. Lalu pilih Tipe bettingan yang ingin anda gunakan ( DISCOUNT - FULL - BB - PRIZE123 )<br />
+4. Silahkan isi kolom pertama dengan angka yang ingin anda beli. Contoh: &quot;&quot;1234&quot;&quot;<br />
+<br />
+5. Pada kolom berikutnya (Kolom 4D/3D/2D) diisi dengan nominal/ jumlah bettingan anda, angka yang anda isi pada kolom nominal akan otomatis dikalikan dengan Rp. 1,000<br />
+Contoh:<br />
+Pembelian Rp.100,- untuk 4D maka pada kolom 4D cukup diisi dengan angka &quot;&quot;0.1&quot;&quot; (tanpa tanda petik)<br />
+Pembelian Rp.500,- untuk 3D maka pada kolom 3D cukup diisi dengan angka &quot;&quot;0.5&quot;&quot; (tanpa tanda petik)<br />
+- Pembelian Rp. 1,000,- untuk 2D pada kolom 2D cukup diisi dengan angka &quot;&quot;1&quot;&quot; (tanpa tanda petik)<br />
+<br />
+6. Klik SUBMIT<br />
+<br />
+7. Periksa kembali seluruh rincian pembelian anda, jika semua sudah benar &amp; sesuai, Tekan KIRIM</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="CARA BETTING 4D 3D 2D
+Berikut Cara pembelian 4D 3D 2D:
+1. Pilih pasaran yang ingin anda mainkan.
+
+2. Pilih menu 4D 3D 2D
+
+3. Lalu pilih Tipe bettingan yang ingin anda gunakan ( DISCOUNT - FULL - BB - PRIZE123 )
+4. Silahkan isi kolom pertama dengan angka yang ingin anda beli. Contoh: &amp;quot;&amp;quot;1234&amp;quot;&amp;quot;
+
+5. Pada kolom berikutnya (Kolom 4D/3D/2D) diisi dengan nominal/ jumlah bettingan anda, angka yang anda isi pada kolom nominal akan otomatis dikalikan dengan Rp. 1,000
+Contoh:
+Pembelian Rp.100,- untuk 4D maka pada kolom 4D cukup diisi dengan angka &amp;quot;&amp;quot;0.1&amp;quot;&amp;quot; (tanpa tanda petik)
+Pembelian Rp.500,- untuk 3D maka pada kolom 3D cukup diisi dengan angka &amp;quot;&amp;quot;0.5&amp;quot;&amp;quot; (tanpa tanda petik)
+- Pembelian Rp. 1,000,- untuk 2D pada kolom 2D cukup diisi dengan angka &amp;quot;&amp;quot;1&amp;quot;&amp;quot; (tanpa tanda petik)
+
+6. Klik SUBMIT
+
+7. Periksa kembali seluruh rincian pembelian anda, jika semua sudah benar &amp;amp; sesuai, Tekan KIRIM" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting 2d depan" data-deskripsi="berikut cara betting 2d depan :
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih 2d depan
+3. pilih tipe taruhan yang ingin di betting
+contoh : discount, bet full, bet bb , prize 123
+4. masukkan angka 2d depan yang ingin anda betting
+contoh : &quot;&quot;12&quot;&quot;
+5. isi nominal taruhan anda
+( minimal betting rp.1000,- di isi dengan angka 1 )
+6. pilih tombol kirim untuk konfirmasi taruhan anda
+7. pastikan taruhan anda berhasil">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>CARA BETTING 2D DEPAN</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting 2D Depan :<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih 2D Depan<br />
+3. Pilih Tipe taruhan yang ingin di betting<br />
+Contoh : Discount, Bet Full, Bet BB , Prize 123<br />
+4. Masukkan angka 2D Depan yang ingin anda betting<br />
+Contoh : &quot;&quot;12&quot;&quot;<br />
+5. Isi nominal Taruhan anda<br />
+( Minimal Betting Rp.1000,- di isi dengan angka 1 )<br />
+6. Pilih tombol KIRIM untuk konfirmasi taruhan anda<br />
+7. Pastikan taruhan anda berhasil</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting 2D Depan :
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih 2D Depan
+3. Pilih Tipe taruhan yang ingin di betting
+Contoh : Discount, Bet Full, Bet BB , Prize 123
+4. Masukkan angka 2D Depan yang ingin anda betting
+Contoh : &amp;quot;&amp;quot;12&amp;quot;&amp;quot;
+5. Isi nominal Taruhan anda
+( Minimal Betting Rp.1000,- di isi dengan angka 1 )
+6. Pilih tombol KIRIM untuk konfirmasi taruhan anda
+7. Pastikan taruhan anda berhasil" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting 2d tengah" data-deskripsi="berikut cara betting 2d tengah:
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih 2d tengah
+3. pilih tipe taruhan yang ingin di betting
+contoh : discount, bet full, bet bb , prize 123
+4. masukkan angka 2d tengah yang ingin anda betting
+contoh : &quot;34&quot;
+5. isi nominal taruhan anda
+( minimal betting rp.1000,- di isi dengan angka 1 )
+6. pilih tombol kirim untuk konfirmasi taruhan anda
+7. pastikan taruhan anda berhasil">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>CARA BETTING 2D TENGAH</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting 2D Tengah:<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih 2D Tengah<br />
+3. Pilih Tipe taruhan yang ingin di betting<br />
+Contoh : Discount, Bet Full, Bet BB , Prize 123<br />
+4. Masukkan angka 2D Tengah yang ingin anda betting<br />
+Contoh : &quot;34&quot;<br />
+5. Isi nominal Taruhan anda<br />
+( Minimal Betting Rp.1000,- di isi dengan angka 1 )<br />
+6. Pilih tombol KIRIM untuk konfirmasi taruhan anda<br />
+7. Pastikan taruhan anda berhasil</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting 2D Tengah:
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih 2D Tengah
+3. Pilih Tipe taruhan yang ingin di betting
+Contoh : Discount, Bet Full, Bet BB , Prize 123
+4. Masukkan angka 2D Tengah yang ingin anda betting
+Contoh : &amp;quot;34&amp;quot;
+5. Isi nominal Taruhan anda
+( Minimal Betting Rp.1000,- di isi dengan angka 1 )
+6. Pilih tombol KIRIM untuk konfirmasi taruhan anda
+7. Pastikan taruhan anda berhasil" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting colok bebas" data-deskripsi="berikut cara betting colok bebas :
+menebak bebas 1 angka dari 4d
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih colok bebas
+3. untuk angka sudah tertera pada tampilan colok bebas
+contoh : angka 1 dan 9
+4. isi nominal taruhan anda
+( untuk minimal betting adalah rp.1,000 di isi dengan angka 1 discount 6% )
+5. pilih tombol kirim untuk konfirmasi taruhan anda
+7. pastikan taruhan anda berhasil
+untuk pasaran totomacau 40, totomacau 5d, kingkong 50 (lidak memiliki diskon)">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>CARA BETTING COLOK BEBAS</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Colok Bebas :<br />
+Menebak bebas 1 angka dari 4D<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih Colok Bebas<br />
+3. Untuk angka sudah tertera pada tampilan Colok bebas<br />
+Contoh : Angka 1 dan 9<br />
+4. Isi nominal Taruhan anda<br />
+( Untuk minimal betting adalah Rp.1,000 di isi dengan angka 1 Discount 6% )<br />
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda<br />
+7. Pastikan taruhan anda berhasil<br />
+Untuk pasaran TOTOMACAU 40, TOTOMACAU 5D, KINGKONG 50 (lidak Memiliki Diskon)</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Colok Bebas :
+Menebak bebas 1 angka dari 4D
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih Colok Bebas
+3. Untuk angka sudah tertera pada tampilan Colok bebas
+Contoh : Angka 1 dan 9
+4. Isi nominal Taruhan anda
+( Untuk minimal betting adalah Rp.1,000 di isi dengan angka 1 Discount 6% )
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda
+7. Pastikan taruhan anda berhasil
+Untuk pasaran TOTOMACAU 40, TOTOMACAU 5D, KINGKONG 50 (lidak Memiliki Diskon)" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting colok bebas 2d" data-deskripsi="berikut cara betting colok bebas 2d:
+menebak bebas 2 angka dari 4d
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih colok bebas 2d
+3. silahkan diisi angka 2d di nomor 1 dan nomor 2
+contoh : nomor 1 = 5 , nomor 2 = 6
+4. silahkan di isi nominal yang ingin anda betting
+( untuk minimal betting adalah rp.1,000 cdi isi dengan angka 1 discount 10% )
+5. pilih tombol kirim untuk konfirmasi taruhan anda
+6. pastikan taruhan anda sudah berhasil
+note : untuk pasaran totomacau 4d, totomacau5d, kingkong4d tidak memiliki diskon">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>CARA BETTING COLOK BEBAS 2D</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Colok Bebas 2D:<br />
+Menebak bebas 2 angka dari 4D<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih Colok Bebas 2D<br />
+3. Silahkan diisi angka 2D di Nomor 1 dan Nomor 2<br />
+Contoh : Nomor 1 = 5 , Nomor 2 = 6<br />
+4. Silahkan di isi Nominal yang ingin anda betting<br />
+( Untuk minimal betting adalah Rp.1,000 cdi isi dengan angka 1 Discount 10% )<br />
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda<br />
+6. Pastikan taruhan anda sudah berhasil<br />
+Note : Untuk Pasaran TOTOMACAU 4D, TOTOMACAU5D, KINGKONG4D tidak memiliki Diskon</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Colok Bebas 2D:
+Menebak bebas 2 angka dari 4D
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih Colok Bebas 2D
+3. Silahkan diisi angka 2D di Nomor 1 dan Nomor 2
+Contoh : Nomor 1 = 5 , Nomor 2 = 6
+4. Silahkan di isi Nominal yang ingin anda betting
+( Untuk minimal betting adalah Rp.1,000 cdi isi dengan angka 1 Discount 10% )
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda
+6. Pastikan taruhan anda sudah berhasil
+Note : Untuk Pasaran TOTOMACAU 4D, TOTOMACAU5D, KINGKONG4D tidak memiliki Diskon" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting colok naga" data-deskripsi="berikut cara betting colok naga:
+menebak bebas 3 angka dari 4d
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih colok naga
+3. silahkan di angka di nomor 1 dan nomor 2 nomor 3
+contoh : nomor 1 = 7 , nomor 2 = 8 , nomor 3 = 9
+4. silahkan di isi nominal yang ingin anda betting
+(untuk minimal betting adalah rp.1,000 di isi dengan angka 1 discount 10% )
+5. pilih tombol kirim untuk konfirmasi taruhan anda
+6. pastikan taruhan anda sudah berhasil
+note : untuk pasaran totomacau 4d, totomacau 5d, kingkong 4d tidak memiliki diskon">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>CARA BETTING COLOK NAGA</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Colok Naga:<br />
+Menebak bebas 3 angka dari 4D<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih Colok Naga<br />
+3. Silahkan di angka di Nomor 1 dan Nomor 2 Nomor 3<br />
+Contoh : Nomor 1 = 7 , Nomor 2 = 8 , Nomor 3 = 9<br />
+4. Silahkan di isi Nominal yang ingin anda betting<br />
+(Untuk minimal betting adalah Rp.1,000 di isi dengan angka 1 Discount 10% )<br />
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda<br />
+6. Pastikan taruhan anda sudah berhasil<br />
+Note : Untuk Pasaran TOTOMACAU 4D, TOTOMACAU 5D, KINGKONG 4D tidak memiliki Diskon</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Colok Naga:
+Menebak bebas 3 angka dari 4D
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih Colok Naga
+3. Silahkan di angka di Nomor 1 dan Nomor 2 Nomor 3
+Contoh : Nomor 1 = 7 , Nomor 2 = 8 , Nomor 3 = 9
+4. Silahkan di isi Nominal yang ingin anda betting
+(Untuk minimal betting adalah Rp.1,000 di isi dengan angka 1 Discount 10% )
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda
+6. Pastikan taruhan anda sudah berhasil
+Note : Untuk Pasaran TOTOMACAU 4D, TOTOMACAU 5D, KINGKONG 4D tidak memiliki Diskon" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting spaceman" data-deskripsi="untuk mulai bermain, pilih jumlah taruhan dan konfirmasi taruhanmu dengan mengeklik tombol &quot;konfirmasi taruhan&quot;.
+
+kamu dapat memasang atau memodifikasi taruhanmu untuk babak berikutnya selama ada pesan &quot;babak berikutnya dalam..&quot; atau &quot;tunggu babak berikutnya pada layar, sampai muncul pesan &quot;taruhan ditutup&quot;.
+
+jumlah total dari taruhanmu akan ditampilkan di bidang taruhan dan total taruhan.
+
+saat waktu taruhan berakhir, pengganda akan ditampilkan dengan nilai awal berupa 1,00x. kemudian pengganda akan bertambah banyak, tapi semakin cepat saat semakin tinggi. selama peningkatan itu, kamu punya peluang untuk melakukan pencairan sekaligus, atau setengah dulu dan setengahnya lagi nanti.
+
+semakin lama kamu menunda pencairan, semakin besarlah kemenanganmu. tetapi, jangan lupa melakukan pencairan sebelum tabrakan terjadi. saat tabrakan terjadi, babak permainan akan berakhir dan semua jumlah yang belum dicairkan saat itu akan menghilang.
+
+perhatikan
+- jika tabrakan terjadi pada pengganda 1,00x, maka semua taruhan yang dipasang di babak itu akan hilang secara otomatis.
+- nilai pengganda sebesar 5000x dibayar secara otomatis setelah tertabrak untuk semua taruhan yang tersisa dalam permainan.
+
+jika kamu berhasil melakukan pencairan sebelum terjadi tabrakan, kamu akan memenangkan sepotong taruhan yang ingin kamu cairkan, dikalikan dengan pengganda saat ini. jumlah kemenanganmu akan ditunjukkan pada pemberitahuan kemenangan. mohon periksa secara menyeluruh bagian &quot;pencairan&quot; serta &quot;cairkan otomatis dan cairkan otomatis 50%&quot; untuk mengetahui lebih lanjut tentang proses mengklaim kemenanganmu.
+
+ketika babak permainan berakhir, kamu dapat mulai memasang taruhan untuk babak selanjutnya.">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>CARA BETTING SPACEMAN</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Untuk mulai bermain, pilih jumlah taruhan dan konfirmasi taruhanmu dengan mengeklik tombol &quot;KONFIRMASI TARUHAN&quot;.<br />
+<br />
+Kamu dapat memasang atau memodifikasi taruhanmu untuk babak berikutnya selama ada pesan &quot;Babak berikutnya dalam..&quot; atau &quot;Tunggu babak berikutnya pada layar, sampai muncul pesan &quot;Taruhan ditutup&quot;.<br />
+<br />
+Jumlah total dari taruhanmu akan ditampilkan di bidang Taruhan dan Total Taruhan.<br />
+<br />
+Saat waktu taruhan berakhir, pengganda akan ditampilkan dengan nilai awal berupa 1,00x. Kemudian pengganda akan bertambah banyak, tapi semakin cepat saat semakin tinggi. Selama peningkatan itu, kamu punya peluang untuk melakukan pencairan sekaligus, atau setengah dulu dan setengahnya lagi nanti.<br />
+<br />
+Semakin lama kamu menunda pencairan, semakin besarlah kemenanganmu. Tetapi, jangan lupa melakukan pencairan sebelum Tabrakan terjadi. Saat Tabrakan terjadi, babak permainan akan berakhir dan semua jumlah yang belum dicairkan saat itu akan menghilang.<br />
+<br />
+PERHATIKAN<br />
+- Jika Tabrakan terjadi pada pengganda 1,00x, maka semua taruhan yang dipasang di babak itu akan hilang secara otomatis.<br />
+- Nilai pengganda sebesar 5000x dibayar secara otomatis setelah tertabrak untuk semua taruhan yang tersisa dalam permainan.<br />
+<br />
+Jika kamu berhasil melakukan pencairan sebelum terjadi Tabrakan, kamu akan memenangkan sepotong taruhan yang ingin kamu cairkan, dikalikan dengan pengganda saat ini. Jumlah kemenanganmu akan ditunjukkan pada pemberitahuan kemenangan. Mohon periksa secara menyeluruh bagian &quot;Pencairan&quot; serta &quot;Cairkan Otomatis dan Cairkan Otomatis 50%&quot; untuk mengetahui lebih lanjut tentang proses mengklaim kemenanganmu.<br />
+<br />
+Ketika babak permainan berakhir, kamu dapat mulai memasang taruhan untuk babak selanjutnya.</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Untuk mulai bermain, pilih jumlah taruhan dan konfirmasi taruhanmu dengan mengeklik tombol &amp;quot;KONFIRMASI TARUHAN&amp;quot;.
+
+Kamu dapat memasang atau memodifikasi taruhanmu untuk babak berikutnya selama ada pesan &amp;quot;Babak berikutnya dalam..&amp;quot; atau &amp;quot;Tunggu babak berikutnya pada layar, sampai muncul pesan &amp;quot;Taruhan ditutup&amp;quot;.
+
+Jumlah total dari taruhanmu akan ditampilkan di bidang Taruhan dan Total Taruhan.
+
+Saat waktu taruhan berakhir, pengganda akan ditampilkan dengan nilai awal berupa 1,00x. Kemudian pengganda akan bertambah banyak, tapi semakin cepat saat semakin tinggi. Selama peningkatan itu, kamu punya peluang untuk melakukan pencairan sekaligus, atau setengah dulu dan setengahnya lagi nanti.
+
+Semakin lama kamu menunda pencairan, semakin besarlah kemenanganmu. Tetapi, jangan lupa melakukan pencairan sebelum Tabrakan terjadi. Saat Tabrakan terjadi, babak permainan akan berakhir dan semua jumlah yang belum dicairkan saat itu akan menghilang.
+
+PERHATIKAN
+- Jika Tabrakan terjadi pada pengganda 1,00x, maka semua taruhan yang dipasang di babak itu akan hilang secara otomatis.
+- Nilai pengganda sebesar 5000x dibayar secara otomatis setelah tertabrak untuk semua taruhan yang tersisa dalam permainan.
+
+Jika kamu berhasil melakukan pencairan sebelum terjadi Tabrakan, kamu akan memenangkan sepotong taruhan yang ingin kamu cairkan, dikalikan dengan pengganda saat ini. Jumlah kemenanganmu akan ditunjukkan pada pemberitahuan kemenangan. Mohon periksa secara menyeluruh bagian &amp;quot;Pencairan&amp;quot; serta &amp;quot;Cairkan Otomatis dan Cairkan Otomatis 50%&amp;quot; untuk mengetahui lebih lanjut tentang proses mengklaim kemenanganmu.
+
+Ketika babak permainan berakhir, kamu dapat mulai memasang taruhan untuk babak selanjutnya." style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting colok jitu" data-deskripsi="berikut cara betting colok jitu :
+1. pilih pasaran yang ingin di mainkan
+2. pilih menu colok jitu
+3. pilih posisi nomor yang ingin di betting : as / kop / kepala / ekor.
+4. pilih angka yang ingin di betting pada kolom nomor masukan nilal / nominal taruhan pada kolom bettingan
+untuk perkalian betting sudah automatis x 1000, maka, :
+- bettingan rp. 1.000 cukup di isi dengan angka 1,
+- bettingan rp. 5.000 cukup di isi dengan angka 5,
+- bettingan rp. 10.000 cukup di isi dengan angka 10,
+- bettingan rp. 100.000 cukup di isi dengan angka 100,
+klik &quot;kirim&quot; untuk menyetujui bettingan yang di lakukan.">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>CARA BETTING COLOK JITU</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Colok Jitu :<br />
+1. Pilih pasaran yang ingin di mainkan<br />
+2. pilih menu COLOK JITU<br />
+3. Pilih posisi nomor yang ingin di betting : AS / KOP / KEPALA / EKOR.<br />
+4. Pilih angka yang ingin di betting Pada kolom nomor masukan nilal / nominal taruhan pada kolom bettingan<br />
+untuk perkalian betting sudah automatis x 1000, maka, :<br />
+- bettingan Rp. 1.000 cukup di isi dengan angka 1,<br />
+- bettingan Rp. 5.000 cukup di isi dengan angka 5,<br />
+- bettingan Rp. 10.000 cukup di isi dengan angka 10,<br />
+- bettingan Rp. 100.000 cukup di isi dengan angka 100,<br />
+klik &quot;KIRIM&quot; untuk menyetujui bettingan yang di lakukan.</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Colok Jitu :
+1. Pilih pasaran yang ingin di mainkan
+2. pilih menu COLOK JITU
+3. Pilih posisi nomor yang ingin di betting : AS / KOP / KEPALA / EKOR.
+4. Pilih angka yang ingin di betting Pada kolom nomor masukan nilal / nominal taruhan pada kolom bettingan
+untuk perkalian betting sudah automatis x 1000, maka, :
+- bettingan Rp. 1.000 cukup di isi dengan angka 1,
+- bettingan Rp. 5.000 cukup di isi dengan angka 5,
+- bettingan Rp. 10.000 cukup di isi dengan angka 10,
+- bettingan Rp. 100.000 cukup di isi dengan angka 100,
+klik &amp;quot;KIRIM&amp;quot; untuk menyetujui bettingan yang di lakukan." style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting kombinasi" data-deskripsi="berikut cara betting kombinasi:
+1. pilih pasaran yang di inginkan
+2. pilih menu kombinasi
+3. isi nominal bettingan yang di pasang/betting
+kolom nominal automatis perkalian 1.000, contoh :
+untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi angka 100.
+4. setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &quot;kirim&quot;">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>CARA BETTING KOMBINASI</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Kombinasi:<br />
+1. Pilih Pasaran yang di inginkan<br />
+2. Pilih menu KOMBINASI<br />
+3. Isi nominal Bettingan yang di pasang/betting<br />
+Kolom nominal automatis perkalian 1.000, Contoh :<br />
+Untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi angka 100.<br />
+4. Setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &quot;KIRIM&quot;</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Kombinasi:
+1. Pilih Pasaran yang di inginkan
+2. Pilih menu KOMBINASI
+3. Isi nominal Bettingan yang di pasang/betting
+Kolom nominal automatis perkalian 1.000, Contoh :
+Untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi angka 100.
+4. Setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &amp;quot;KIRIM&amp;quot;" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting shio" data-deskripsi="berikut cara betting shio:
+menebak shio dari 2d
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih shio
+3. silahkan di pilih shio yang ingin di betting
+contoh : shio naga, shio kuda
+4. silahkan di isi nominal yang ingin anda betting
+( untuk minimal betting adalah rp.1,000 di isi dengan angka 1 discount 5% )
+5. pilih tombol kirim untuk konfirmasi taruhan anda
+6. pastikan taruhan anda sudah berhasil
+note : untuk pasaran totomacau 4d, totomacau 5d, kingkong 4d tidak memiliki diskon">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>CARA BETTING SHIO</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Shio:<br />
+Menebak shio dari 2D<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih Shio<br />
+3. Silahkan di pilih Shio yang ingin di betting<br />
+Contoh : Shio Naga, Shio Kuda<br />
+4. Silahkan di isi Nominal yang ingin anda betting<br />
+( Untuk minimal betting adalah Rp.1,000 di isi dengan angka 1 Discount 5% )<br />
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda<br />
+6. Pastikan taruhan anda sudah berhasil<br />
+Note : Untuk Pasaran TOTOMACAU 4D, TOTOMACAU 5D, KINGKONG 4D tidak memiliki Diskon</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Shio:
+Menebak shio dari 2D
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih Shio
+3. Silahkan di pilih Shio yang ingin di betting
+Contoh : Shio Naga, Shio Kuda
+4. Silahkan di isi Nominal yang ingin anda betting
+( Untuk minimal betting adalah Rp.1,000 di isi dengan angka 1 Discount 5% )
+5. Pilih tombol KIRIM untuk konfirmasi taruhan anda
+6. Pastikan taruhan anda sudah berhasil
+Note : Untuk Pasaran TOTOMACAU 4D, TOTOMACAU 5D, KINGKONG 4D tidak memiliki Diskon" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting silang homo" data-deskripsi="berikut cara betting silang homo:
+1. pilih pasaran yang di inginkan
+2. pilih menu silang homo
+3. isi nominal bettingan yang di pasang/betting
+kolom nominal automatis perkalian 1.000, contoh :
+untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi
+angka 100.
+4. setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &quot;kirim&quot;">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>CARA BETTING SILANG HOMO</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Silang Homo:<br />
+1. Pilih Pasaran yang di inginkan<br />
+2. Pilih menu SILANG HOMO<br />
+3. Isi nominal Bettingan yang di pasang/betting<br />
+Kolom nominal automatis perkalian 1.000, Contoh :<br />
+Untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi<br />
+angka 100.<br />
+4. Setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &quot;KIRIM&quot;</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Silang Homo:
+1. Pilih Pasaran yang di inginkan
+2. Pilih menu SILANG HOMO
+3. Isi nominal Bettingan yang di pasang/betting
+Kolom nominal automatis perkalian 1.000, Contoh :
+Untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi
+angka 100.
+4. Setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &amp;quot;KIRIM&amp;quot;" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting kembang kempis" data-deskripsi="berikut cara betting kembang kempis:
+1. pilih pasaran yang di inginkan
+2. pilih menu kembang kempis
+3. isi nominal bettingan yang di pasang/betting
+kolom nominal automatis perkalian 1.000, contoh :
+untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi angka 100.
+4.setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &quot;kirim&quot;">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>CARA BETTING KEMBANG KEMPIS</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut Cara Betting Kembang Kempis:<br />
+1. Pilih Pasaran yang di inginkan<br />
+2. Pilih menu KEMBANG KEMPIS<br />
+3. Isi nominal Bettingan yang di pasang/betting<br />
+Kolom nominal automatis perkalian 1.000, Contoh :<br />
+Untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi angka 100.<br />
+4.Setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &quot;KIRIM&quot;</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut Cara Betting Kembang Kempis:
+1. Pilih Pasaran yang di inginkan
+2. Pilih menu KEMBANG KEMPIS
+3. Isi nominal Bettingan yang di pasang/betting
+Kolom nominal automatis perkalian 1.000, Contoh :
+Untuk bettingan 1.000 cukup di isi dengan angka 1, 10,000 di isi angka 10, 100.000 di isi angka 100.
+4.Setelah mengisi pilihan betting dan nominal taruhan dengan benar. klik &amp;quot;KIRIM&amp;quot;" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting angka tarung" data-deskripsi="berikut cara betting angka tarung :
+1. pilih jenis pasaran togel yang anda sukai
+2. pilih angka tarung
+3. masukkan angka diantara as / kop / kepala / ekor
+( seperti kolom gambar yang di warnai dengan warna kuning )
+4. isi nominal taruhan anda
+( seperti kolom gambar yang di warnai dengan ungu)
+5. pilih tombol submit untuk konfirmasi taruhan anda
+6. setelah submit pilih kirim dan pastikan taruhan anda berhasil">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>CARA BETTING ANGKA TARUNG</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut cara betting Angka Tarung :<br />
+1. Pilih jenis pasaran togel yang anda sukai<br />
+2. Pilih Angka Tarung<br />
+3. Masukkan angka diantara As / Kop / Kepala / Ekor<br />
+( seperti kolom gambar yang di warnai dengan warna kuning )<br />
+4. Isi nominal Taruhan anda<br />
+( seperti kolom gambar yang di warnai dengan ungu)<br />
+5. Pilih tombol submit untuk konfirmasi taruhan anda<br />
+6. Setelah submit pilih KIRIM dan pastikan taruhan anda berhasil</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut cara betting Angka Tarung :
+1. Pilih jenis pasaran togel yang anda sukai
+2. Pilih Angka Tarung
+3. Masukkan angka diantara As / Kop / Kepala / Ekor
+( seperti kolom gambar yang di warnai dengan warna kuning )
+4. Isi nominal Taruhan anda
+( seperti kolom gambar yang di warnai dengan ungu)
+5. Pilih tombol submit untuk konfirmasi taruhan anda
+6. Setelah submit pilih KIRIM dan pastikan taruhan anda berhasil" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting fast 4d" data-deskripsi="cara betting fast 4d :
+1. pilih pasaran yang ingin anda mainkan.
+2. pilih menu fast 4d.
+3. lalu pilih tipe bettingan yang ingin anda gunakan (full - discount - bb - prize123 (hanya di
+pasaran tertentu))
+4. pilih kategori yang diinginkan (4d, 3d, 2d belakang / 2d tengah / 2d belakang )
+5. pilih angka betting yang diingin kan dengan memberi tanda * sebagai pembatas dari angka yang
+diinginkan.
+contoh : 1234*4567*322*346*789*34*56
+6. isi nominal / jumlah bettingan anda, angka yang anda isi pada kolom nominal akan otomatis
+dikalikan dengan rp.1,000
+contoh :
+-pembelian rp.100,- untuk 5d maka pada kolom 5d cukup diisi dengan angka *&quot;0.1&quot;™
+(tanpa tanda petik)
+- pembelian rp.500,- untuk 4d maka pada kolom 4d cukup diisi dengan angka **0.5&quot;**
+(tanpa tanda petik)
+- pembelian rp.1,000,- untuk 3d pada kolom 3d cukup diisi dengan angka **j*&quot;
+(tanpa tanda petik )
+- pembelian rp.1,200,- untuk 2d pada kolom 2d cukup diisi dengan angka &quot;*1.2&quot;&quot;
+(tanpa tanda petik)
+7. periksa kembali seluruh rincian pembelian anda, jika semua sudah benar &amp; sesuai, tekan kirim.">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>CARA BETTING FAST 4D</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Cara Betting Fast 4D :<br />
+1. Pilih Pasaran yang ingin anda mainkan.<br />
+2. Pilih menu Fast 4D.<br />
+3. Lalu pilih Tipe bettingan yang ingin anda gunakan (FULL - DISCOUNT - BB - PRIZE123 (hanya di<br />
+pasaran tertentu))<br />
+4. Pilih Kategori yang diinginkan (4D, 3D, 2D BELAKANG / 2D TENGAH / 2D BELAKANG )<br />
+5. Pilih angka betting yang diingin kan dengan memberi tanda * sebagai pembatas dari angka yang<br />
+diinginkan.<br />
+Contoh : 1234*4567*322*346*789*34*56<br />
+6. Isi nominal / jumlah bettingan anda, angka yang anda isi pada kolom nominal akan otomatis<br />
+dikalikan dengan Rp.1,000<br />
+Contoh :<br />
+-Pembelian Rp.100,- untuk 5D maka pada kolom 5D cukup diisi dengan angka *&quot;0.1&quot;™<br />
+(tanpa tanda petik)<br />
+- Pembelian Rp.500,- untuk 4D maka pada kolom 4D cukup diisi dengan angka **0.5&quot;**<br />
+(tanpa tanda petik)<br />
+- Pembelian Rp.1,000,- untuk 3D pada kolom 3D cukup diisi dengan angka **j*&quot;<br />
+(tanpa tanda petik )<br />
+- Pembelian Rp.1,200,- untuk 2D pada kolom 2D cukup diisi dengan angka &quot;*1.2&quot;&quot;<br />
+(tanpa tanda petik)<br />
+7. Periksa kembali seluruh rincian pembelian anda, jika semua sudah benar &amp; sesuai, Tekan KIRIM.</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Cara Betting Fast 4D :
+1. Pilih Pasaran yang ingin anda mainkan.
+2. Pilih menu Fast 4D.
+3. Lalu pilih Tipe bettingan yang ingin anda gunakan (FULL - DISCOUNT - BB - PRIZE123 (hanya di
+pasaran tertentu))
+4. Pilih Kategori yang diinginkan (4D, 3D, 2D BELAKANG / 2D TENGAH / 2D BELAKANG )
+5. Pilih angka betting yang diingin kan dengan memberi tanda * sebagai pembatas dari angka yang
+diinginkan.
+Contoh : 1234*4567*322*346*789*34*56
+6. Isi nominal / jumlah bettingan anda, angka yang anda isi pada kolom nominal akan otomatis
+dikalikan dengan Rp.1,000
+Contoh :
+-Pembelian Rp.100,- untuk 5D maka pada kolom 5D cukup diisi dengan angka *&amp;quot;0.1&amp;quot;™
+(tanpa tanda petik)
+- Pembelian Rp.500,- untuk 4D maka pada kolom 4D cukup diisi dengan angka **0.5&amp;quot;**
+(tanpa tanda petik)
+- Pembelian Rp.1,000,- untuk 3D pada kolom 3D cukup diisi dengan angka **j*&amp;quot;
+(tanpa tanda petik )
+- Pembelian Rp.1,200,- untuk 2D pada kolom 2D cukup diisi dengan angka &amp;quot;*1.2&amp;quot;&amp;quot;
+(tanpa tanda petik)
+7. Periksa kembali seluruh rincian pembelian anda, jika semua sudah benar &amp;amp; sesuai, Tekan KIRIM." style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting bbfs" data-deskripsi="berikut ini cara bbfs:
+-pilih pasaran yang ingin anda mainkan
+-pilih menu bb campuran
+-kolom nomor silahkan diisi dengan angka yang ingin anda beli
+(4-7digit)
+contoh: 12345
+-pada kolom berikutnya (kolom 4d / 3d / 2d) diisi dengan
+nominal/jumlah bettingan anda
+contoh : pembelian rp.100 untuk 4d maka pada kolom 4d cukup diisi
+dengan angka 0.1,
+pembelian rp.3,000 untuk 3d maka pada kolom 3d cukup diisi dengan
+angka 3,
+pembelian rp.10,000 untuk 2d maka pada kolom 2d cukup diisi
+dengan angka 10,
+-tekan submit
+-periksa kembali seluruh rincian pembelian anda , jika semua sudah
+benar, maka tekan kirim.">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>CARA BETTING BBFS</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Berikut ini cara BBFS:<br />
+-Pilih pasaran yang ingin anda mainkan<br />
+-Pilih menu BB CAMPURAN<br />
+-Kolom NOMOR silahkan diisi dengan angka yang ingin anda beli<br />
+(4-7digit)<br />
+contoh: 12345<br />
+-Pada kolom berikutnya (kolom 4d / 3d / 2d) diisi dengan<br />
+nominal/jumlah bettingan anda<br />
+Contoh : Pembelian Rp.100 untuk 4D maka pada kolom 4D cukup diisi<br />
+dengan angka 0.1,<br />
+Pembelian Rp.3,000 untuk 3D maka pada kolom 3D cukup diisi dengan<br />
+angka 3,<br />
+Pembelian Rp.10,000 untuk 2D maka pada kolom 2D cukup diisi<br />
+dengan angka 10,<br />
+-Tekan Submit<br />
+-Periksa kembali seluruh rincian pembelian anda , jika semua sudah<br />
+benar, maka tekan kirim.</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Berikut ini cara BBFS:
+-Pilih pasaran yang ingin anda mainkan
+-Pilih menu BB CAMPURAN
+-Kolom NOMOR silahkan diisi dengan angka yang ingin anda beli
+(4-7digit)
+contoh: 12345
+-Pada kolom berikutnya (kolom 4d / 3d / 2d) diisi dengan
+nominal/jumlah bettingan anda
+Contoh : Pembelian Rp.100 untuk 4D maka pada kolom 4D cukup diisi
+dengan angka 0.1,
+Pembelian Rp.3,000 untuk 3D maka pada kolom 3D cukup diisi dengan
+angka 3,
+Pembelian Rp.10,000 untuk 2D maka pada kolom 2D cukup diisi
+dengan angka 10,
+-Tekan Submit
+-Periksa kembali seluruh rincian pembelian anda , jika semua sudah
+benar, maka tekan kirim." style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara betting pola colok" data-deskripsi="cara betting pola colok :
+1. pilih pasaran yang anda inginkan
+2. pilh menu pola coloki
+3. sialkan isi kolom nomok denzan anoka
+contoh : 1234567 ( maksimal adalah 7digit)
+4. poda kolom berikutnyo (colok bebos, colok bebas 20, colok naca ) di isi
+dengan nominal atau jumlah bettingan anda , pada kolom nominal akan
+automatis di kalikan dengan 1.000
+contoh: pembelian rp. 1.000 hanya cukup di isi dengan angka 1.
+pembelian rp. 10.000 hanya cukup di isi dengan angka 10 pembelian rp.
+100.000 hanya cukup di isi dengan angka 100
+submit : melihat kembali nomor yang sudah berhasil di acak oleh sistem
+denan pilihan bettingan yang anda lakukan, jika semua sudah benar,
+tekan &quot;kirim&quot;">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>CARA BETTING POLA COLOK</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Cara Betting Pola Colok :<br />
+1. Pilih pasaran yang anda inginkan<br />
+2. pilh menu PolA ColOKI<br />
+3. Sialkan isi kolom NOMOK denzan ANOKA<br />
+Contoh : 1234567 ( maksimal adalah 7DIGIT)<br />
+4. Poda kolom berikutnyo (colok bebos, colok bebas 20, colok naca ) di isi<br />
+dengan nominal atau jumlah bettingan anda , pada kolom nominal akan<br />
+automatis di kalikan dengan 1.000<br />
+contoh: pembelian Rp. 1.000 hanya cukup di isi dengan angka 1.<br />
+pembelian Rp. 10.000 hanya cukup di isi dengan angka 10 pembelian Rp.<br />
+100.000 hanya cukup di isi dengan angka 100<br />
+SUBMIT : Melihat kembali nomor yang sudah berhasil di acak oleh sistem<br />
+denan pilihan bettingan yang anda lakukan, Jika semua sudah benar,<br />
+tekan &quot;KIRIM&quot;</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Cara Betting Pola Colok :
+1. Pilih pasaran yang anda inginkan
+2. pilh menu PolA ColOKI
+3. Sialkan isi kolom NOMOK denzan ANOKA
+Contoh : 1234567 ( maksimal adalah 7DIGIT)
+4. Poda kolom berikutnyo (colok bebos, colok bebas 20, colok naca ) di isi
+dengan nominal atau jumlah bettingan anda , pada kolom nominal akan
+automatis di kalikan dengan 1.000
+contoh: pembelian Rp. 1.000 hanya cukup di isi dengan angka 1.
+pembelian Rp. 10.000 hanya cukup di isi dengan angka 10 pembelian Rp.
+100.000 hanya cukup di isi dengan angka 100
+SUBMIT : Melihat kembali nomor yang sudah berhasil di acak oleh sistem
+denan pilihan bettingan yang anda lakukan, Jika semua sudah benar,
+tekan &amp;quot;KIRIM&amp;quot;" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="maksimal bet angka tarung" data-deskripsi="untuk minimal bettingan pada pola angka tarung adalah (2d) dimana 1 digit pada posisi kepala dan 1 digit pada posisi ekor ya bosku
+
+untuk maksimal bettingan pada pola angka tarung adalah 8 digit di setiap posisi ya bosku
+kecuali di pasaran hongkong &amp; sydney adalah 7 digit
+dan untuk pasaran totomacau 5d maksimal 10 digit ya bosku">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>MAKSIMAL BET ANGKA TARUNG</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Untuk minimal bettingan pada pola angka tarung adalah (2D) dimana 1 digit pada posisi kepala dan 1 digit pada posisi ekor ya bosku<br />
+<br />
+Untuk Maksimal bettingan pada pola angka tarung adalah 8 digit di setiap posisi ya bosku<br />
+kecuali di pasaran HONGKONG &amp; SYDNEY adalah 7 digit<br />
+dan untuk pasaran TOTOMACAU 5D maksimal 10 digit ya bosku</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Untuk minimal bettingan pada pola angka tarung adalah (2D) dimana 1 digit pada posisi kepala dan 1 digit pada posisi ekor ya bosku
+
+Untuk Maksimal bettingan pada pola angka tarung adalah 8 digit di setiap posisi ya bosku
+kecuali di pasaran HONGKONG &amp;amp; SYDNEY adalah 7 digit
+dan untuk pasaran TOTOMACAU 5D maksimal 10 digit ya bosku" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="bolak balik ful set ( bbfs )" data-deskripsi="untuk bettingan bbfs semua pasaran togel 4-9 digit
+terkecuali :
+pasaran hongkong &amp; sydney, bettigan yang dapat dilakukan 4-7 digit
+pasaran toto macau 5d, bettigan yang dapat dilakukan 4-8 digit">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>BOLAK BALIK FUL SET ( BBFS )</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Untuk bettingan BBFS semua pasaran togel 4-9 digit<br />
+terkecuali :<br />
+Pasaran HONGKONG &amp; SYDNEY, bettigan yang dapat dilakukan 4-7 digit<br />
+Pasaran TOTO MACAU 5D, bettigan yang dapat dilakukan 4-8 digit</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Untuk bettingan BBFS semua pasaran togel 4-9 digit
+terkecuali :
+Pasaran HONGKONG &amp;amp; SYDNEY, bettigan yang dapat dilakukan 4-7 digit
+Pasaran TOTO MACAU 5D, bettigan yang dapat dilakukan 4-8 digit" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="minimal betting togel" data-deskripsi="minimal betting di linetogel :
+
+minimal bet 5d/4d/3d/2d = 100,- ( diisi 0.1 )
+minimal bet semua jenis colok : 1.000
+bbfs : 4 digit s/d 9 digit
+bbfs : 4 digit s/d 7 digit (untuk pasaran hongkong dan sydney)
+bbfs : 4 digit s/d 8 digit (untuk pasaran toto macau 5d)
+bebas invest (tidak ada batasan line)
+nb : 100 rupiah hanya berlaku untuk kelipatan
+contoh 600 diisi dengan 0.6 / 1.100 diisi dengan 1.1
+nominal yang diisi di kolom nominal akan dikalikan dengan 1.000
+
+khusus pasaran kingkong 4d
+minimal bet 4d/3d/2d = 100 ( diisi 0.1 )
+minimal bet semua jenis colok : 500 , 
+kecuali colok bebas dan colok bebas 2d : 100">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>MINIMAL BETTING TOGEL</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Minimal betting di linetogel :<br />
+<br />
+Minimal Bet 5d/4d/3d/2d = 100,- ( diisi 0.1 )<br />
+Minimal Bet Semua Jenis Colok : 1.000<br />
+BBFS : 4 digit s/d 9 digit<br />
+BBFS : 4 digit s/d 7 digit (Untuk pasaran Hongkong dan Sydney)<br />
+BBFS : 4 digit s/d 8 digit (Untuk pasaran Toto Macau 5D)<br />
+Bebas Invest (tidak ada batasan line)<br />
+NB : 100 rupiah hanya berlaku untuk kelipatan<br />
+Contoh 600 diisi dengan 0.6 / 1.100 diisi dengan 1.1<br />
+Nominal yang diisi di kolom nominal akan dikalikan dengan 1.000<br />
+<br />
+Khusus pasaran KINGKONG 4D<br />
+Minimal Bet 4d/3d/2d = 100 ( diisi 0.1 )<br />
+Minimal bet semua jenis colok : 500 , <br />
+kecuali colok bebas dan colok bebas 2d : 100</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Minimal betting di linetogel :
+
+Minimal Bet 5d/4d/3d/2d = 100,- ( diisi 0.1 )
+Minimal Bet Semua Jenis Colok : 1.000
+BBFS : 4 digit s/d 9 digit
+BBFS : 4 digit s/d 7 digit (Untuk pasaran Hongkong dan Sydney)
+BBFS : 4 digit s/d 8 digit (Untuk pasaran Toto Macau 5D)
+Bebas Invest (tidak ada batasan line)
+NB : 100 rupiah hanya berlaku untuk kelipatan
+Contoh 600 diisi dengan 0.6 / 1.100 diisi dengan 1.1
+Nominal yang diisi di kolom nominal akan dikalikan dengan 1.000
+
+Khusus pasaran KINGKONG 4D
+Minimal Bet 4d/3d/2d = 100 ( diisi 0.1 )
+Minimal bet semua jenis colok : 500 , 
+kecuali colok bebas dan colok bebas 2d : 100" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="peraturan bermain togel" data-deskripsi="peraturan permainan togel :
+betting yang normal adalah disaat pasaran betting dibuka. semua pembelian / betting yang telah dilakukan tidak dapat dibatalkan. apabila ditemukan transaksi tidak wajar maka akan dianggap tidak sah dan akan diblokir permanen beserta saldo didalamnya">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>PERATURAN BERMAIN TOGEL</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>peraturan permainan togel :<br />
+Betting yang Normal adalah disaat pasaran betting dibuka. Semua pembelian / betting yang telah dilakukan tidak dapat dibatalkan. Apabila ditemukan transaksi tidak wajar maka akan dianggap TIDAK SAH dan akan diblokir permanen beserta saldo didalamnya</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="peraturan permainan togel :
+Betting yang Normal adalah disaat pasaran betting dibuka. Semua pembelian / betting yang telah dilakukan tidak dapat dibatalkan. Apabila ditemukan transaksi tidak wajar maka akan dianggap TIDAK SAH dan akan diblokir permanen beserta saldo didalamnya" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="pertanyaan pola rtp" data-deskripsi="untuk ada tanda silang dan tanda ceklis serta berapa putaran yang bisa bosku lakukan, dan juga ada dc off / on, dc ini adalah duoble chance ( peluang ganda) ya bosku">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>PERTANYAAN POLA RTP</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>untuk ada tanda silang dan tanda ceklis serta berapa putaran yang bisa bosku lakukan, dan juga ada DC off / on, DC ini adalah Duoble Chance ( Peluang Ganda) ya bosku</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="untuk ada tanda silang dan tanda ceklis serta berapa putaran yang bisa bosku lakukan, dan juga ada DC off / on, DC ini adalah Duoble Chance ( Peluang Ganda) ya bosku" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="arti turnover (to)" data-deskripsi="turnover adalah total nominal yang sudah berhasil di betting / pasang dalam meja permainan ( berapapun nominal yang dibetting dengan hasil menang atau kalah tetap dihitung sebagai turnover )">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>ARTI TURNOVER (TO)</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Turnover adalah total nominal yang sudah berhasil di betting / pasang dalam meja permainan ( Berapapun nominal yang dibetting dengan hasil menang atau kalah tetap dihitung sebagai Turnover )</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Turnover adalah total nominal yang sudah berhasil di betting / pasang dalam meja permainan ( Berapapun nominal yang dibetting dengan hasil menang atau kalah tetap dihitung sebagai Turnover )" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="hadiah hiburan totomacau" data-deskripsi="yth member setia linetogel, kami ingin menginformasikan bahwa untuk saat ini telah tersedia hadiah totomacaupools.dimana anda akan memiliki kesempatan yang besar  untuk memenangan permainan togel pada pasaran totomacaupools.sebagai contoh keluaran totomacau 4d terakhir di jam 24:00 adalah nomor 1234,maka semua bettingan dari periode 1,2,3,4,5 dan 6 di hari tersebut yg terdapat bettingan 4d “1234” maka akan mendapat hadiah hiburan x dengan prize yang sudah di tentukan
+untuk hadiahnya sebagai berikut :
+prize hadiah hiburan :
+tipe full : x300
+tipe discount : x150
+tipe super discount : x100
+tipe tepat : x100 (hanya jika tepat)">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>HADIAH HIBURAN TOTOMACAU</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Yth Member Setia Linetogel, Kami ingin menginformasikan bahwa untuk saat ini telah tersedia HADIAH TOTOMACAUPOOLS.dimana anda akan memiliki kesempatan yang besar  untuk memenangan permainan togel pada pasaran TOTOMACAUPOOLS.Sebagai contoh keluaran totomacau 4D terakhir di jam 24:00 adalah nomor 1234,Maka semua bettingan dari periode 1,2,3,4,5 dan 6 di hari tersebut yg terdapat bettingan 4D “1234” maka akan mendapat hadiah hiburan x dengan prize yang sudah di tentukan<br />
+untuk hadiahnya sebagai berikut :<br />
+Prize Hadiah Hiburan :<br />
+Tipe Full : x300<br />
+Tipe Discount : x150<br />
+Tipe Super Discount : x100<br />
+Tipe Tepat : x100 (Hanya jika tepat)</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Yth Member Setia Linetogel, Kami ingin menginformasikan bahwa untuk saat ini telah tersedia HADIAH TOTOMACAUPOOLS.dimana anda akan memiliki kesempatan yang besar  untuk memenangan permainan togel pada pasaran TOTOMACAUPOOLS.Sebagai contoh keluaran totomacau 4D terakhir di jam 24:00 adalah nomor 1234,Maka semua bettingan dari periode 1,2,3,4,5 dan 6 di hari tersebut yg terdapat bettingan 4D “1234” maka akan mendapat hadiah hiburan x dengan prize yang sudah di tentukan
+untuk hadiahnya sebagai berikut :
+Prize Hadiah Hiburan :
+Tipe Full : x300
+Tipe Discount : x150
+Tipe Super Discount : x100
+Tipe Tepat : x100 (Hanya jika tepat)" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara perhitungan maxwin pada slot step 1" data-deskripsi="cara perhitungan maxwin permainan slot game
+kemenangan maxwin adalah batas kemenangan
+maximal yang di hitung berdasarkan nominal betingan
+contoh : betingan rp 1,000maka kesempatan maxwin adalah rp,5,000,000
+( nilai bet 1,000 x [perkalian maximal 5000x )">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>CARA PERHITUNGAN MAXWIN PADA SLOT STEP 1</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>cara perhitungan MaxWin permainan slot game<br />
+kemenangan maxwin adalah batas kemenangan<br />
+maximal yang di hitung berdasarkan nominal betingan<br />
+contoh : betingan Rp 1,000maka kesempatan maxwin adalah Rp,5,000,000<br />
+( nilai bet 1,000 x [perkalian maximal 5000x )</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="cara perhitungan MaxWin permainan slot game
+kemenangan maxwin adalah batas kemenangan
+maximal yang di hitung berdasarkan nominal betingan
+contoh : betingan Rp 1,000maka kesempatan maxwin adalah Rp,5,000,000
+( nilai bet 1,000 x [perkalian maximal 5000x )" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara perhitungan maxwin pada slot step 2" data-deskripsi="semakin besar nominal betingan anda maka semakin besar
+limit maxwin nya ya boskunote : setiap permainan slot memiliki batas perkalian berbeda ya bosku
+contoh : 25,000x , 15000x , 10000x &amp; 5000">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>CARA PERHITUNGAN MAXWIN PADA SLOT STEP 2</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>semakin besar nominal betingan anda maka semakin besar<br />
+limit maxwin nya ya boskuNote : setiap permainan slot memiliki batas perkalian berbeda ya bosku<br />
+contoh : 25,000x , 15000x , 10000x &amp; 5000</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="semakin besar nominal betingan anda maka semakin besar
+limit maxwin nya ya boskuNote : setiap permainan slot memiliki batas perkalian berbeda ya bosku
+contoh : 25,000x , 15000x , 10000x &amp;amp; 5000" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara perhitungan maxwin pada slot step 3" data-deskripsi="serta untuk sweet bonanza sendiri tidak ada batas maxwin nya ya bosku">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>CARA PERHITUNGAN MAXWIN PADA SLOT STEP 3</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>serta untuk sweet bonanza sendiri tidak ada batas maxwin nya ya bosku</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="serta untuk sweet bonanza sendiri tidak ada batas maxwin nya ya bosku" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="arti colok bebas" data-deskripsi="colok bebas togel adalah jenis taruhan yang memberikan kebebasan kepada pemain untuk memilih angka tanpa terikat pada posisi tertentu">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>ARTI COLOK BEBAS</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Colok Bebas Togel adalah jenis taruhan yang memberikan kebebasan kepada pemain untuk memilih angka tanpa terikat pada posisi tertentu</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Colok Bebas Togel adalah jenis taruhan yang memberikan kebebasan kepada pemain untuk memilih angka tanpa terikat pada posisi tertentu" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="arti colok naga" data-deskripsi="colok naga adalah taruhan di mana pemain menebak tiga angka yang akan muncul dari empat angka hasil keluaran togel (biasanya 4d). tidak harus urut, yang penting ketiga angka yang ditebak muncul di antara empat angka keluaran ya bosku">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>ARTI COLOK NAGA</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Colok naga adalah taruhan di mana pemain menebak tiga angka yang akan muncul dari empat angka hasil keluaran togel (biasanya 4D). Tidak harus urut, yang penting ketiga angka yang ditebak muncul di antara empat angka keluaran ya bosku</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Colok naga adalah taruhan di mana pemain menebak tiga angka yang akan muncul dari empat angka hasil keluaran togel (biasanya 4D). Tidak harus urut, yang penting ketiga angka yang ditebak muncul di antara empat angka keluaran ya bosku" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="cara lihat putar ulang pada slot pragmatic" data-deskripsi="untuk melihat kembali replay / putar ulang history permainan slot anda , silahkan login ke permainan yang anda mainkan sebelunya kemudian pilih tanda titik tiga di pojok kanan https://sleekshot.app/v/nxzxsa0kdp61  kemudian pilih putar ulang.
+hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di putar ulang
+seperti contoh pada gambar https://sleekshot.app/v/j4fmcegrq9qh">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>CARA LIHAT PUTAR ULANG PADA SLOT PRAGMATIC</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>untuk melihat kembali replay / putar ulang history permainan slot anda , silahkan login ke permainan yang anda mainkan sebelunya kemudian pilih tanda titik tiga di pojok kanan https://sleekshot.app/v/NxzXsA0KDP61  kemudian pilih putar ulang.<br />
+Hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di Putar Ulang<br />
+seperti contoh pada gambar https://sleekshot.app/v/J4fMCEgrQ9qh</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="untuk melihat kembali replay / putar ulang history permainan slot anda , silahkan login ke permainan yang anda mainkan sebelunya kemudian pilih tanda titik tiga di pojok kanan https://sleekshot.app/v/NxzXsA0KDP61  kemudian pilih putar ulang.
+Hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di Putar Ulang
+seperti contoh pada gambar https://sleekshot.app/v/J4fMCEgrQ9qh" style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="jika tidak dapat melihat menu putar ulang pada slot pragmatic step 1" data-deskripsi="mohon maaf bosku jika tidak bisa melihat kembali replay / putar ulang history permainan slot anda maka anda tidak mendapatkan perkalian diatas 10 x ya bosku, hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di putar ulang ya bosku">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>JIKA TIDAK DAPAT MELIHAT MENU PUTAR ULANG PADA SLOT PRAGMATIC STEP 1</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Mohon maaf bosku jika tidak bisa melihat kembali replay / putar ulang history permainan slot anda maka anda tidak mendapatkan perkalian diatas 10 x ya bosku, Hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di Putar Ulang ya bosku</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Mohon maaf bosku jika tidak bisa melihat kembali replay / putar ulang history permainan slot anda maka anda tidak mendapatkan perkalian diatas 10 x ya bosku, Hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di Putar Ulang ya bosku" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="jika tidak dapat melihat menu putar ulang pada slot pragmatic step 2" data-deskripsi="hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di putar ulang
+seperti contoh pada gambar  https://sleekshot.app/v/j4fmcegrq9qh">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>JIKA TIDAK DAPAT MELIHAT MENU PUTAR ULANG PADA SLOT PRAGMATIC STEP 2</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di Putar Ulang<br />
+seperti contoh pada gambar  https://sleekshot.app/v/J4fMCEgrQ9qh</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Hanya kemenangan di atas atau setara 10x total taruhan yang ditampilkan di Putar Ulang
+seperti contoh pada gambar  https://sleekshot.app/v/J4fMCEgrQ9qh" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="perbedaan pola tarung  &amp; bbfs" data-deskripsi="untuk perbedaaanya sebagai berikut ya bosku :
+pada bbfs bosku dapat mengisi angka yang akan di lakukan kombinasi secara acak dengan 4-7 digit untuk beberapa pasaran ya bosku sedangkan untuk angka tarung bosku dapat memilih minimal 1 angka dengan posisi yang berbeda dan maksimal 10 digit beberapa pasaran ya bosku dari posisi yang ada.
+untuk bbfs bosku tidak di perlukan menentukan angka pada tiap posisinya namun pada angka tarung diperlukan pengisian terhadap posisi yang berbeda ya bosku">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>PERBEDAAN POLA TARUNG  &amp; BBFS</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>untuk perbedaaanya sebagai berikut ya bosku :<br />
+pada bbfs bosku dapat mengisi angka yang akan di lakukan kombinasi secara acak dengan 4-7 digit untuk beberapa pasaran ya bosku sedangkan untuk angka tarung bosku dapat memilih minimal 1 angka dengan posisi yang berbeda dan maksimal 10 digit beberapa pasaran ya bosku dari posisi yang ada.<br />
+untuk bbfs bosku tidak di perlukan menentukan angka pada tiap posisinya namun pada angka tarung diperlukan pengisian terhadap posisi yang berbeda ya bosku</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="untuk perbedaaanya sebagai berikut ya bosku :
+pada bbfs bosku dapat mengisi angka yang akan di lakukan kombinasi secara acak dengan 4-7 digit untuk beberapa pasaran ya bosku sedangkan untuk angka tarung bosku dapat memilih minimal 1 angka dengan posisi yang berbeda dan maksimal 10 digit beberapa pasaran ya bosku dari posisi yang ada.
+untuk bbfs bosku tidak di perlukan menentukan angka pada tiap posisinya namun pada angka tarung diperlukan pengisian terhadap posisi yang berbeda ya bosku" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="withdraw belum capai to" data-deskripsi="syarat penarikan dana atau withdraw bonus freechip total bettingan/taruhan anda harus sudah mencapai to (
+turnover) yang sudah di tentukan ya bosku to yang ditentukan adalah kali 1 freechip atau rp.300.000
+contoh anda membetting 1.000 sebanyak 300 kali baru bisa melakukan withdraw semua bettingan akan tetap di
+hitung menang ataupun kalah ya bosku.">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #f1c40f;">
+                                                <i class="fas fa-gamepad" style="color: #f1c40f;"></i>
+                                            </div>
+                                            <h2>WITHDRAW BELUM CAPAI TO</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Syarat penarikan dana atau WITHDRAW bonus freechip total bettingan/taruhan anda harus sudah mencapai TO (<br />
+turnover) yang sudah di tentukan ya bosku TO yang ditentukan adalah kali 1 freechip atau Rp.300.000<br />
+Contoh anda membetting 1.000 sebanyak 300 kali baru bisa melakukan withdraw semua bettingan akan tetap di<br />
+hitung menang ataupun kalah ya bosku.</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Syarat penarikan dana atau WITHDRAW bonus freechip total bettingan/taruhan anda harus sudah mencapai TO (
+turnover) yang sudah di tentukan ya bosku TO yang ditentukan adalah kali 1 freechip atau Rp.300.000
+Contoh anda membetting 1.000 sebanyak 300 kali baru bisa melakukan withdraw semua bettingan akan tetap di
+hitung menang ataupun kalah ya bosku." style="border-color: #f1c40f; color: #f1c40f;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="limit global artinya step 1" data-deskripsi="limit global adalah keadaan dimana angka yang ingin bosku betting, sudah mencapai limit ( sudah di betting oleh member member lain hingga max betting )">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #2ecc71;">
+                                                <i class="fas fa-gamepad" style="color: #2ecc71;"></i>
+                                            </div>
+                                            <h2>LIMIT GLOBAL ARTINYA STEP 1</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Limit Global adalah keadaan dimana angka yang ingin bosku betting, sudah mencapai limit ( sudah di betting oleh member member lain hingga max betting )</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Limit Global adalah keadaan dimana angka yang ingin bosku betting, sudah mencapai limit ( sudah di betting oleh member member lain hingga max betting )" style="border-color: #2ecc71; color: #2ecc71;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="limit global artinya step 2" data-deskripsi="silakan lakukan bettingan tertinggi yang anda inginkan.
+jika ada angka bettingan anda yang ditolak artinya angka bettingan tersebut telah mencapai limit bettingan global.
+setiap angka-angka yang telah mencapai limit bettingan global maka angka tersebut tidak dapat dipasang lagi.
+silakan mencoba mengurangi nominal bettingan anda atau melakukan bettingan angka lainnya">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #3498db;">
+                                                <i class="fas fa-gamepad" style="color: #3498db;"></i>
+                                            </div>
+                                            <h2>LIMIT GLOBAL ARTINYA STEP 2</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Silakan lakukan bettingan tertinggi yang anda inginkan.<br />
+Jika ada angka bettingan anda yang ditolak artinya angka bettingan tersebut telah mencapai limit bettingan global.<br />
+Setiap angka-angka yang telah mencapai limit bettingan global maka angka tersebut tidak dapat dipasang lagi.<br />
+Silakan mencoba mengurangi nominal bettingan anda atau melakukan bettingan angka lainnya</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Silakan lakukan bettingan tertinggi yang anda inginkan.
+Jika ada angka bettingan anda yang ditolak artinya angka bettingan tersebut telah mencapai limit bettingan global.
+Setiap angka-angka yang telah mencapai limit bettingan global maka angka tersebut tidak dapat dipasang lagi.
+Silakan mencoba mengurangi nominal bettingan anda atau melakukan bettingan angka lainnya" style="border-color: #3498db; color: #3498db;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                            <div class="content-card" data-judul="perbedaan quick 2d dan fast4d" data-deskripsi="untuk bett tipe quick 2d adalah generator untuk langsung sort / mengurutkan bettingan berdasarkan pilihan. anda dapat memilih contoh bettingan 2d yang anda inginkan, contoh anda ingin betting pada 2d besar dan belakang, maka anda dapat langsung memilih tipe besar dan belakang pada generator quick2d tersebut, angka yang dihasilkan dari generator tersebut otomatis tersortir menjadi angka 2d besar dan belakang.
+
+tebak posisi : untuk menentukan posisi yang ingin anda tebak ( 2d belakang, depan, tengah )
+tebak tipe ( besar, kecil, genap, ganjil )
+besar : sort angka dari 50 sampai 99 ( kategori besar )
+kecil : sort angka dari 01-49 ( kategori kecil )
+ganjil : sort angka dari 01 - 99 ( kategori ganjil )
+genap : sort angka dari 02 - 98 ( kategori genap )
+quick pemukul bola pingpong 2d atau permainan quick 2d
+buat mempermudah pembelian spesial 2d depan, 2d tengah, 2d( balik) dalam permainan dengan jumlah banyak dan campuran no berentetan serta jumlah pemukul bola pingpong yang serupa, misalnya:
+2d( balik) besar= 50rb, maksudnya 2d yang di pemukul bola pingpong merupakan:
+50= 50rb
+51= 50rb
+52= 50rb
+53= 50rb
+54= 50rb
+55= 50rb hingga dengan 99= 50rb
+
+jumlah line dalam besar, kecil, abnormal, serta bulat merupakan senantiasa 50 line bagus 2d depan, 2d tengah ataupun 2d( balik)
+2d posisi atau metode main quick 2d serta 2d posisi
+metode main quick 2d serta 2d posisi
+
+bentuk: 1234
+12= depan, 23= tengah, 34= belakang
+besar atau kecil: 0–4=kecil, 5–9=besar
+abnormal atau bulat: 1=ganjil, 2=genap serta seterusnya
+misalnya pergi no= 1234
+berati juara buat 2d depan merupakan= 12
+berati juara buat 2d tengah merupakan= 23
+berati juara buat 2d balik merupakan= 34
+
+
+sedangkan untuk bett tipe fast 4d adalah generator untuk pemain lebih di mudahkan dalam melakukan bettingan 4d,3d dan 2d belakang,tengah,depan
+fast 4d untuk memasang angka lebih banyak ( minimal 2 nomor dan maximal 400 nomor / line )
+contoh pengisian angka : 1234*4567*322*346*789*34*56">
+                                    <div class="card-inner">
+                                        <div class="card-header">
+                                            <div class="icon-wrapper" style="border-color: #9b59b6;">
+                                                <i class="fas fa-gamepad" style="color: #9b59b6;"></i>
+                                            </div>
+                                            <h2>PERBEDAAN QUICK 2D DAN FAST4D</h2>
+                                        </div>
+                                        <div class="card-content">
+                                            <p>Untuk bett tipe Quick 2D adalah generator untuk langsung sort / mengurutkan bettingan berdasarkan pilihan. Anda dapat memilih contoh bettingan 2D yang anda inginkan, contoh anda ingin betting pada 2D besar dan belakang, maka anda dapat langsung memilih tipe besar dan belakang pada generator Quick2D tersebut, angka yang dihasilkan dari generator tersebut otomatis tersortir menjadi angka 2D besar dan belakang.<br />
+<br />
+Tebak Posisi : Untuk menentukan posisi yang ingin anda tebak ( 2D belakang, depan, tengah )<br />
+Tebak Tipe ( Besar, Kecil, Genap, Ganjil )<br />
+Besar : Sort angka dari 50 sampai 99 ( kategori besar )<br />
+Kecil : Sort angka dari 01-49 ( kategori kecil )<br />
+Ganjil : Sort angka dari 01 - 99 ( kategori ganjil )<br />
+Genap : Sort angka dari 02 - 98 ( kategori genap )<br />
+QUICK Pemukul bola pingpong 2D atau Permainan Quick 2D<br />
+Buat mempermudah pembelian spesial 2D Depan, 2D Tengah, 2D( Balik) dalam permainan dengan jumlah banyak dan campuran no berentetan serta jumlah pemukul bola pingpong yang serupa, misalnya:<br />
+2D( Balik) Besar= 50rb, maksudnya 2D yang di pemukul bola pingpong merupakan:<br />
+50= 50rb<br />
+51= 50rb<br />
+52= 50rb<br />
+53= 50rb<br />
+54= 50rb<br />
+55= 50rb hingga dengan 99= 50rb<br />
+<br />
+Jumlah LINE dalam Besar, Kecil, Abnormal, serta Bulat merupakan senantiasa 50 LINE bagus 2D Depan, 2D Tengah ataupun 2D( Balik)<br />
+2D POSISI atau Metode Main Quick 2D serta 2D Posisi<br />
+Metode Main Quick 2D serta 2D Posisi<br />
+<br />
+Bentuk: 1234<br />
+12= DEPAN, 23= TENGAH, 34= BELAKANG<br />
+Besar atau Kecil: 0–4=kecil, 5–9=besar<br />
+Abnormal atau Bulat: 1=ganjil, 2=genap serta seterusnya<br />
+Misalnya pergi no= 1234<br />
+berati juara buat 2D Depan merupakan= 12<br />
+berati juara buat 2D Tengah merupakan= 23<br />
+berati juara buat 2D Balik merupakan= 34<br />
+<br />
+<br />
+Sedangkan Untuk bett tipe FAST 4D adalah generator untuk pemain lebih di mudahkan dalam melakukan bettingan 4D,3D dan 2D belakang,tengah,depan<br />
+Fast 4D untuk memasang angka lebih banyak ( minimal 2 nomor dan maximal 400 Nomor / Line )<br />
+contoh pengisian angka : 1234*4567*322*346*789*34*56</p>
+                                                                                            <div style="text-align: center;">
+                                                    <button class="copy-btn copy-item-btn" data-text="Untuk bett tipe Quick 2D adalah generator untuk langsung sort / mengurutkan bettingan berdasarkan pilihan. Anda dapat memilih contoh bettingan 2D yang anda inginkan, contoh anda ingin betting pada 2D besar dan belakang, maka anda dapat langsung memilih tipe besar dan belakang pada generator Quick2D tersebut, angka yang dihasilkan dari generator tersebut otomatis tersortir menjadi angka 2D besar dan belakang.
+
+Tebak Posisi : Untuk menentukan posisi yang ingin anda tebak ( 2D belakang, depan, tengah )
+Tebak Tipe ( Besar, Kecil, Genap, Ganjil )
+Besar : Sort angka dari 50 sampai 99 ( kategori besar )
+Kecil : Sort angka dari 01-49 ( kategori kecil )
+Ganjil : Sort angka dari 01 - 99 ( kategori ganjil )
+Genap : Sort angka dari 02 - 98 ( kategori genap )
+QUICK Pemukul bola pingpong 2D atau Permainan Quick 2D
+Buat mempermudah pembelian spesial 2D Depan, 2D Tengah, 2D( Balik) dalam permainan dengan jumlah banyak dan campuran no berentetan serta jumlah pemukul bola pingpong yang serupa, misalnya:
+2D( Balik) Besar= 50rb, maksudnya 2D yang di pemukul bola pingpong merupakan:
+50= 50rb
+51= 50rb
+52= 50rb
+53= 50rb
+54= 50rb
+55= 50rb hingga dengan 99= 50rb
+
+Jumlah LINE dalam Besar, Kecil, Abnormal, serta Bulat merupakan senantiasa 50 LINE bagus 2D Depan, 2D Tengah ataupun 2D( Balik)
+2D POSISI atau Metode Main Quick 2D serta 2D Posisi
+Metode Main Quick 2D serta 2D Posisi
+
+Bentuk: 1234
+12= DEPAN, 23= TENGAH, 34= BELAKANG
+Besar atau Kecil: 0–4=kecil, 5–9=besar
+Abnormal atau Bulat: 1=ganjil, 2=genap serta seterusnya
+Misalnya pergi no= 1234
+berati juara buat 2D Depan merupakan= 12
+berati juara buat 2D Tengah merupakan= 23
+berati juara buat 2D Balik merupakan= 34
+
+
+Sedangkan Untuk bett tipe FAST 4D adalah generator untuk pemain lebih di mudahkan dalam melakukan bettingan 4D,3D dan 2D belakang,tengah,depan
+Fast 4D untuk memasang angka lebih banyak ( minimal 2 nomor dan maximal 400 Nomor / Line )
+contoh pengisian angka : 1234*4567*322*346*789*34*56" style="border-color: #9b59b6; color: #9b59b6;">
+                                                        <i class="fas fa-copy"></i> Salin Teks
+                                                    </button>
+                                                </div>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                                    </div>
+
+                <!-- Galeri Gambar Permainan -->
+                <div id="gambar-permainan" class="tab-pane">
+                                            <div class="empty-card">
+                            <i class="fas fa-images"></i>
+                            <p>Belum ada gambar. Silakan tambahkan melalui menu Pengaturan.</p>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Modal Preview -->
+<div class="preview-modal" id="previewModal">
+    <div class="preview-content">
+        <button class="preview-close" id="closePreview">&times;</button>
+        <div class="preview-header"><h2 id="previewTitle"></h2></div>
+        <div class="preview-image-container"><img id="previewImage" src="" alt="Preview" class="preview-image"></div>
+        <div class="preview-description" id="previewDesc"></div>
+        <div class="preview-actions">
+            <button class="preview-btn" id="copyTextBtn"><i class="fas fa-copy"></i> Copy Teks</button>
+            <button class="preview-btn" id="copyImageBtn"><i class="fas fa-image"></i> Copy Gambar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    function switchTab(tabId) {
+        panes.forEach(pane => pane.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+        filterContent();
+    }
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            switchTab(tabId);
         });
-    </script>
+    });
+
+    // Search filter
+    function filterContent() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const activePane = document.querySelector('.tab-pane.active').id;
+        
+        if (activePane === 'konten-umum') {
+            const contentCards = document.querySelectorAll('.content-card');
+            contentCards.forEach(card => {
+                const judul = card.getAttribute('data-judul') || '';
+                const deskripsi = card.getAttribute('data-deskripsi') || '';
+                if (judul.includes(searchTerm) || deskripsi.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        } else if (activePane === 'gambar-permainan') {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                const judul = item.getAttribute('data-judul') || '';
+                const deskripsi = item.getAttribute('data-deskripsi') || '';
+                if (judul.includes(searchTerm) || deskripsi.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', filterContent);
+
+    // Copy functions
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                const success = document.execCommand('copy');
+                document.body.removeChild(ta);
+                return success;
+            } catch {
+                return false;
+            }
+        }
+    }
+
+    function showCopySuccess() {
+        const existing = document.querySelector('.copy-toast');
+        if (existing) existing.remove();
+        const toast = document.createElement('div');
+        toast.className = 'copy-toast';
+        toast.innerHTML = '<i class="fas fa-check-circle"></i> Teks berhasil disalin!';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
+
+    // Copy untuk konten umum
+    document.querySelectorAll('.copy-item-btn').forEach(btn => {
+        btn.addEventListener('click', async function(e) {
+            e.stopPropagation();
+            const text = this.getAttribute('data-text');
+            if (!text) return;
+            const success = await copyToClipboard(text);
+            if (success) {
+                const original = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Tersalin';
+                this.disabled = true;
+                showCopySuccess();
+                setTimeout(() => {
+                    this.innerHTML = original;
+                    this.disabled = false;
+                }, 1500);
+            } else {
+                alert('Gagal menyalin teks.');
+            }
+        });
+    });
+
+    // Copy untuk galeri
+    document.querySelectorAll('.copy-desc-btn').forEach(btn => {
+        btn.addEventListener('click', async function(e) {
+            e.stopPropagation();
+            const text = this.getAttribute('data-text');
+            if (!text) return;
+            const success = await copyToClipboard(text);
+            if (success) {
+                const original = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Tersalin';
+                this.disabled = true;
+                showCopySuccess();
+                setTimeout(() => {
+                    this.innerHTML = original;
+                    this.disabled = false;
+                }, 1500);
+            } else {
+                alert('Gagal menyalin teks.');
+            }
+        });
+    });
+
+    // Modal preview untuk gambar
+    const modal = document.getElementById('previewModal');
+    const modalTitle = document.getElementById('previewTitle');
+    const modalImage = document.getElementById('previewImage');
+    const modalDesc = document.getElementById('previewDesc');
+    const closeBtn = document.getElementById('closePreview');
+    let currentImageUrl = '', currentDesc = '';
+
+    document.querySelectorAll('.gallery-item').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.copy-desc-btn')) return;
+            currentImageUrl = card.dataset.url;
+            currentDesc = card.dataset.desc;
+            modalTitle.textContent = card.dataset.name;
+            modalImage.src = currentImageUrl;
+            modalDesc.textContent = currentDesc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+
+    document.getElementById('copyTextBtn').addEventListener('click', async () => {
+        if (!currentDesc) return;
+        const success = await copyToClipboard(currentDesc);
+        if (success) {
+            const btn = document.getElementById('copyTextBtn');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Tersalin';
+            btn.disabled = true;
+            showCopySuccess();
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.disabled = false;
+            }, 1500);
+        } else alert('Gagal menyalin teks.');
+    });
+
+    document.getElementById('copyImageBtn').addEventListener('click', async () => {
+        if (!currentImageUrl) return;
+        try {
+            const response = await fetch(currentImageUrl);
+            const blob = await response.blob();
+            await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+            const btn = document.getElementById('copyImageBtn');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Tersalin';
+            btn.disabled = true;
+            showCopySuccess();
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.disabled = false;
+            }, 1500);
+        } catch {
+            const success = await copyToClipboard(currentImageUrl);
+            if (success) {
+                const btn = document.getElementById('copyImageBtn');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-link"></i> URL Tersalin';
+                btn.disabled = true;
+                showCopySuccess();
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.disabled = false;
+                }, 1500);
+            } else alert('Gagal menyalin gambar.');
+        }
+    });
+</script>
 </body>
 </html>
