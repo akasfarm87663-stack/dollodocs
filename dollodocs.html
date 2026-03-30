@@ -1193,8 +1193,8 @@
               <span>🆔 #${item.id + 1}</span>
               <span>📅 ${formatDate(item.createdAt)}</span>
             </div>
-            <button class="copy-btn" onclick="copyContent(${item.id}, this)">
-              📋 Salin
+            <button class="copy-btn" onclick="copyDescriptionOnly(${item.id}, this)">
+              📋 Salin Deskripsi
             </button>
           </div>
         </div>
@@ -1252,20 +1252,21 @@
     }
 
     /**
-     * 📋 Copy Content to Clipboard
+     * 📋 COPY DESCRIPTION ONLY (UPDATED: Hanya Kolom B)
      */
-    function copyContent(id, button) {
+    function copyDescriptionOnly(id, button) {
       const item = appData.items.find(i => i.id === id);
       if (!item) return;
       
-      const text = `${item.title}\n\n${item.description}`;
+      // ✅ HANYA COPY DESKRIPSI (Kolom B) - TANPA JUDUL
+      const textToCopy = item.description;
       
-      navigator.clipboard.writeText(text).then(() => {
+      navigator.clipboard.writeText(textToCopy).then(() => {
         const original = button.innerHTML;
         button.classList.add('copied');
-        button.innerHTML = '✓ Tersalin!';
+        button.innerHTML = '✓ Deskripsi Disalin!';
         
-        showToast('📋 Konten berhasil disalin!', 'success');
+        showToast('📋 Deskripsi berhasil disalin!', 'success');
         
         setTimeout(() => {
           button.classList.remove('copied');
