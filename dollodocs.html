@@ -1,1494 +1,676 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌸 Anime Data Storage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #ff6b9d;
-      --secondary: #c471f5;
-      --accent: #4facfe;
-      --bg-dark: #1a1a2e;
-      --bg-card: #16213e;
-      --bg-sidebar: #0f0f1a;
-      --text: #f8f9fa;
-      --text-muted: #b8c1cf;
-      --sidebar-width: 280px;
-      --shadow: 0 8px 32px rgba(0,0,0,0.35);
-      --shadow-hover: 0 16px 48px rgba(0,0,0,0.5);
-      --border-radius: 16px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Anime Data Manager - Line Togel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b9d;
+            --secondary: #c44582;
+            --accent: #ff9ec5;
+            --dark: #2d1b3e;
+            --darker: #1a0f2e;
+            --light: #fff5f9;
+            --text: #333;
+            --text-light: #666;
+            --sidebar-width: 280px;
+            --transition: all 0.3s ease;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, var(--bg-dark), #0a0a15);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* 🎌 Mobile Menu Toggle */
-    .menu-toggle {
-      display: none;
-      position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 1100;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border: none;
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      color: white;
-      font-size: 1.6rem;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      align-items: center;
-      justify-content: center;
-    }
-    .menu-toggle:hover { transform: scale(1.05); }
-    .menu-toggle:active { transform: scale(0.95); }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
 
-    /* 🎀 Sidebar Navigation */
-    .sidebar {
-      width: var(--sidebar-width);
-      background: linear-gradient(180deg, var(--bg-sidebar), #0a0a12);
-      padding: 20px 16px;
-      position: fixed;
-      height: 100vh;
-      border-right: 2px solid var(--primary);
-      box-shadow: var(--shadow);
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
-    }
+        /* 🎌 Anime Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--darker) 0%, rgba(45, 27, 62, 0.95) 100%);
+            border-right: 2px solid var(--primary);
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 4px 0 20px rgba(255, 107, 157, 0.3);
+        }
 
-    .sidebar-header {
-      text-align: center;
-      padding: 16px 0 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      margin-bottom: 16px;
-    }
+        .sidebar-header {
+            padding: 15px 25px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            margin-bottom: 20px;
+        }
 
-    .sidebar-header h2 {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.4rem;
-      background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-size: 200% 200%;
-      animation: gradient 4s ease infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
+        .sidebar-header h2 {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--primary);
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+        }
 
-    @keyframes gradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
+        .sidebar-header .anime-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
 
-    .sidebar-header .emoji {
-      font-size: 1.8rem;
-      animation: float 3s ease-in-out infinite;
-      display: inline-block;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+        .search-box {
+            padding: 0 20px 20px;
+        }
 
-    /* 🔍 Search in Sidebar */
-    .sidebar-search {
-      margin: 12px 8px 16px;
-      position: relative;
-    }
-    .sidebar-search input {
-      width: 100%;
-      padding: 10px 14px 10px 36px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-    .sidebar-search input:focus {
-      outline: none;
-      border-color: var(--accent);
-      background: rgba(255,255,255,0.12);
-    }
-    .sidebar-search::before {
-      content: "🔍";
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
 
-    /* 🧭 Navigation Menu */
-    .nav-section {
-      margin-bottom: 12px;
-    }
-    .nav-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      padding: 8px 16px 6px;
-      margin-bottom: 4px;
-    }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 107, 157, 0.4);
+        }
 
-    .nav-menu {
-      list-style: none;
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-    .nav-menu::-webkit-scrollbar { width: 4px; }
-    .nav-menu::-webkit-scrollbar-track { background: transparent; }
-    .nav-menu::-webkit-scrollbar-thumb { 
-      background: rgba(255,255,255,0.2); 
-      border-radius: 4px; 
-    }
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-    .nav-item { margin: 4px 0; }
+        .menu-list {
+            list-style: none;
+            padding: 0 10px;
+        }
 
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      color: var(--text-muted);
-      text-decoration: none;
-      border-radius: 12px;
-      transition: var(--transition);
-      font-weight: 600;
-      font-size: 0.92rem;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
+        .menu-item {
+            margin: 5px 0;
+        }
 
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: linear-gradient(var(--primary), var(--accent));
-      opacity: 0;
-      transition: var(--transition);
-    }
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
 
-    .nav-link:hover, .nav-link.active {
-      background: linear-gradient(90deg, rgba(255,107,157,0.15), rgba(79,172,254,0.15));
-      color: var(--text);
-      transform: translateX(3px);
-    }
-    .nav-link.active::before { opacity: 1; }
+        .menu-link:hover,
+        .menu-link.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+        }
 
-    .nav-link .icon {
-      font-size: 1.25rem;
-      width: 24px;
-      text-align: center;
-      flex-shrink: 0;
-    }
+        .menu-link i {
+            width: 25px;
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
 
-    .nav-link .count {
-      margin-left: auto;
-      background: rgba(255,255,255,0.12);
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
+        .menu-link .badge {
+            margin-left: auto;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
 
-    /* 📊 Sync Status */
-    .sidebar-footer {
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
+        /* 🎀 Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+        }
 
-    .sync-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--accent);
+        }
 
-    .sync-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #00c853;
-      flex-shrink: 0;
-      animation: pulse 2s infinite;
-    }
-    .sync-dot.loading { background: #ffd54f; animation: pulse 1s infinite; }
-    .sync-dot.error { background: #ff5252; animation: none; }
-    .sync-dot.offline { background: #9e9e9e; animation: none; }
+        .content-header h1 {
+            font-family: 'Quicksand', sans-serif;
+            color: white;
+            font-size: 1.8rem;
+        }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
-    }
+        .content-header h1 span {
+            color: var(--primary);
+        }
 
-    .storage-info {
-      font-size: 0.72rem;
-      opacity: 0.8;
-      line-height: 1.5;
-    }
-    .storage-info strong { color: var(--accent); }
+        .action-buttons button {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-left: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    /* 🎀 Main Content Area */
-    .main-content {
-      margin-left: var(--sidebar-width);
-      flex: 1;
-      padding: 28px 32px;
-      max-width: calc(100% - var(--sidebar-width));
-      min-height: 100vh;
-    }
+        .action-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+        }
 
-    .page-header {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
+        .action-buttons button.secondary {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid var(--accent);
+        }
 
-    .page-header h1 {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.9rem;
-      background: linear-gradient(45deg, var(--accent), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        /* 📦 Data Cards */
+        .data-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
 
-    .page-header .subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-top: 4px;
-    }
+        .data-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 25px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .header-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
 
-    /* 🎨 Buttons */
-    .btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      white-space: nowrap;
-    }
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.3);
+            border-color: var(--primary);
+        }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--secondary));
-      color: white;
-      box-shadow: 0 4px 14px rgba(79,172,254,0.35);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(79,172,254,0.5);
-    }
+        .card-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-    .btn-outline:hover {
-      background: rgba(255,107,157,0.15);
-      transform: translateY(-2px);
-    }
+        .card-title i {
+            color: var(--primary);
+        }
 
-    .btn-sm {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      border-radius: 10px;
-    }
+        .card-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
 
-    /* 🔍 Main Search */
-    .main-search {
-      margin-bottom: 24px;
-      position: relative;
-      max-width: 600px;
-    }
-    .main-search input {
-      width: 100%;
-      padding: 14px 20px 14px 44px;
-      border-radius: 16px;
-      border: 2px solid rgba(255,255,255,0.12);
-      background: var(--bg-card);
-      color: var(--text);
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-    .main-search input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(79,172,254,0.15);
-    }
-    .main-search::before {
-      content: "🔍";
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.1rem;
-      opacity: 0.7;
-      pointer-events: none;
-    }
+        .card-description br {
+            margin: 8px 0;
+        }
 
-    /* 📦 Data Cards Grid */
-    .data-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 22px;
-    }
+        .card-meta {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-    .data-card {
-      background: var(--bg-card);
-      border-radius: var(--border-radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      animation: cardFadeIn 0.4s ease forwards;
-      opacity: 0;
-    }
+        /* 🗄️ Storage Section */
+        .storage-panel {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid var(--accent);
+        }
 
-    @keyframes cardFadeIn {
-      to { opacity: 1; transform: translateY(0); }
-      from { opacity: 0; transform: translateY(16px); }
-    }
+        .storage-panel h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .data-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
-      opacity: 0.95;
-    }
+        .storage-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.85);
+        }
 
-    .data-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--primary);
-      z-index: 2;
-    }
+        .storage-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 18px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
 
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
+        .storage-item span:first-child {
+            color: rgba(255, 255, 255, 0.7);
+        }
 
-    .card-title {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.28rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.4;
-      flex: 1;
-      min-width: 0;
-    }
+        .storage-item span:last-child {
+            color: var(--accent);
+            font-weight: 600;
+        }
 
-    .card-badge {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
+        /* ✨ Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
 
-    .card-content {
-      color: var(--text-muted);
-      line-height: 1.75;
-      font-size: 0.96rem;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      margin-bottom: 16px;
-    }
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
 
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 14px;
-      border-top: 1px dashed rgba(255,255,255,0.15);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+        /* 📱 Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: var(--transition);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block !important;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: var(--primary);
+                color: white;
+                border: none;
+                padding: 12px 18px;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+        }
 
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+        .menu-toggle {
+            display: none;
+        }
 
-    .card-meta span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+        /* 🎨 Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
 
-    .copy-btn {
-      background: linear-gradient(135deg, var(--accent), var(--secondary));
-      border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .copy-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px rgba(79,172,254,0.45);
-    }
-    .copy-btn.copied {
-      background: linear-gradient(135deg, #00c853, #00e676);
-    }
-
-    /* 📊 Stats Bar */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 14px;
-      margin-bottom: 24px;
-      padding: 16px;
-      background: var(--bg-card);
-      border-radius: var(--border-radius);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 8px;
-    }
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: linear-gradient(45deg, var(--accent), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* 🎭 Loading & Empty States */
-    .loading-state, .empty-state {
-      text-align: center;
-      padding: 50px 24px;
-      color: var(--text-muted);
-      grid-column: 1 / -1;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    .loading-state .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid rgba(255,255,255,0.12);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .empty-state .emoji {
-      font-size: 3.5rem;
-      margin-bottom: 16px;
-      display: block;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .empty-state p {
-      margin-bottom: 20px;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* 🎀 Decorative Elements */
-    .decoration {
-      position: fixed;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.1;
-      font-size: 3rem;
-      animation: float 8s ease-in-out infinite;
-    }
-    .deco-1 { top: 10%; right: 5%; animation-delay: 0s; }
-    .deco-2 { bottom: 15%; left: 3%; animation-delay: -3s; font-size: 2.5rem; }
-    .deco-3 { top: 50%; right: 10%; animation-delay: -6s; font-size: 2rem; opacity: 0.07; }
-
-    /* 📱 Toast Notifications */
-    .toast-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-width: 360px;
-    }
-
-    .toast {
-      background: var(--bg-card);
-      border-left: 4px solid var(--accent);
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: toastSlideIn 0.3s ease, toastFadeOut 0.3s ease 2.7s forwards;
-      font-size: 0.9rem;
-    }
-
-    @keyframes toastSlideIn {
-      from { transform: translateX(120px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes toastFadeOut {
-      to { opacity: 0; transform: translateY(10px); }
-    }
-
-    .toast.success { border-left-color: #00c853; }
-    .toast.error { border-left-color: #ff5252; }
-    .toast.warning { border-left-color: #ffd54f; color: #fff; }
-    .toast.info { border-left-color: #4facfe; }
-
-    /* 📱 Responsive Design */
-    @media (max-width: 1100px) {
-      .data-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-    }
-
-    @media (max-width: 992px) {
-      .sidebar {
-        transform: translateX(-100%);
-        width: 300px;
-      }
-      .sidebar.active { transform: translateX(0); }
-      
-      .main-content {
-        margin-left: 0;
-        max-width: 100%;
-        padding: 20px 16px;
-      }
-      
-      .menu-toggle { display: flex; }
-      
-      .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .header-actions {
-        width: 100%;
-        justify-content: space-between;
-      }
-      
-      .stats-bar {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .data-grid { grid-template-columns: 1fr; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .card-footer { flex-direction: column; align-items: flex-start; }
-      .copy-btn { width: 100%; justify-content: center; }
-    }
-
-    /* 🎨 Scrollbar Styling */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(var(--primary), var(--accent));
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(var(--accent), var(--secondary));
-    }
-  </style>
+        /* 🌸 Decorative Elements */
+        .decoration {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .decoration-1 { top: 10%; right: 5%; font-size: 8rem; }
+        .decoration-2 { bottom: 15%; left: 3%; font-size: 6rem; animation: float 4s ease-in-out infinite; }
+    </style>
 </head>
 <body>
+    <!-- 🎌 Decorative Anime Elements -->
+    <div class="decoration decoration-1">🌸</div>
+    <div class="decoration decoration-2">✨</div>
 
-  <!-- 🎌 Mobile Menu Toggle Button -->
-  <button class="menu-toggle" onclick="toggleSidebar()" title="Toggle Menu">☰</button>
+    <!-- 🍔 Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
 
-  <!-- 🎀 Sidebar Navigation -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <h2><span class="emoji">🌸</span> Anime Storage</h2>
-    </div>
-    
-    <!-- 🔍 Sidebar Search -->
-    <div class="sidebar-search">
-      <input type="text" id="sidebarSearch" placeholder="Cari kategori..." onkeyup="filterCategories()">
-    </div>
+    <!-- 🎀 Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="anime-icon">🎌</div>
+            <h2>Anime Data Hub</h2>
+            <small style="color: rgba(255,255,255,0.6);">Line Togel Manager</small>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Cari judul..." onkeyup="filterData()">
+        </div>
+        
+        <ul class="menu-list" id="menuList">
+            <!-- Menu items will be populated by JavaScript -->
+        </ul>
+    </aside>
 
-    <!-- 🧭 Dynamic Category Menu -->
-    <div class="nav-section">
-      <div class="nav-title">📂 Kategori</div>
-      <ul class="nav-menu" id="categoryMenu">
-        <li class="nav-item">
-          <div class="nav-link active" onclick="filterData('all', this)" data-cat="all">
-            <span class="icon">🏠</span> Semua Data
-            <span class="count" id="countAll">0</span>
-          </div>
-        </li>
-        <!-- Dynamic categories inserted by JS -->
-      </ul>
-    </div>
-
-    <!-- 📊 Storage Info -->
-    <div class="sidebar-footer">
-      <div class="sync-status">
-        <span class="sync-dot" id="syncDot"></span>
-        <span id="syncText">Menunggu...</span>
-      </div>
-      <div class="storage-info">
-        <strong>💾 Penyimpanan:</strong><br>
-        <span id="storageUsed">0 KB</span> / <span id="storageLimit">5 MB</span><br>
-        <small id="cacheTime">Cache: -</small>
-      </div>
-      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.1);">
-        <button class="btn btn-outline btn-sm" onclick="refreshData()" style="width:100%; justify-content:center;">
-          🔄 Refresh Data
-        </button>
-        <button class="btn btn-primary btn-sm" onclick="exportData()" style="width:100%; justify-content:center; margin-top:8px;">
-          💾 Export JSON
-        </button>
-        <button class="btn btn-outline btn-sm" onclick="clearStorage()" style="width:100%; justify-content:center; margin-top:8px; border-color:#ff5252; color:#ff8a8a;">
-          🗑️ Hapus Cache
-        </button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 🎀 Main Content Area -->
-  <main class="main-content">
-    <div class="page-header">
-      <div>
-        <h1>📚 Anime Data Collection</h1>
-        <p class="subtitle">Kolom A: Judul | Kolom B: Deskripsi • Auto-sync dari Google Sheets</p>
-      </div>
-      <div class="header-actions">
-        <button class="btn btn-outline" onclick="refreshData()">🔄 Refresh</button>
-        <button class="btn btn-primary" onclick="exportData()">💾 Export</button>
-      </div>
-    </div>
-
-    <!-- 🔍 Main Search -->
-    <div class="main-search">
-      <input type="text" id="mainSearch" placeholder="🔍 Cari judul atau deskripsi..." onkeyup="searchData()">
-    </div>
-
-    <!-- 📊 Quick Stats -->
-    <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-value" id="statTotal">0</div>
-        <div class="stat-label">Total Data</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statCategories">0</div>
-        <div class="stat-label">Kategori</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statStorage">0 KB</div>
-        <div class="stat-label">Storage Used</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statLastUpdate">-</div>
-        <div class="stat-label">Terakhir Update</div>
-      </div>
-    </div>
-
-    <!-- 📦 Data Cards Container -->
-    <div class="data-grid" id="dataContainer">
-      <div class="loading-state">
-        <div class="spinner"></div>
-        <p>✨ Mengambil data dari Google Sheets...</p>
-        <small style="opacity:0.7; margin-top:8px; display:block;">Kolom A → Judul | Kolom B → Deskripsi</small>
-      </div>
-    </div>
-  </main>
-
-  <!-- 🌸 Decorative Floating Elements -->
-  <div class="decoration deco-1">🌸</div>
-  <div class="decoration deco-2">⭐</div>
-  <div class="decoration deco-3">🎀</div>
-
-  <!-- 🎀 Toast Container -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- 💫 JavaScript Logic -->
-  <script>
-    /**
-     * 🌸 ANIME DATA STORAGE SYSTEM
-     * Fetch from Google Sheets → Store in localStorage → Display with Anime UI
-     * 
-     * 📋 Configuration
-     */
-    const CONFIG = {
-      // Google Sheets CSV Export URL (PUBLIC/VIEW-ONLY access required)
-      sheetUrl: 'https://docs.google.com/spreadsheets/d/1xlBUoiw1h1LxL6I6JM58XHzWsOQtZX9glxt-ndwQO9k/export?format=csv&gid=0',
-      
-      // localStorage keys
-      storageKey: 'anime_data_v2',
-      metaKey: 'anime_meta_v2',
-      
-      // Cache settings
-      cacheExpiry: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
-      autoRefresh: 30 * 60 * 1000, // Auto-refresh every 30 min if page open
-      
-      // Column mapping (0-indexed: A=0, B=1)
-      columnTitle: 0,    // Kolom A = Judul
-      columnDesc: 1,     // Kolom B = Deskripsi
-      
-      // Category detection keywords (for auto-categorization)
-      categoryKeywords: {
-        'deposit': ['deposit', 'top up', 'saldo', 'dana'],
-        'withdraw': ['withdraw', 'tarik', 'penarikan', 'wd'],
-        'promo': ['promo', 'bonus', 'diskon', 'hadiah', 'event'],
-        'info': ['info', 'informasi', 'panduan', 'tutorial', 'cara'],
-        'rules': ['syarat', 'ketentuan', 'rules', 'terms', 'peraturan'],
-        'contact': ['cs', 'kontak', 'hubungi', 'support', 'help']
-      }
-    };
-
-    // 🗄️ Global State
-    let appData = {
-      items: [],
-      categories: new Set(),
-      lastFetch: null,
-      version: 2
-    };
-
-    // 🚀 Initialize Application
-    document.addEventListener('DOMContentLoaded', () => {
-      initApp();
-      setupEventListeners();
-      startAutoRefresh();
-    });
-
-    /**
-     * 🔄 Main App Initialization
-     */
-    async function initApp() {
-      updateSyncStatus('loading', 'Memeriksa cache...');
-      
-      // Try load from localStorage first (offline support)
-      const cached = loadFromStorage();
-      
-      if (cached && !navigator.onLine) {
-        // Offline mode - use cache only
-        appData = cached;
-        renderAll();
-        updateSyncStatus('offline', 'Mode Offline • Cache');
-        showToast('📴 Menampilkan data cache (offline)', 'warning');
-        return;
-      }
-      
-      if (cached && isCacheValid(cached.meta?.timestamp)) {
-        // Valid cache - use it but fetch fresh in background
-        appData = cached;
-        renderAll();
-        updateSyncStatus('success', `Cache: ${formatDate(cached.meta?.timestamp)}`);
-        showToast('✅ Data cache dimuat', 'success');
-        // Background refresh
-        fetchAndStoreData().catch(() => {});
-      } else {
-        // No cache or expired - fetch fresh
-        await fetchAndStoreData();
-      }
-    }
-
-    /**
-     * 📥 Fetch Data from Google Sheets CSV
-     */
-    async function fetchAndStoreData() {
-      try {
-        updateSyncStatus('loading', 'Menghubungi Google Sheets...');
-        
-        const response = await fetch(CONFIG.sheetUrl, { 
-          cache: 'no-store',
-          headers: { 'Accept': 'text/csv' }
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const csvText = await response.text();
-        const parsed = parseCSVToData(csvText);
-        
-        if (parsed.length === 0) {
-          throw new Error('Tidak ada data valid ditemukan di Sheet');
-        }
-        
-        // Update app state
-        appData = {
-          items: parsed,
-          categories: new Set(parsed.map(item => item.category)),
-          lastFetch: new Date().toISOString(),
-          meta: {
-            timestamp: Date.now(),
-            total: parsed.length,
-            source: CONFIG.sheetUrl
-          },
-          version: CONFIG.storageKey
-        };
-        
-        // 💾 STORE TO localStorage (PENTING: Penyimpanan HTML)
-        saveToStorage(appData);
-        
-        // Render UI
-        renderAll();
-        
-        // Update status
-        updateSyncStatus('success', `Update: ${formatTime(new Date())}`);
-        showToast(`✅ ${parsed.length} data berhasil disimpan!`, 'success');
-        
-        // Update storage stats
-        updateStorageStats();
-        
-        return true;
-        
-      } catch (error) {
-        console.error('❌ Fetch Error:', error);
-        updateSyncStatus('error', 'Gagal sinkronisasi');
-        
-        // Fallback to cache if exists
-        const cached = loadFromStorage();
-        if (cached?.items?.length) {
-          appData = cached;
-          renderAll();
-          showToast('⚠️ Menampilkan data cache', 'warning');
-          return true;
-        }
-        
-        showEmptyState('❌ Gagal Memuat Data', error.message);
-        showToast('❌ ' + error.message, 'error');
-        return false;
-      }
-    }
-
-    /**
-     * 📄 Parse CSV: Kolom A=Judul, Kolom B=Deskripsi
-     */
-    function parseCSVToData(csvText) {
-      const lines = csvText.split(/\r?\n/).filter(line => line.trim());
-      const result = [];
-      
-      // Skip header row if exists (check if first row looks like data)
-      const startIndex = looksLikeHeader(lines[0]) ? 1 : 0;
-      
-      for (let i = startIndex; i < lines.length; i++) {
-        const row = parseCSVLine(lines[i]);
-        
-        // Validate: need at least title (Col A) and description (Col B)
-        if (row.length > CONFIG.columnDesc) {
-          const title = row[CONFIG.columnTitle]?.trim();
-          const description = row[CONFIG.columnDesc]?.trim();
-          
-          if (title && description) {
-            result.push({
-              id: result.length,
-              title: sanitizeHtml(title),
-              description: sanitizeHtml(description)
-                .replace(/<br\s*\/?>/gi, '\n')  // Convert <br> to newline
-                .replace(/\\n/g, '\n'),           // Convert \n literal to newline
-              category: detectCategory(title),
-              createdAt: new Date().toISOString(),
-              source: 'sheets'
-            });
-          }
-        }
-      }
-      
-      return result;
-    }
-
-    /**
-     * 🔀 Simple CSV Line Parser (handles quoted fields)
-     */
-    function parseCSVLine(line) {
-      const result = [];
-      let current = '';
-      let inQuotes = false;
-      
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        const next = line[i + 1];
-        
-        if (char === '"') {
-          if (inQuotes && next === '"') {
-            current += '"'; // Escaped quote
-            i++;
-          } else {
-            inQuotes = !inQuotes;
-          }
-        } else if (char === ',' && !inQuotes) {
-          result.push(current);
-          current = '';
-        } else {
-          current += char;
-        }
-      }
-      result.push(current);
-      return result.map(val => val.trim());
-    }
-
-    /**
-     * 🏷️ Auto-detect Category from Title Keywords
-     */
-    function detectCategory(title) {
-      const lower = title.toLowerCase();
-      
-      for (const [category, keywords] of Object.entries(CONFIG.categoryKeywords)) {
-        if (keywords.some(kw => lower.includes(kw))) {
-          return category;
-        }
-      }
-      
-      return 'lainnya';
-    }
-
-    /**
-     * 🧐 Check if first row looks like header
-     */
-    function looksLikeHeader(row) {
-      const lower = row.toLowerCase();
-      return lower.includes('judul') || lower.includes('title') || 
-             lower.includes('deskripsi') || lower.includes('description') ||
-             lower.includes('nama') || lower.includes('name');
-    }
-
-    /**
-     * 💾 SAVE TO localStorage (FITUR UTAMA: Penyimpanan HTML)
-     */
-    function saveToStorage(data) {
-      try {
-        const serialized = JSON.stringify(data);
-        localStorage.setItem(CONFIG.storageKey, serialized);
-        
-        // Save metadata separately for quick access
-        localStorage.setItem(CONFIG.metaKey, JSON.stringify({
-          timestamp: data.meta?.timestamp,
-          total: data.items?.length,
-          categories: [...(data.categories || [])],
-          storageUsed: new Blob([serialized]).size
-        }));
-        
-        console.log('💾 Data saved to localStorage:', {
-          items: data.items?.length,
-          size: new Blob([serialized]).size,
-          timestamp: data.meta?.timestamp
-        });
-        
-        return true;
-      } catch (e) {
-        if (e.name === 'QuotaExceededError') {
-          showToast('⚠️ Storage penuh! Hapus cache lama.', 'warning');
-          // Try to clear old data and retry
-          localStorage.removeItem(CONFIG.storageKey);
-          localStorage.removeItem(CONFIG.metaKey);
-        }
-        console.error('❌ Save to localStorage failed:', e);
-        return false;
-      }
-    }
-
-    /**
-     * 📤 LOAD FROM localStorage
-     */
-    function loadFromStorage() {
-      try {
-        const serialized = localStorage.getItem(CONFIG.storageKey);
-        const meta = localStorage.getItem(CONFIG.metaKey);
-        
-        if (!serialized) return null;
-        
-        const data = JSON.parse(serialized);
-        if (meta) data.meta = JSON.parse(meta);
-        
-        // Validate structure
-        if (!data.items || !Array.isArray(data.items)) {
-          console.warn('⚠️ Invalid cache structure, clearing...');
-          localStorage.removeItem(CONFIG.storageKey);
-          localStorage.removeItem(CONFIG.metaKey);
-          return null;
-        }
-        
-        // Rebuild categories Set
-        if (data.items.length) {
-          data.categories = new Set(data.items.map(item => item.category));
-        }
-        
-        return data;
-      } catch (e) {
-        console.warn('❌ Load from localStorage failed:', e);
-        // Corrupted cache - clear it
-        localStorage.removeItem(CONFIG.storageKey);
-        localStorage.removeItem(CONFIG.metaKey);
-        return null;
-      }
-    }
-
-    /**
-     * ⏰ Check if cache is still valid
-     */
-    function isCacheValid(timestamp) {
-      if (!timestamp) return false;
-      return (Date.now() - timestamp) < CONFIG.cacheExpiry;
-    }
-
-    /**
-     * 🎨 Render Everything
-     */
-    function renderAll() {
-      renderStats();
-      renderCategoryMenu();
-      renderDataCards(appData.items);
-      updateStorageStats();
-    }
-
-    /**
-     * 📊 Render Stats Bar
-     */
-    function renderStats() {
-      document.getElementById('statTotal').textContent = appData.items.length;
-      document.getElementById('statCategories').textContent = appData.categories.size;
-      document.getElementById('statLastUpdate').textContent = 
-        appData.meta?.timestamp ? formatRelativeTime(appData.meta.timestamp) : '-';
-    }
-
-    /**
-     * 🧭 Render Category Menu in Sidebar
-     */
-    function renderCategoryMenu(searchTerm = '') {
-      const menu = document.getElementById('categoryMenu');
-      const existing = menu.querySelectorAll('.nav-link[data-cat]:not([data-cat="all"])');
-      existing.forEach(el => el.closest('.nav-item')?.remove());
-      
-      const categories = [...appData.categories].sort();
-      const search = searchTerm.toLowerCase();
-      
-      categories.forEach(cat => {
-        if (search && !cat.toLowerCase().includes(search)) return;
-        
-        const count = appData.items.filter(item => item.category === cat).length;
-        if (count === 0) return;
-        
-        const icons = {
-          deposit: '💰', withdraw: '💸', promo: '🎁',
-          info: 'ℹ️', rules: '📜', contact: '💬', lainnya: '📦'
-        };
-        
-        const li = document.createElement('li');
-        li.className = 'nav-item';
-        li.innerHTML = `
-          <div class="nav-link" data-cat="${cat}" onclick="filterData('${cat}', this)">
-            <span class="icon">${icons[cat] || '📌'}</span>
-            ${cat.charAt(0).toUpperCase() + cat.slice(1)}
-            <span class="count">${count}</span>
-          </div>
-        `;
-        menu.appendChild(li);
-      });
-      
-      // Update "All" count
-      document.getElementById('countAll').textContent = appData.items.length;
-    }
-
-    /**
-     * 🃏 Render Data Cards
-     */
-    function renderDataCards(items, stagger = true) {
-      const container = document.getElementById('dataContainer');
-      
-      if (!items || items.length === 0) {
-        showEmptyState('🔍 Tidak Ditemukan', 'Coba kata kunci lain atau refresh data');
-        return;
-      }
-      
-      container.innerHTML = items.map((item, index) => `
-        <div class="data-card" 
-             data-category="${item.category}" 
-             data-id="${item.id}"
-             style="${stagger ? `animation-delay: ${Math.min(index * 0.05, 0.5)}s` : ''}">
-          
-          <div class="card-header">
-            <h3 class="card-title">${item.title}</h3>
-            <span class="card-badge">${item.category}</span>
-          </div>
-          
-          <div class="card-content">${item.description}</div>
-          
-          <div class="card-footer">
-            <div class="card-meta">
-              <span>🆔 #${item.id + 1}</span>
-              <span>📅 ${formatDate(item.createdAt)}</span>
+    <!-- 📦 Main Content Area -->
+    <main class="main-content">
+        <div class="content-header">
+            <h1>📊 Data <span>Manager</span></h1>
+            <div class="action-buttons">
+                <button onclick="exportToHTML()">
+                    <i class="fas fa-download"></i> Export HTML
+                </button>
+                <button onclick="refreshData()" class="secondary">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
             </div>
-            <button class="copy-btn" onclick="copyDescriptionOnly(${item.id}, this)">
-              📋 Salin Deskripsi
-            </button>
-          </div>
         </div>
-      `).join('');
-    }
 
-    /**
-     * 🔍 Search Functionality
-     */
-    function searchData() {
-      const query = document.getElementById('mainSearch').value.trim().toLowerCase();
-      const activeCat = document.querySelector('.nav-link.active')?.dataset.cat || 'all';
-      
-      let filtered = appData.items;
-      
-      // Category filter
-      if (activeCat !== 'all') {
-        filtered = filtered.filter(item => item.category === activeCat);
-      }
-      
-      // Search filter
-      if (query) {
-        filtered = filtered.filter(item => 
-          item.title.toLowerCase().includes(query) ||
-          item.description.toLowerCase().includes(query)
-        );
-      }
-      
-      renderDataCards(filtered, false);
-    }
-
-    /**
-     * 🏷️ Filter by Category
-     */
-    function filterData(category, element) {
-      // Update active nav state
-      document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-      if (element) element.classList.add('active');
-      
-      // Re-render with filter
-      searchData(); // This respects both category and search
-      
-      // Close sidebar on mobile
-      if (window.innerWidth <= 992) {
-        document.getElementById('sidebar').classList.remove('active');
-      }
-    }
-
-    /**
-     * 🔍 Filter Categories in Sidebar
-     */
-    function filterCategories() {
-      const term = document.getElementById('sidebarSearch').value;
-      renderCategoryMenu(term);
-    }
-
-    /**
-     * 📋 COPY DESCRIPTION ONLY (UPDATED: Hanya Kolom B)
-     */
-    function copyDescriptionOnly(id, button) {
-      const item = appData.items.find(i => i.id === id);
-      if (!item) return;
-      
-      // ✅ HANYA COPY DESKRIPSI (Kolom B) - TANPA JUDUL
-      const textToCopy = item.description;
-      
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const original = button.innerHTML;
-        button.classList.add('copied');
-        button.innerHTML = '✓ Deskripsi Disalin!';
-        
-        showToast('📋 Deskripsi berhasil disalin!', 'success');
-        
-        setTimeout(() => {
-          button.classList.remove('copied');
-          button.innerHTML = original;
-        }, 2000);
-      }).catch(() => {
-        showToast('❌ Gagal menyalin', 'error');
-      });
-    }
-
-    /**
-     * 🔄 Manual Refresh
-     */
-    async function refreshData() {
-      showToast('🔄 Memuat data terbaru...', 'info');
-      updateSyncStatus('loading', 'Refreshing...');
-      
-      const success = await fetchAndStoreData();
-      if (success) {
-        showToast('✅ Data diperbarui!', 'success');
-      }
-    }
-
-    /**
-     * 💾 Export Data as JSON
-     */
-    function exportData() {
-      if (!appData.items?.length) {
-        showToast('⚠️ Tidak ada data untuk diekspor', 'warning');
-        return;
-      }
-      
-      const exportData = {
-        exportedAt: new Date().toISOString(),
-        source: CONFIG.sheetUrl,
-        total: appData.items.length,
-        data: appData.items
-      };
-      
-      const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `anime-data-${new Date().toISOString().slice(0,10)}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
-      showToast('💾 Data berhasil diekspor!', 'success');
-    }
-
-    /**
-     * 🗑️ Clear localStorage Cache
-     */
-    function clearStorage() {
-      if (confirm('⚠️ Hapus semua data cache dari penyimpanan browser?\n\nData akan diambil ulang dari Google Sheets.')) {
-        localStorage.removeItem(CONFIG.storageKey);
-        localStorage.removeItem(CONFIG.metaKey);
-        showToast('🗑️ Cache dihapus! Memuat ulang...', 'info');
-        refreshData();
-      }
-    }
-
-    /**
-     * 📊 Update Storage Usage Display
-     */
-    function updateStorageStats() {
-      try {
-        const serialized = localStorage.getItem(CONFIG.storageKey) || '';
-        const used = new Blob([serialized]).size;
-        const limit = 5 * 1024 * 1024; // 5MB typical limit
-        
-        document.getElementById('storageUsed').textContent = formatBytes(used);
-        document.getElementById('statStorage').textContent = formatBytes(used);
-        document.getElementById('storageLimit').textContent = formatBytes(limit);
-        
-        if (used > limit * 0.9) {
-          showToast('⚠️ Storage hampir penuh!', 'warning');
-        }
-      } catch (e) {
-        console.warn('Could not calculate storage:', e);
-      }
-    }
-
-    /**
-     * 🎨 UI Helper Functions
-     */
-    function updateSyncStatus(status, text) {
-      const dot = document.getElementById('syncDot');
-      const txt = document.getElementById('syncText');
-      
-      dot.className = 'sync-dot';
-      switch(status) {
-        case 'loading': dot.classList.add('loading'); break;
-        case 'error': dot.classList.add('error'); break;
-        case 'offline': dot.classList.add('offline'); break;
-        default: /* success */ 
-      }
-      txt.textContent = text;
-    }
-
-    function showEmptyState(title, message) {
-      document.getElementById('dataContainer').innerHTML = `
-        <div class="empty-state">
-          <span class="emoji">🎌</span>
-          <strong style="font-size:1.2rem; display:block; margin-bottom:8px;">${title}</strong>
-          <p>${message}</p>
-          <button class="btn btn-primary" onclick="refreshData()">🔄 Refresh Data</button>
+        <!-- Data Cards Container -->
+        <div class="data-container" id="dataContainer">
+            <!-- Cards will be populated by JavaScript -->
         </div>
-      `;
-    }
 
-    function showToast(message, type = 'info') {
-      const container = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      toast.innerHTML = `<span>${message}</span>`;
-      container.appendChild(toast);
-      
-      // Auto-remove after animation
-      setTimeout(() => toast.remove(), 3000);
-    }
+        <!-- 💾 Storage Information Panel -->
+        <div class="storage-panel">
+            <h3><i class="fas fa-database"></i> Penyimpanan Data</h3>
+            <div class="storage-info">
+                <div class="storage-item">
+                    <span>Total Data</span>
+                    <span id="totalData">0</span>
+                </div>
+                <div class="storage-item">
+                    <span>Format</span>
+                    <span>HTML + JSON</span>
+                </div>
+                <div class="storage-item">
+                    <span>Source</span>
+                    <span>Google Sheets</span>
+                </div>
+                <div class="storage-item">
+                    <span>Last Update</span>
+                    <span id="lastUpdate">-</span>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    function sanitizeHtml(text) {
-      // Basic XSS prevention
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+    <script>
+        // 🗄️ Data Storage System
+        const DataStorage = {
+            key: 'anime_togel_data',
+            
+            // Save data to localStorage
+            save(data) {
+                const payload = {
+                    data: data,
+                    timestamp: new Date().toISOString(),
+                    source: 'https://docs.google.com/spreadsheets/d/1xlBUoiw1h1LxL6I6JM58XHzWsOQtZX9glxt-ndwQO9k'
+                };
+                localStorage.setItem(this.key, JSON.stringify(payload));
+                this.updateStorageInfo();
+            },
+            
+            // Load data from localStorage
+            load() {
+                const stored = localStorage.getItem(this.key);
+                return stored ? JSON.parse(stored) : null;
+            },
+            
+            // Update storage info display
+            updateStorageInfo() {
+                const stored = this.load();
+                if (stored) {
+                    document.getElementById('totalData').textContent = stored.data.length;
+                    document.getElementById('lastUpdate').textContent = 
+                        new Date(stored.timestamp).toLocaleString('id-ID');
+                }
+            }
+        };
 
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('active');
-    }
+        // 📊 Sample Data from Google Sheets (Kolom A: Judul, Kolom B: Deskripsi)
+        const sheetData = [
+            {
+                title: "DEPOSIT DONE",
+                description: "Dana deposit anda telah berhasil kami proses, Silahkan check saldo pada akun anda ya bosku , Selamat bermain dan kami doakan semoga beruntung ya bosku.<br>NB : Kami informasikan kepada member setia kami untuk tidak memberikan keterangan apapun pada kolom catatan pada saat anda mengirimkan dana deposit ya bosku.<br>Terima kasih telah menghubungi CS LINE TOGEL, Senang dapat melayani anda, Salam jp"
+            },
+            {
+                title: "Withdraw Done",
+                description: "Penarikan dana (withdraw) Anda telah berhasil kami proses. Silahkan periksa kembali mutasi rekening bank Anda ya bosku. Terima kasih"
+            },
+            {
+                title: "Belum tercetak",
+                description: "Mohon maaf bosku, Setelah kami Checkan Untuk Pengiriman dana anda belum tercetak pada mutasi rekening deposit kami, Silahkan ditunggu hingga mutasi pengiriman Dana anda tercetak di mutasi rekening deposit kami ya bosku.<br>NB : Kami informasikan kepada member setia kami untuk tidak memberikan keterangan apapun pada kolom catatan pada saat anda mengirimkan dana deposit ya bosku. Terima Kasih"
+            },
+            {
+                title: "belum cetak 1",
+                description: "Mohon ditunggu ya bosku, Dikarenakan dana deposit Anda masih belum tercatat dalam mutasi rekening kami. <br>Deposit Anda akan diproses segera setelah mutasi tersebut tercatat dalam mutasi rekening kami ya bosku."
+            },
+            {
+                title: "belum cetak 2",
+                description: "Baik bosku, kami akan memproses deposit anda setelah dana deposit anda tercetak dimutasi bank deposit kami ya bosku."
+            },
+            {
+                title: "PK UNTUK DEPOSIT KOSONG",
+                description: "bank :<br>nama rekening :<br>nomor rekening :<br>silahkan kirimkan dana anda ke rekening tersebut serta untuk pengirim dana tersebut wajib atas nama sama dengan akun anda saat ini ya bosku dan kirimkan bukti transfer anda kepada kami agar dapat kami aktifkan kembali akun anda<br>NB : Minimal deposit kami adalah Rp.10.000"
+            },
+            {
+                title: "PK GANTI BULAN",
+                description: "Yth, Member Setia Line Togel,<br>Saat ini system layanan Deposit dan Withdraw kami sedang mereset keseluruhan data ya bosku.<br>Untuk perihal Deposit dan Withdraw akan mengalami keterlambatan proses mulai dari jam 23:40 s/d 00:15 WIB. Mohon pengertiannya dan mohon maaf atas ketidaknyamannya ya bosku, Terima Kasih."
+            },
+            {
+                title: "GANTI BULAN 1",
+                description: "Mohon di tunggu sesuai dengan estimasi yang sudah kami informasikan ya bosku.Mohon pengertiannya dan mohon maaf atas ketidaknyamannya ya bosku, Terima kasih."
+            },
+            {
+                title: "GANTI BULAN 2",
+                description: "kami informasikan kembali Untuk perihal Deposit dan Withdraw akan mengalami keterlambatan proses mulai dari jam 23:40 s/d 00:15 WIB. Mohon pengertiannya dan mohon maaf atas ketidaknyamannya yah bosku, Terima Kasih."
+            }
+        ];
 
-    function setupEventListeners() {
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener('click', (e) => {
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.querySelector('.menu-toggle');
-        if (window.innerWidth <= 992 && 
-            sidebar.classList.contains('active') &&
-            !sidebar.contains(e.target) && 
-            !toggle?.contains(e.target)) {
-          sidebar.classList.remove('active');
+        // 🎨 Render Functions
+        function renderMenu(data) {
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = data.map((item, index) => `
+                <li class="menu-item">
+                    <a class="menu-link ${index === 0 ? 'active' : ''}" 
+                       onclick="showContent(${index})" 
+                       data-index="${index}">
+                        <i class="fas fa-file-alt"></i>
+                        <span>${item.title}</span>
+                        <span class="badge">${index + 1}</span>
+                    </a>
+                </li>
+            `).join('');
         }
-      });
 
-      // Handle online/offline events
-      window.addEventListener('online', () => {
-        if (document.getElementById('syncDot')?.classList.contains('offline')) {
-          showToast('🌐 Koneksi pulih! Sinkronisasi...', 'info');
-          refreshData();
+        function renderCards(data, filter = '') {
+            const container = document.getElementById('dataContainer');
+            const filtered = data.filter(item => 
+                item.title.toLowerCase().includes(filter.toLowerCase()) ||
+                item.description.toLowerCase().includes(filter.toLowerCase())
+            );
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="color: white; grid-column: 1/-1; text-align: center; padding: 40px;">😔 Tidak ada data yang ditemukan</p>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map((item, index) => `
+                <article class="data-card" data-title="${item.title.toLowerCase()}">
+                    <h3 class="card-title">
+                        <i class="fas fa-star"></i>
+                        ${item.title}
+                    </h3>
+                    <div class="card-description">${item.description}</div>
+                    <div class="card-meta">
+                        <span><i class="fas fa-hashtag"></i> #${index + 1}</span>
+                        <span><i class="fas fa-database"></i> Stored</span>
+                    </div>
+                </article>
+            `).join('');
         }
-      });
-      
-      window.addEventListener('offline', () => {
-        updateSyncStatus('offline', 'Mode Offline');
-        showToast('📴 Offline mode aktif', 'warning');
-      });
 
-      // Keyboard shortcuts
-      document.addEventListener('keydown', (e) => {
-        // Ctrl+R or Cmd+R to refresh (prevent browser refresh)
-        if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
-          e.preventDefault();
-          refreshData();
+        function showContent(index) {
+            // Update active menu
+            document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
+            document.querySelector(`.menu-link[data-index="${index}"]`)?.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        // Escape to clear search
-        if (e.key === 'Escape') {
-          document.getElementById('mainSearch').value = '';
-          document.getElementById('sidebarSearch').value = '';
-          searchData();
-          renderCategoryMenu();
+
+        function filterData() {
+            const query = document.getElementById('searchInput').value;
+            renderCards(sheetData, query);
         }
-      });
-    }
 
-    function startAutoRefresh() {
-      setInterval(() => {
-        if (document.visibilityState === 'visible' && navigator.onLine) {
-          fetchAndStoreData().catch(() => {});
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
         }
-      }, CONFIG.autoRefresh);
-    }
 
-    /**
-     * 🕐 Utility: Format Functions
-     */
-    function formatBytes(bytes) {
-      if (bytes === 0) return '0 B';
-      const k = 1024;
-      const sizes = ['B', 'KB', 'MB', 'GB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
-    }
+        function refreshData() {
+            // Simulate refresh animation
+            const btn = event.currentTarget;
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            setTimeout(() => {
+                // Re-save data to update timestamp
+                DataStorage.save(sheetData);
+                renderMenu(sheetData);
+                renderCards(sheetData);
+                
+                btn.classList.remove('loading');
+                btn.innerHTML = '<i class="fas fa-sync"></i> Refresh';
+                
+                // Show success feedback
+                alert('✅ Data berhasil diperbarui!');
+            }, 1500);
+        }
 
-    function formatTime(date) {
-      return new Date(date).toLocaleTimeString('id-ID', { 
-        hour: '2-digit', minute: '2-digit' 
-      });
-    }
+        function exportToHTML() {
+            // Create downloadable HTML file with embedded data
+            const htmlContent = `<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Export Data - ${new Date().toLocaleDateString('id-ID')}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .item { margin: 20px 0; padding: 15px; border-left: 4px solid #ff6b9d; background: #fff5f9; }
+        h2 { color: #c44582; }
+        .meta { color: #666; font-size: 0.9rem; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Export Data Line Togel</h1>
+        <p class="meta">Diexport pada: ${new Date().toLocaleString('id-ID')}<br>
+        Source: Google Sheets</p>
+        ${sheetData.map(item => `
+            <div class="item">
+                <h2>${item.title}</h2>
+                <p>${item.description.replace(/<br>/g, '<br>&nbsp;&nbsp;')}</p>
+            </div>
+        `).join('')}
+    </div>
+</body>
+</html>`;
+            
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `data-togel-${new Date().toISOString().slice(0,10)}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
 
-    function formatDate(date) {
-      return new Date(date).toLocaleDateString('id-ID', {
-        day: '2-digit', month: 'short', year: 'numeric'
-      });
-    }
+        // 🚀 Initialize Application
+        function init() {
+            // Load from storage or use default data
+            const stored = DataStorage.load();
+            const data = stored?.data || sheetData;
+            
+            // Render UI
+            renderMenu(data);
+            renderCards(data);
+            DataStorage.updateStorageInfo();
+            
+            // Auto-save to localStorage
+            DataStorage.save(sheetData);
+            
+            console.log('🌸 Anime Data Manager initialized!', {
+                totalItems: sheetData.length,
+                storage: 'localStorage',
+                source: 'Google Sheets CSV Export'
+            });
+        }
 
-    function formatRelativeTime(timestamp) {
-      const now = Date.now();
-      const diff = now - timestamp;
-      const minutes = Math.floor(diff / 60000);
-      const hours = Math.floor(diff / 3600000);
-      const days = Math.floor(diff / 86400000);
-      
-      if (minutes < 1) return 'Baru saja';
-      if (minutes < 60) return `${minutes}m lalu`;
-      if (hours < 24) return `${hours}j lalu`;
-      if (days < 7) return `${days}h lalu`;
-      return formatDate(timestamp);
-    }
-  </script>
+        // Start the app when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.menu-toggle');
+            if (window.innerWidth <= 1024 && 
+                !sidebar.contains(e.target) && 
+                !toggle.contains(e.target) &&
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
