@@ -3,72 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌸 Anime Data Hub | Line Togel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <title>💀 Skull Data Hub | Line Togel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff6b9d;
-            --primary-glow: rgba(255, 107, 157, 0.6);
-            --secondary: #c44582;
-            --accent: #ff9ec5;
-            --cyan: #00f5d4;
-            --purple: #9d50ff;
-            --dark: #1a1a2e;
-            --darker: #0f0f1a;
-            --glass: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --text: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.7);
-            --sidebar-width: 300px;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --skull-primary: #8b0000;
+            --skull-blood: #ff0033;
+            --skull-glow: rgba(255, 0, 51, 0.7);
+            --skull-bone: #f5f5dc;
+            --skull-ash: #2a2a2a;
+            --skull-dark: #0a0a0f;
+            --skull-darker: #050508;
+            --skull-glass: rgba(20, 20, 30, 0.85);
+            --skull-border: rgba(139, 0, 0, 0.5);
+            --skull-text: #f0f0f0;
+            --skull-text-dim: rgba(240, 240, 240, 0.6);
+            --sidebar-width: 320px;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--darker);
-            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--skull-darker);
+            color: var(--skull-text);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* 🌌 Animated Background */
-        .bg-animation {
+        /* 🔥 Animated Skull Background */
+        .bg-skull {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(139, 0, 0, 0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(255, 0, 51, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(42, 42, 42, 0.4) 0%, transparent 80%),
+                linear-gradient(180deg, var(--skull-darker) 0%, var(--skull-dark) 50%, #1a0a0f 100%);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
+        /* 💀 Skull Pattern Overlay */
+        .skull-pattern {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            background: 
-                radial-gradient(ellipse at 20% 80%, rgba(157, 80, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(0, 245, 212, 0.08) 0%, transparent 70%),
-                linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
-            animation: bgShift 20s ease-in-out infinite;
+            opacity: 0.04;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%238b0000' d='M40 5c-8 0-15 6-15 14 0 5 3 9 7 11-2 3-3 7-3 11h22c0-4-1-8-3-11 4-2 7-6 7-11 0-8-7-14-15-14zm-8 25a3 3 0 110-6 3 3 0 010 6zm16 0a3 3 0 110-6 3 3 0 010 6zm-8 10h-4v4h4v-4z'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='%23ff0033' stroke-width='0.5' d='M20,50 Q30,30 50,40 T80,50 M20,60 Q30,80 50,70 T80,60'/%3E%3Ccircle cx='35' cy='45' r='3' fill='%238b0000'/%3E%3Ccircle cx='65' cy='45' r='3' fill='%238b0000'/%3E%3C/svg%3E");
+            background-size: 120px 120px, 200px 200px;
+            animation: patternMove 30s linear infinite;
         }
 
-        @keyframes bgShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes patternMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 120px 120px, -200px -200px; }
         }
 
-        /* ✨ Particles Canvas */
-        #particles {
+        /* 🔥 Fire Particles Canvas */
+        #fireParticles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             pointer-events: none;
         }
 
-        /* 🎌 Glass Sidebar */
+        /* ☠️ Gothic Sidebar */
         .sidebar {
             width: var(--sidebar-width);
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid var(--glass-border);
-            padding: 25px 0;
+            background: var(--skull-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 2px solid var(--skull-border);
+            border-left: 3px solid var(--skull-blood);
+            padding: 20px 0;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
@@ -76,56 +94,94 @@
             display: flex;
             flex-direction: column;
             transition: var(--transition);
-            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                5px 0 40px rgba(139, 0, 0, 0.5),
+                inset 0 0 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                rgba(139, 0, 0, 0.1) 20%, 
+                transparent 40%,
+                rgba(255, 0, 51, 0.05) 60%,
+                transparent 100%);
+            pointer-events: none;
+            animation: bloodFlow 8s ease-in-out infinite;
+        }
+
+        @keyframes bloodFlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .sidebar-header {
-            padding: 20px 25px 30px;
+            padding: 25px 25px 30px;
             text-align: center;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 2px solid var(--skull-border);
             margin-bottom: 20px;
             position: relative;
         }
 
         .sidebar-header::after {
-            content: '';
+            content: '☠️';
             position: absolute;
-            bottom: -1px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            font-size: 1.5rem;
+            animation: skullBob 2s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--skull-glow);
+        }
+
+        @keyframes skullBob {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
         }
 
         .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--cyan), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'Nosifer', cursive;
+            font-size: 1.6rem;
+            color: var(--skull-blood);
+            text-shadow: 
+                0 0 10px var(--skull-glow),
+                0 0 25px var(--skull-blood),
+                0 0 50px var(--skull-primary);
             margin-bottom: 8px;
-            text-shadow: 0 0 20px var(--primary-glow);
-            animation: glowPulse 3s ease-in-out infinite;
+            letter-spacing: 2px;
+            animation: textFlicker 4s infinite;
         }
 
-        @keyframes glowPulse {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.3); }
+        @keyframes textFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
+                text-shadow: 
+                    0 0 10px var(--skull-glow),
+                    0 0 25px var(--skull-blood),
+                    0 0 50px var(--skull-primary);
+            }
+            20%, 24%, 55% { 
+                text-shadow: none;
+                color: var(--skull-bone);
+            }
         }
 
         .logo-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--skull-text-dim);
+            letter-spacing: 3px;
             text-transform: uppercase;
+            border-top: 1px dashed var(--skull-border);
+            padding-top: 12px;
+            margin-top: 10px;
         }
 
-        /* 🔍 Search Box */
+        /* 🔍 Gothic Search */
         .search-wrapper {
             padding: 0 20px 20px;
-            position: relative;
         }
 
         .search-box {
@@ -134,49 +190,66 @@
 
         .search-box i {
             position: absolute;
-            left: 18px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
+            color: var(--skull-blood);
             transition: var(--transition);
+            font-size: 1.1rem;
         }
 
         .search-box input {
             width: 100%;
-            padding: 14px 18px 14px 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            color: var(--text);
-            font-size: 0.9rem;
+            padding: 15px 20px 15px 50px;
+            background: rgba(139, 0, 0, 0.15);
+            border: 1px solid var(--skull-border);
+            border-radius: 8px;
+            color: var(--skull-text);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
             transition: var(--transition);
             outline: none;
         }
 
-        .search-box input:focus {
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 20px var(--primary-glow);
+        .search-box input::placeholder {
+            color: var(--skull-text-dim);
+            font-style: italic;
         }
 
-        .search-box input:focus + i { color: var(--primary); }
+        .search-box input:focus {
+            border-color: var(--skull-blood);
+            background: rgba(255, 0, 51, 0.1);
+            box-shadow: 
+                0 0 0 3px rgba(139, 0, 0, 0.3),
+                0 0 25px var(--skull-glow);
+        }
 
-        /* 📋 Menu Items */
+        .search-box input:focus + i {
+            color: var(--skull-blood);
+            animation: pulseIcon 1s ease-in-out;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+
+        /* ☠️ Menu Items */
         .menu-list {
             list-style: none;
-            padding: 0 15px;
+            padding: 0 12px;
             flex: 1;
             overflow-y: auto;
         }
 
         .menu-item {
-            margin: 6px 0;
+            margin: 5px 0;
             opacity: 0;
-            transform: translateX(-20px);
+            transform: translateX(-25px);
             animation: slideIn 0.4s ease forwards;
         }
 
-        .menu-item:nth-child(n) { animation-delay: calc(var(--i, 0) * 0.05s); }
+        .menu-item:nth-child(n) { animation-delay: calc(var(--i, 0) * 0.06s); }
 
         @keyframes slideIn {
             to { opacity: 1; transform: translateX(0); }
@@ -186,358 +259,521 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            padding: 14px 20px;
-            color: var(--text-muted);
+            padding: 14px 18px;
+            color: var(--skull-text-dim);
             text-decoration: none;
-            border-radius: 16px;
+            border-radius: 10px;
             transition: var(--transition);
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             cursor: pointer;
             position: relative;
+            border-left: 3px solid transparent;
             overflow: hidden;
         }
 
         .menu-link::before {
-            content: '';
+            content: '💀';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
+            left: -30px;
+            opacity: 0;
+            transition: var(--transition);
+            font-size: 0.9rem;
         }
 
-        .menu-link:hover::before { left: 100%; }
+        .menu-link:hover::before,
+        .menu-link.active::before {
+            left: 12px;
+            opacity: 1;
+        }
 
         .menu-link:hover,
         .menu-link.active {
-            background: linear-gradient(135deg, rgba(255,107,157,0.2), rgba(157,80,255,0.2));
-            color: var(--text);
-            transform: translateX(4px);
-            border: 1px solid var(--glass-border);
+            background: linear-gradient(90deg, rgba(139, 0, 0, 0.4), transparent);
+            color: var(--skull-text);
+            border-left-color: var(--skull-blood);
+            transform: translateX(5px);
+            text-shadow: 0 0 10px var(--skull-glow);
         }
 
         .menu-link.active {
-            border-left: 3px solid var(--primary);
-            box-shadow: 0 4px 20px rgba(255, 107, 157, 0.25);
+            box-shadow: 
+                inset 4px 0 0 var(--skull-blood),
+                0 0 20px rgba(255, 0, 51, 0.3);
         }
 
         .menu-link i {
-            width: 22px;
+            width: 24px;
             font-size: 1.1rem;
             text-align: center;
             transition: var(--transition);
+            color: var(--skull-text-dim);
         }
 
         .menu-link:hover i,
         .menu-link.active i {
-            transform: scale(1.1);
-            color: var(--primary);
+            color: var(--skull-blood);
+            transform: scale(1.15) rotate(5deg);
+            text-shadow: 0 0 15px var(--skull-glow);
         }
 
         .menu-link .badge {
             margin-left: auto;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(255, 107, 157, 0.4);
+            background: linear-gradient(135deg, var(--skull-primary), var(--skull-blood));
+            color: var(--skull-bone);
+            padding: 4px 11px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid var(--skull-blood);
+            box-shadow: 0 0 10px var(--skull-glow);
         }
 
-        /* 🎀 Main Content */
+        /* 🩸 Main Content */
         .main-content {
             margin-left: var(--sidebar-width);
             padding: 30px 40px;
             min-height: 100vh;
             transition: var(--transition);
+            position: relative;
         }
 
-        /* 📊 Header Section */
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--skull-blood), var(--skull-primary), var(--skull-blood), transparent);
+            animation: gradientMove 3s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* 📊 Gothic Header */
         .content-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             padding-bottom: 25px;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 2px solid var(--skull-border);
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
+            position: relative;
+        }
+
+        .content-header::after {
+            content: '⚔️';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3rem;
+            animation: skullBob 3s ease-in-out infinite;
         }
 
         .header-title h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.9rem;
-            background: linear-gradient(135deg, var(--text), var(--primary), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 5px;
+            font-family: 'Creepster', cursive;
+            font-size: 2.3rem;
+            color: var(--skull-blood);
+            text-shadow: 
+                0 0 15px var(--skull-glow),
+                3px 3px 0 var(--skull-dark);
+            margin-bottom: 8px;
+            letter-spacing: 3px;
         }
 
         .header-title p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            color: var(--skull-text-dim);
+            font-size: 1rem;
+            font-style: italic;
         }
 
         .header-actions {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
         }
 
+        /* 🔥 Gothic Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
+            gap: 9px;
+            padding: 13px 26px;
             border: none;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--purple), var(--cyan));
-            opacity: 0;
-            transition: var(--transition);
-            z-index: -1;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
 
+        .btn:hover::before { left: 100%; }
+
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+            background: linear-gradient(135deg, var(--skull-primary), var(--skull-blood));
+            color: var(--skull-bone);
+            border: 2px solid var(--skull-blood);
+            box-shadow: 
+                0 4px 0 rgba(100, 0, 0, 0.8),
+                0 0 25px var(--skull-glow);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+            box-shadow: 
+                0 7px 0 rgba(100, 0, 0, 0.8),
+                0 0 40px var(--skull-glow),
+                0 0 80px rgba(255, 0, 51, 0.5);
+            text-shadow: 0 0 10px var(--skull-bone);
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 
+                0 2px 0 rgba(100, 0, 0, 0.8),
+                0 0 15px var(--skull-glow);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--glass-border);
-            color: var(--text);
+            border: 2px solid var(--skull-border);
+            color: var(--skull-text);
         }
 
         .btn-outline:hover {
-            border-color: var(--primary);
-            background: rgba(255, 107, 157, 0.1);
+            border-color: var(--skull-blood);
+            background: rgba(139, 0, 0, 0.2);
             transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--skull-glow);
         }
 
-        .btn i { transition: var(--transition); }
-        .btn:hover i { transform: scale(1.1); }
+        .btn i { transition: var(--transition); font-size: 1rem; }
+        .btn:hover i { transform: scale(1.2) rotate(10deg); }
 
-        /* 📦 Data Cards Grid */
+        /* ☠️ Data Cards */
         .data-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 28px;
+            margin-bottom: 35px;
         }
 
         .data-card {
-            background: var(--glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 28px;
+            background: var(--skull-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--skull-border);
+            border-left: 4px solid var(--skull-blood);
+            border-radius: 16px;
+            padding: 30px;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(20px);
-            animation: cardAppear 0.5s ease forwards;
+            transform: translateY(25px);
+            animation: cardRise 0.5s ease forwards;
         }
 
-        .data-card:nth-child(n) { animation-delay: calc(var(--i, 0) * 0.1s); }
+        .data-card:nth-child(n) { animation-delay: calc(var(--i, 0) * 0.08s); }
 
-        @keyframes cardAppear {
+        @keyframes cardRise {
             to { opacity: 1; transform: translateY(0); }
         }
 
         .data-card::before {
+            content: '☠️';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.1;
+            transition: var(--transition);
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .data-card:hover {
+            transform: translateY(-10px) scale(1.015);
+            border-color: var(--skull-blood);
+            border-left-color: var(--skull-blood);
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.6),
+                0 0 50px var(--skull-glow),
+                inset 0 0 60px rgba(139, 0, 0, 0.1);
+        }
+
+        .data-card:hover::before {
+            opacity: 0.25;
+            transform: rotate(0deg) scale(1.1);
+            text-shadow: 0 0 30px var(--skull-glow);
+        }
+
+        .data-card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--cyan), var(--purple), var(--primary));
-            background-size: 300% 100%;
-            animation: gradientMove 4s linear infinite;
+            bottom: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--skull-primary), var(--skull-blood), var(--skull-primary));
+            background-size: 200% 100%;
+            animation: gradientMove 2s linear infinite;
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
-        }
-
-        .data-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--primary);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.4),
-                0 0 40px var(--primary-glow);
-        }
-
-        .data-card:hover::before { opacity: 1; }
+        .data-card:hover::after { opacity: 1; }
 
         .card-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 14px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--skull-primary), var(--skull-blood));
+            border: 2px solid var(--skull-bone);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 18px;
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-            font-size: 1.3rem;
-            color: white;
+            margin-bottom: 20px;
+            box-shadow: 
+                0 8px 30px rgba(139, 0, 0, 0.6),
+                0 0 20px var(--skull-glow);
+            font-size: 1.5rem;
+            color: var(--skull-bone);
             transition: var(--transition);
+            position: relative;
+        }
+
+        .card-icon::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border: 2px solid var(--skull-blood);
+            border-radius: 14px;
+            animation: borderPulse 2s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
 
         .data-card:hover .card-icon {
-            transform: rotate(10deg) scale(1.1);
+            transform: rotate(8deg) scale(1.1);
+            box-shadow: 
+                0 12px 40px rgba(139, 0, 0, 0.8),
+                0 0 35px var(--skull-glow);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 14px;
-            color: var(--text);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--skull-text);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-shadow: 0 0 10px rgba(255, 0, 51, 0.4);
         }
 
         .card-title i {
-            color: var(--primary);
-            font-size: 1.1rem;
+            color: var(--skull-blood);
+            font-size: 1.2rem;
+            animation: iconGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { text-shadow: 0 0 10px var(--skull-glow); }
+            50% { text-shadow: 0 0 25px var(--skull-blood), 0 0 50px var(--skull-glow); }
         }
 
         .card-desc {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 0.93rem;
-            margin-bottom: 20px;
+            color: var(--skull-text-dim);
+            line-height: 1.9;
+            font-size: 0.97rem;
+            margin-bottom: 22px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
 
-        .card-desc br { margin: 6px 0; }
+        .card-desc br { margin: 8px 0; }
+        .card-desc strong { 
+            color: var(--skull-blood); 
+            text-shadow: 0 0 8px var(--skull-glow);
+        }
 
         .card-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 18px;
-            border-top: 1px dashed var(--glass-border);
-            font-size: 0.82rem;
-            color: var(--text-muted);
+            padding-top: 20px;
+            border-top: 1px dashed var(--skull-border);
+            font-size: 0.85rem;
         }
 
         .card-tag {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            background: rgba(255, 107, 157, 0.15);
-            padding: 5px 14px;
+            gap: 6px;
+            background: rgba(139, 0, 0, 0.3);
+            padding: 6px 16px;
             border-radius: 20px;
-            color: var(--primary);
-            font-weight: 500;
+            color: var(--skull-blood);
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid var(--skull-border);
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
         }
+
+        .card-tag i { animation: spin 3s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .card-status {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            color: var(--skull-text-dim);
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--cyan);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        .status-skull {
+            font-size: 1.1rem;
+            animation: skullPulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
+        @keyframes skullPulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 0.7; transform: scale(0.95); }
         }
 
-        /* 💾 Storage Panel */
+        /* ⚰️ Storage Panel */
         .storage-panel {
-            background: var(--glass);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 24px 30px;
+            background: var(--skull-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--skull-border);
+            border-radius: 18px;
+            padding: 25px 32px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 22px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .storage-panel::before {
+            content: '🦴';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.08;
+            pointer-events: none;
         }
 
         .storage-item {
             text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
+            padding: 18px 12px;
+            background: rgba(139, 0, 0, 0.15);
+            border-radius: 12px;
             transition: var(--transition);
+            border: 1px solid transparent;
+            position: relative;
         }
 
         .storage-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
+            background: rgba(255, 0, 51, 0.15);
+            border-color: var(--skull-blood);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
         }
 
         .storage-value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 5px 0;
-        }
-
-        .storage-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--skull-blood);
+            text-shadow: 0 0 15px var(--skull-glow);
+            margin: 6px 0;
             letter-spacing: 1px;
         }
 
-        /* 🌸 Decorative Elements */
-        .decoration {
+        .storage-label {
+            font-size: 0.78rem;
+            color: var(--skull-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .storage-status {
+            font-size: 0.72rem;
+            color: var(--skull-blood);
+            margin-top: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .storage-status i { animation: blink 1.5s infinite; }
+        @keyframes blink { 50% { opacity: 0.4; } }
+
+        /* 💀 Decorative Skulls */
+        .skull-deco {
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.08;
-            font-size: 4rem;
-            animation: floatDecor 8s ease-in-out infinite;
+            font-size: 3rem;
+            opacity: 0.06;
+            animation: floatSkull 10s ease-in-out infinite;
+            text-shadow: 0 0 30px var(--skull-glow);
         }
 
-        .dec-1 { top: 15%; right: 8%; animation-delay: 0s; }
-        .dec-2 { bottom: 20%; left: 5%; animation-delay: -2s; font-size: 3rem; }
-        .dec-3 { top: 60%; right: 15%; animation-delay: -4s; font-size: 2.5rem; }
+        .skull-1 { top: 10%; right: 10%; animation-delay: 0s; }
+        .skull-2 { bottom: 15%; left: 8%; animation-delay: -3s; font-size: 2.5rem; }
+        .skull-3 { top: 55%; right: 18%; animation-delay: -6s; font-size: 2rem; }
+        .skull-4 { bottom: 30%; right: 5%; animation-delay: -9s; font-size: 1.8rem; opacity: 0.04; }
 
-        @keyframes floatDecor {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            75% { transform: translateY(15px) rotate(-3deg); }
+        @keyframes floatSkull {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-25px) rotate(3deg) scale(1.05); }
+            50% { transform: translateY(0) rotate(0deg) scale(1); }
+            75% { transform: translateY(20px) rotate(-2deg) scale(0.98); }
+        }
+
+        /* 🩸 Blood Drip Effect */
+        .blood-drip {
+            position: fixed;
+            width: 3px;
+            background: linear-gradient(180deg, var(--skull-blood), transparent);
+            border-radius: 0 0 50% 50%;
+            animation: drip 4s ease-in infinite;
+            opacity: 0.6;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes drip {
+            0% { height: 0; top: -20px; opacity: 0.8; }
+            20% { opacity: 0.6; }
+            100% { height: 150px; top: 100%; opacity: 0; }
         }
 
         /* 📱 Mobile Toggle */
@@ -547,89 +783,142 @@
             top: 20px;
             left: 20px;
             z-index: 101;
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            color: var(--text);
-            font-size: 1.3rem;
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background: var(--skull-glass);
+            backdrop-filter: blur(8px);
+            border: 2px solid var(--skull-border);
+            color: var(--skull-blood);
+            font-size: 1.4rem;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .mobile-toggle:hover {
-            background: rgba(255, 107, 157, 0.2);
-            transform: scale(1.05);
+            background: rgba(139, 0, 0, 0.4);
+            border-color: var(--skull-blood);
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 0 0 30px var(--skull-glow);
         }
 
-        /* 🎨 Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
+        /* 🎨 Scrollbar Gothic */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { 
+            background: var(--skull-dark); 
+            border-left: 1px solid var(--skull-border);
+        }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--primary), var(--purple));
+            background: linear-gradient(180deg, var(--skull-primary), var(--skull-blood));
             border-radius: 10px;
+            border: 2px solid var(--skull-dark);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, var(--secondary), var(--cyan));
+            background: linear-gradient(180deg, var(--skull-blood), #cc0029);
+            box-shadow: 0 0 15px var(--skull-glow);
         }
 
         /* 📱 Responsive */
-        @media (max-width: 1100px) {
+        @media (max-width: 1150px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.active { transform: translateX(0); }
             .main-content { margin-left: 0; padding: 20px; }
-            .mobile-toggle { display: flex; align-items: center; justify-content: center; }
+            .mobile-toggle { display: flex; }
             .data-grid { grid-template-columns: 1fr; }
+            .content-header { flex-direction: column; align-items: flex-start; }
+            .header-actions { width: 100%; justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            .content-header { flex-direction: column; align-items: flex-start; }
-            .header-actions { width: 100%; justify-content: center; }
-            .btn { width: 100%; justify-content: center; }
+            .btn { width: 100%; justify-content: center; padding: 14px; }
+            .header-title h1 { font-size: 1.9rem; }
+            .data-card { padding: 24px; }
         }
 
-        /* ✨ Loading Animation */
+        /* 🔥 Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            padding: 16px 24px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--skull-primary), var(--skull-blood));
+            color: var(--skull-bone);
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.5),
+                0 0 30px var(--skull-glow);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid var(--skull-blood);
+            animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
+            max-width: 350px;
+        }
+
+        @keyframes toastIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes toastOut {
+            to { transform: translateX(100px); opacity: 0; }
+        }
+
+        /* ⚡ Loading Skeleton */
         .skeleton {
-            background: linear-gradient(90deg, var(--glass) 25%, rgba(255,255,255,0.15) 50%, var(--glass) 75%);
+            background: linear-gradient(90deg, var(--skull-ash) 25%, var(--skull-border) 50%, var(--skull-ash) 75%);
             background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 12px;
+            animation: shimmer 1.4s infinite;
+            border-radius: 10px;
         }
-
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
 
-        /* 🎭 Tooltip */
+        /* 🩸 Tooltip Gothic */
         [data-tooltip] {
             position: relative;
             cursor: help;
         }
-
         [data-tooltip]::after {
             content: attr(data-tooltip);
             position: absolute;
             bottom: 100%;
             left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            padding: 8px 14px;
-            background: var(--dark);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            font-size: 0.8rem;
+            transform: translateX(-50%) translateY(12px);
+            padding: 10px 18px;
+            background: var(--skull-dark);
+            border: 1px solid var(--skull-blood);
+            border-radius: 8px;
+            font-size: 0.82rem;
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            color: var(--skull-text);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 20px var(--skull-glow);
+            font-family: 'Rajdhani', sans-serif;
         }
-
-        [data-tooltip]:hover::after {
+        [data-tooltip]::before {
+            content: '☠️';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        [data-tooltip]:hover::after,
+        [data-tooltip]:hover::before {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
@@ -637,30 +926,35 @@
     </style>
 </head>
 <body>
-    <!-- 🌌 Background Effects -->
-    <div class="bg-animation"></div>
-    <canvas id="particles"></canvas>
+    <!-- 🔥 Background Layers -->
+    <div class="bg-skull"></div>
+    <div class="skull-pattern"></div>
+    <canvas id="fireParticles"></canvas>
     
-    <!-- 🌸 Decorative Floating Elements -->
-    <div class="decoration dec-1">🌸</div>
-    <div class="decoration dec-2">✨</div>
-    <div class="decoration dec-3">🎌</div>
+    <!-- 💀 Floating Skull Decorations -->
+    <div class="skull-deco skull-1">💀</div>
+    <div class="skull-deco skull-2">☠️</div>
+    <div class="skull-deco skull-3">🦴</div>
+    <div class="skull-deco skull-4">⚰️</div>
 
-    <!-- 🍔 Mobile Menu Button -->
+    <!-- 🩸 Blood Drips (Dynamic) -->
+    <div id="bloodDrips"></div>
+
+    <!-- ☠️ Mobile Menu Button -->
     <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-skull"></i>
     </button>
 
-    <!-- 🎌 Glass Sidebar -->
+    <!-- 🩸 Gothic Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="logo">🎮 ANIME HUB</div>
-            <div class="logo-subtitle">Line Togel Manager</div>
+            <div class="logo">SKULL HUB</div>
+            <div class="logo-subtitle">Line Togel • Darkness Edition</div>
         </div>
         
         <div class="search-wrapper">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Cari data..." onkeyup="filterData()">
+                <input type="text" id="searchInput" placeholder="Summon data..." onkeyup="filterData()">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -670,31 +964,31 @@
         </ul>
 
         <!-- Sidebar Footer -->
-        <div style="padding: 20px 25px; margin-top: auto; border-top: 1px solid var(--glass-border);">
-            <div style="display: flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: 0.85rem;">
-                <div style="width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--purple)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">LT</div>
-                <div>
-                    <div style="font-weight: 500; color: var(--text);">Line Togel</div>
-                    <div style="font-size: 0.75rem;">v2.0 ✨ Premium</div>
+        <div style="padding: 20px 25px; margin-top: auto; border-top: 2px solid var(--skull-border); text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--skull-text-dim); font-size: 0.85rem;">
+                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--skull-primary), var(--skull-blood)); border: 2px solid var(--skull-bone); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--skull-bone); font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 15px var(--skull-glow);">☠️</div>
+                <div style="text-align: left;">
+                    <div style="font-weight: 600; color: var(--skull-text); font-family: 'Orbitron', sans-serif;">Line Togel</div>
+                    <div style="font-size: 0.7rem; color: var(--skull-blood);">v3.0 • Dark Realm</div>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- 📦 Main Content -->
+    <!-- 🩸 Main Content -->
     <main class="main-content">
         <!-- Header -->
         <header class="content-header">
             <div class="header-title">
-                <h1>📊 Data Manager</h1>
-                <p>Kelola data judul & deskripsi dari Google Sheets</p>
+                <h1>☠️ DATA TOMB</h1>
+                <p>Manage your skull-labeled data from the void</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-outline" onclick="refreshData()" data-tooltip="Muat ulang data">
-                    <i class="fas fa-sync-alt"></i> Refresh
+                <button class="btn btn-outline" onclick="refreshData()" data-tooltip="Resurrect data">
+                    <i class="fas fa-rotate-right"></i> Resurrect
                 </button>
-                <button class="btn btn-primary" onclick="exportData()" data-tooltip="Download sebagai HTML">
-                    <i class="fas fa-file-export"></i> Export HTML
+                <button class="btn btn-primary" onclick="exportData()" data-tooltip="Carve into HTML">
+                    <i class="fas fa-scroll"></i> Carve HTML
                 </button>
             </div>
         </header>
@@ -707,31 +1001,31 @@
         <!-- Storage Info Panel -->
         <div class="storage-panel">
             <div class="storage-item">
-                <div class="storage-label">Total Data</div>
+                <div class="storage-label">Souls Collected</div>
                 <div class="storage-value" id="totalData">0</div>
-                <div style="font-size: 0.75rem; color: var(--cyan);">items</div>
+                <div class="storage-status"><i class="fas fa-circle"></i> Bound</div>
             </div>
             <div class="storage-item">
-                <div class="storage-label">Storage</div>
+                <div class="storage-label">Crypt Storage</div>
                 <div class="storage-value">Local</div>
-                <div style="font-size: 0.75rem; color: var(--primary);">✓ Synced</div>
+                <div class="storage-status"><i class="fas fa-check"></i> Sealed</div>
             </div>
             <div class="storage-item">
-                <div class="storage-label">Source</div>
+                <div class="storage-label">Void Source</div>
                 <div class="storage-value">Sheets</div>
-                <div style="font-size: 0.75rem; color: var(--purple);">Connected</div>
+                <div class="storage-status"><i class="fas fa-link"></i> Linked</div>
             </div>
             <div class="storage-item">
-                <div class="storage-label">Updated</div>
+                <div class="storage-label">Last Ritual</div>
                 <div class="storage-value" id="lastUpdate">--:--</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">just now</div>
+                <div class="storage-status"><i class="fas fa-clock"></i> Recent</div>
             </div>
         </div>
     </main>
 
     <script>
-        // 🎨 Particles Animation System
-        class ParticleSystem {
+        // 🔥 Fire Particle System
+        class FireParticle {
             constructor(canvasId) {
                 this.canvas = document.getElementById(canvasId);
                 this.ctx = this.canvas.getContext('2d');
@@ -748,18 +1042,19 @@
             }
 
             init() {
-                const particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
-                const colors = ['#ff6b9d', '#00f5d4', '#9d50ff', '#ff9ec5'];
+                const colors = ['#ff0033', '#8b0000', '#ff4500', '#ff6b6b', '#ff0066'];
+                const count = Math.min(60, Math.floor(window.innerWidth / 20));
                 
-                for (let i = 0; i < particleCount; i++) {
+                for (let i = 0; i < count; i++) {
                     this.particles.push({
                         x: Math.random() * this.canvas.width,
-                        y: Math.random() * this.canvas.height,
-                        size: Math.random() * 3 + 1,
-                        speedX: (Math.random() - 0.5) * 0.5,
-                        speedY: (Math.random() - 0.5) * 0.5,
+                        y: this.canvas.height + Math.random() * 100,
+                        size: Math.random() * 4 + 2,
+                        speedY: -(Math.random() * 2 + 1),
+                        speedX: (Math.random() - 0.5) * 0.8,
                         color: colors[Math.floor(Math.random() * colors.length)],
-                        opacity: Math.random() * 0.5 + 0.2
+                        opacity: Math.random() * 0.6 + 0.3,
+                        life: Math.random() * 100 + 50
                     });
                 }
             }
@@ -768,47 +1063,70 @@
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 
                 this.particles.forEach((p, i) => {
-                    p.x += p.speedX;
                     p.y += p.speedY;
+                    p.x += p.speedX + Math.sin(p.y * 0.02) * 0.3;
+                    p.opacity -= 0.008;
+                    p.life--;
                     
-                    if (p.x < 0 || p.x > this.canvas.width) p.speedX *= -1;
-                    if (p.y < 0 || p.y > this.canvas.height) p.speedY *= -1;
+                    if (p.y < -20 || p.opacity <= 0 || p.life <= 0) {
+                        p.y = this.canvas.height + Math.random() * 50;
+                        p.x = Math.random() * this.canvas.width;
+                        p.opacity = Math.random() * 0.6 + 0.3;
+                        p.life = Math.random() * 100 + 50;
+                    }
                     
+                    // Fire glow effect
+                    const gradient = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
+                    gradient.addColorStop(0, `${p.color}${Math.floor(p.opacity * 255).toString(16).padStart(2, '0')}`);
+                    gradient.addColorStop(0.5, `${p.color}${Math.floor(p.opacity * 100).toString(16).padStart(2, '0')}`);
+                    gradient.addColorStop(1, 'transparent');
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.fill();
+                    
+                    // Core particle
                     this.ctx.beginPath();
                     this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     this.ctx.fillStyle = `${p.color}${Math.floor(p.opacity * 255).toString(16).padStart(2, '0')}`;
                     this.ctx.fill();
-                    
-                    // Connect nearby particles
-                    this.particles.slice(i + 1).forEach(p2 => {
-                        const dx = p.x - p2.x;
-                        const dy = p.y - p2.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (dist < 120) {
-                            this.ctx.beginPath();
-                            this.ctx.moveTo(p.x, p.y);
-                            this.ctx.lineTo(p2.x, p2.y);
-                            this.ctx.strokeStyle = `rgba(255, 107, 157, ${0.15 * (1 - dist/120)})`;
-                            this.ctx.lineWidth = 0.5;
-                            this.ctx.stroke();
-                        }
-                    });
                 });
                 
                 requestAnimationFrame(() => this.animate());
             }
         }
 
-        // 💾 Data Storage Manager
+        // 💀 Blood Drip Generator
+        function createBloodDrips() {
+            const container = document.getElementById('bloodDrips');
+            const count = Math.floor(Math.random() * 5) + 3;
+            
+            for (let i = 0; i < count; i++) {
+                const drip = document.createElement('div');
+                drip.className = 'blood-drip';
+                drip.style.left = `${Math.random() * 100}%`;
+                drip.style.animationDelay = `${Math.random() * 4}s`;
+                drip.style.animationDuration = `${3 + Math.random() * 3}s`;
+                container.appendChild(drip);
+                
+                // Remove and recreate for continuous effect
+                setTimeout(() => {
+                    drip.remove();
+                    createBloodDrips();
+                }, 7000);
+            }
+        }
+
+        // ⚰️ Data Storage Manager
         const DataStorage = {
-            key: 'anime_togel_v2',
+            key: 'skull_togel_v3',
             
             save(data) {
                 const payload = {
                     data,
                     timestamp: new Date().toISOString(),
-                    version: '2.0'
+                    version: '3.0-dark'
                 };
                 localStorage.setItem(this.key, JSON.stringify(payload));
                 this.updateUI();
@@ -831,192 +1149,13 @@
             }
         };
 
-        // 📊 Sample Data (Replace with Google Sheets fetch)
+        // ☠️ Sample Data (Replace with Google Sheets fetch)
         const sheetData = [
-            { title: "DEPOSIT DONE", description: "Dana deposit anda telah berhasil kami proses, Silahkan check saldo pada akun anda ya bosku , Selamat bermain dan kami doakan semoga beruntung ya bosku.<br><br><strong>NB:</strong> Kami informasikan kepada member setia kami untuk tidak memberikan keterangan apapun pada kolom catatan pada saat anda mengirimkan dana deposit ya bosku.<br><br>Terima kasih telah menghubungi CS LINE TOGEL, Senang dapat melayani anda, Salam jp 🎰" },
-            { title: "Withdraw Done", description: "Penarikan dana (withdraw) Anda telah berhasil kami proses. Silahkan periksa kembali mutasi rekening bank Anda ya bosku. Terima kasih 💰" },
-            { title: "Belum tercetak", description: "Mohon maaf bosku, Setelah kami Checkan Untuk Pengiriman dana anda belum tercetak pada mutasi rekening deposit kami, Silahkan ditunggu hingga mutasi pengiriman Dana anda tercetak di mutasi rekening deposit kami ya bosku.<br><br><strong>NB:</strong> Kami informasikan kepada member setia kami untuk tidak memberikan keterangan apapun pada kolom catatan pada saat anda mengirimkan dana deposit ya bosku. Terima Kasih ⏳" },
-            { title: "belum cetak 1", description: "Mohon ditunggu ya bosku, Dikarenakan dana deposit Anda masih belum tercatat dalam mutasi rekening kami.<br><br>Deposit Anda akan diproses segera setelah mutasi tersebut tercatat dalam mutasi rekening kami ya bosku. 🔄" },
-            { title: "belum cetak 2", description: "Baik bosku, kami akan memproses deposit anda setelah dana deposit anda tercetak dimutasi bank deposit kami ya bosku. ✅" },
-            { title: "PK DEPOSIT KOSONG", description: "<strong>Informasi Rekening:</strong><br>🏦 Bank: [Nama Bank]<br>👤 Nama: [Nama Rekening]<br>🔢 No: [Nomor Rekening]<br><br>Silahkan kirimkan dana anda ke rekening tersebut serta untuk pengirim dana tersebut wajib atas nama sama dengan akun anda saat ini ya bosku dan kirimkan bukti transfer anda kepada kami agar dapat kami aktifkan kembali akun anda<br><br><strong>NB:</strong> Minimal deposit kami adalah Rp.10.000 💵" },
-            { title: "PK GANTI BULAN", description: "Yth, Member Setia Line Togel,<br><br>Saat ini system layanan Deposit dan Withdraw kami sedang mereset keseluruhan data ya bosku.<br><br>Untuk perihal Deposit dan Withdraw akan mengalami keterlambatan proses mulai dari jam <strong>23:40 s/d 00:15 WIB</strong>. Mohon pengertiannya dan mohon maaf atas ketidaknyamannya ya bosku, Terima Kasih. 🌙" },
-            { title: "GANTI BULAN 1", description: "Mohon di tunggu sesuai dengan estimasi yang sudah kami informasikan ya bosku. Mohon pengertiannya dan mohon maaf atas ketidaknyamannya ya bosku, Terima kasih. ⏰" },
-            { title: "GANTI BULAN 2", description: "Kami informasikan kembali Untuk perihal Deposit dan Withdraw akan mengalami keterlambatan proses mulai dari jam <strong>23:40 s/d 00:15 WIB</strong>. Mohon pengertiannya dan mohon maaf atas ketidaknyamannya yah bosku, Terima Kasih. 🎌" }
-        ];
-
-        // 🎨 Render Functions
-        function renderMenu(data) {
-            const menuList = document.getElementById('menuList');
-            menuList.innerHTML = data.map((item, index) => `
-                <li class="menu-item" style="--i: ${index}">
-                    <a class="menu-link ${index === 0 ? 'active' : ''}" 
-                       onclick="showContent(${index})" 
-                       data-index="${index}">
-                        <i class="fas fa-file-lines"></i>
-                        <span style="flex:1">${item.title}</span>
-                        <span class="badge">${String(index + 1).padStart(2, '0')}</span>
-                    </a>
-                </li>
-            `).join('');
-        }
-
-        function renderCards(data, filter = '') {
-            const container = document.getElementById('dataContainer');
-            const filtered = data.filter(item => 
-                item.title.toLowerCase().includes(filter.toLowerCase()) ||
-                item.description.toLowerCase().includes(filter.toLowerCase())
-            );
-            
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
-                        <div style="font-size: 4rem; margin-bottom: 20px; opacity: 0.5;">🔍</div>
-                        <h3 style="color: var(--text); margin-bottom: 10px;">Tidak ada data ditemukan</h3>
-                        <p style="color: var(--text-muted);">Coba gunakan kata kunci lain atau reset pencarian</p>
-                    </div>`;
-                return;
-            }
-            
-            container.innerHTML = filtered.map((item, index) => `
-                <article class="data-card" style="--i: ${index}" data-title="${item.title.toLowerCase()}">
-                    <div class="card-icon">
-                        <i class="fas fa-sparkles"></i>
-                    </div>
-                    <h3 class="card-title">
-                        <i class="fas fa-tag"></i>
-                        ${item.title}
-                    </h3>
-                    <div class="card-desc">${item.description}</div>
-                    <div class="card-footer">
-                        <span class="card-tag">
-                            <i class="fas fa-hashtag"></i>
-                            #${String(index + 1).padStart(2, '0')}
-                        </span>
-                        <span class="card-status">
-                            <span class="status-dot"></span>
-                            Stored
-                        </span>
-                    </div>
-                </article>
-            `).join('');
-        }
-
-        function showContent(index) {
-            document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active'));
-            document.querySelector(`.menu-link[data-index="${index}"]`)?.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function filterData() {
-            const query = document.getElementById('searchInput').value;
-            renderCards(sheetData, query);
-        }
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        function refreshData() {
-            const btn = event.currentTarget;
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                DataStorage.save(sheetData);
-                renderMenu(sheetData);
-                renderCards(sheetData);
-                
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-                
-                // Show toast notification
-                showToast('✅ Data berhasil diperbarui!', 'success');
-            }, 1200);
-        }
-
-        function exportData() {
-            const htmlContent = `<!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Export Data - Line Togel</title>
-<style>body{font-family:'Segoe UI',system-ui,sans-serif;max-width:900px;margin:0 auto;padding:40px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#333}
-.container{background:white;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
-h1{color:#667eea;margin-bottom:10px}
-.meta{color:#666;font-size:0.9rem;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid #eee}
-.item{margin:25px 0;padding:20px;background:linear-gradient(135deg,#f5f7fa 0%,#e4e8f0 100%);border-left:4px solid #667eea;border-radius:0 12px 12px 0}
-.item h3{color:#764ba2;margin-bottom:12px}
-.item p{line-height:1.8;color:#555}</style></head><body>
-<div class="container"><h1>📋 Export Data Line Togel</h1>
-<p class="meta">🕐 ${new Date().toLocaleString('id-ID')}<br>📊 Source: Google Sheets</p>
-${sheetData.map(item => `<div class="item"><h3>${item.title}</h3><p>${item.description.replace(/<br>/g,'<br>&nbsp;&nbsp;')}</p></div>`).join('')}
-</div></body></html>`;
-            
-            const blob = new Blob([htmlContent], {type: 'text/html'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `line-togel-data-${new Date().toISOString().slice(0,10)}.html`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('📥 File HTML berhasil di-download!', 'success');
-        }
-
-        // 🎭 Toast Notification
-        function showToast(message, type = 'info') {
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed; bottom: 30px; right: 30px;
-                padding: 16px 24px; border-radius: 14px;
-                background: ${type === 'success' ? 'linear-gradient(135deg, #00c853, #00e676)' : 'linear-gradient(135deg, #2979ff, #448aff)'};
-                color: white; font-weight: 500; font-size: 0.95rem;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-                z-index: 10000; animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-                display: flex; align-items: center; gap: 10px;
-            `;
-            toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i> ${message}`;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        // 🚀 Initialize
-        function init() {
-            // Start particles
-            new ParticleSystem('particles');
-            
-            // Load and render data
-            const stored = DataStorage.load();
-            const data = stored?.data || sheetData;
-            
-            renderMenu(data);
-            renderCards(data);
-            DataStorage.save(sheetData); // Auto-save
-            
-            // Add animation delay to menu items
-            document.querySelectorAll('.menu-item').forEach((item, i) => {
-                item.style.setProperty('--i', i);
-            });
-            
-            console.log('🎨 Anime Hub v2.0 loaded ✨', {
-                items: sheetData.length,
-                storage: 'localStorage',
-                particles: 'active'
-            });
-        }
-
-        // Start when DOM ready
-        document.addEventListener('DOMContentLoaded', init);
-
-        // Close sidebar on outside click (mobile)
-        document.addEventListener('click', (e) => {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.querySelector('.mobile-toggle');
-            if (window.innerWidth <= 1100 && 
-                sidebar.classList.contains('active') &&
-                !sidebar.contains(e.target) && 
-                !toggle.contains(e.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
-    </script>
-</body>
-</html>
+            { title: "DEPOSIT DONE", description: "<strong>💀 Dana deposit anda telah berhasil kami proses!</strong><br><br>Silahkan check saldo pada akun anda ya bosku, Selamat bermain dan kami doakan semoga beruntung ya bosku.<br><br><strong style='color:#ff0033'>⚠️ NB:</strong> Kami informasikan kepada member setia kami untuk tidak memberikan keterangan apapun pada kolom catatan pada saat anda mengirimkan dana deposit ya bosku.<br><br><em>Terima kasih telah menghubungi CS LINE TOGEL, Senang dapat melayani anda, Salam jp 🎰☠️</em>" },
+            { title: "Withdraw Done", description: "<strong>💰 Penarikan dana (withdraw) Anda telah berhasil kami proses.</strong><br><br>Silahkan periksa kembali mutasi rekening bank Anda ya bosku.<br><br><em>Terima kasih telah bermain dengan kami. Semoga rezeki selalu mengalir seperti darah... 🩸</em>" },
+            { title: "Belum tercetak", description: "<strong>⏳ Mohon maaf bosku...</strong><br><br>Setelah kami Checkan, pengiriman dana anda belum tercetak pada mutasi rekening deposit kami.<br><br>Silahkan ditunggu hingga mutasi pengiriman Dana anda tercetak di mutasi rekening deposit kami ya bosku.<br><br><strong style='color:#ff0033'>⚠️ NB:</strong> Kami informasikan kepada member setia kami untuk tidak memberikan keterangan apapun pada kolom catatan pada saat anda mengirimkan dana deposit ya bosku.<br><br><em>Terima Kasih ☠️</em>" },
+            { title: "belum cetak 1", description: "<strong>🔄 Mohon ditunggu ya bosku...</strong><br><br>Dikarenakan dana deposit Anda masih belum tercatat dalam mutasi rekening kami.<br><br>Deposit Anda akan diproses segera setelah mutasi tersebut tercatat dalam mutasi rekening kami ya bosku.<br><br><em>Stay patient, fortune favors the bold 💀</em>" },
+            { title: "belum cetak 2", description: "<strong>✅ Baik bosku...</strong><br><br>Kami akan memproses deposit anda setelah dana deposit anda tercetak dimutasi bank deposit kami ya bosku.<br><br><em>Your patience shall be rewarded 🩸</em>" },
+            { title: "PK DEPOSIT KOSONG", description: "<strong>🏦 INFORMASI REKETING VOID:</strong><br><br>🔸 Bank: [Nama Bank]<br>🔸 Nama: [Nama Rekening]<br>🔸 No: [Nomor Rekening]<br><br>Silahkan kirimkan dana anda ke rekening tersebut serta untuk pengirim dana tersebut wajib atas nama sama dengan akun anda saat ini ya bosku dan kirimkan bukti transfer anda kepada kami agar dapat kami aktifkan kembali akun anda<br><br><strong style='color:#ff0033'>⚠️ NB:</strong> Minimal deposit kami adalah Rp.10.000 💀💵" },
+            { title: "PK GANTI BULAN", description: "<strong>🌙 Yth, Member Setia Line Togel,</strong><br><br>Saat ini system layanan Deposit dan Withdraw kami sedang mereset keseluruhan data ya bosku.<br><br>Untuk perihal Deposit dan Withdraw akan mengalami keterlambatan proses mulai dari jam <strong style='color:#ff0033'>23:40 s/d 00:15 WIB</strong>.<br><br>Mohon pengertiannya dan mohon maaf atas ketidaknyamannya ya bosku, Terima Kasih. ☠️🕯️" },
+            { title: "GANTI BULAN 1", description: "<strong>⏰ Mohon di tunggu...</strong><br><br>S
