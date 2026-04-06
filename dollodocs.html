@@ -3,367 +3,588 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skull Theme - Formula Calculator</title>
+    <title>SkullAnime Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@400;700;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-void: #06060a;
+            --bg-deep: #0b0b10;
+            --bg-main: #101016;
+            --bg-card: #16161f;
+            --bg-card-h: #1e1e2a;
+            --bg-sidebar: #09090d;
+            --bg-input: #111119;
+            --accent: #e63946;
+            --accent-g: rgba(230,57,70,0.25);
+            --accent-s: #ff6b7a;
+            --accent-d: #a11d28;
+            --bone: #ede6d8;
+            --bone-dk: #bfb8aa;
+            --bone-mt: #6e6a62;
+            --gold: #d4a843;
+            --gold-d: rgba(212,168,67,0.12);
+            --txt: #cdc8c0;
+            --txt-m: #74706a;
+            --brd: #232330;
+            --brd-l: #33334a;
+            --shd: rgba(0,0,0,0.6);
         }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'Outfit',sans-serif;background:var(--bg-void);color:var(--txt);min-height:100vh;overflow-x:hidden;}
 
-        body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
-            min-height: 100vh;
-            font-family: 'Orbitron', monospace;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
+        /* ===== AMBIENT ===== */
+        .amb{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+        .amb .orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbF 18s ease-in-out infinite;}
+        .amb .orb:nth-child(1){width:420px;height:420px;background:var(--accent-g);top:-15%;left:-8%;animation-delay:0s;}
+        .amb .orb:nth-child(2){width:350px;height:350px;background:rgba(212,168,67,0.08);bottom:-10%;right:-5%;animation-delay:-6s;animation-duration:22s;}
+        .amb .orb:nth-child(3){width:250px;height:250px;background:rgba(230,57,70,0.1);top:50%;left:40%;animation-delay:-12s;animation-duration:25s;}
+        @keyframes orbF{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(50px,-40px) scale(1.08);}66%{transform:translate(-40px,50px) scale(0.94);}}
 
-        /* Animated Background Skulls */
-        .bg-skull {
-            position: fixed;
-            font-size: 200px;
-            opacity: 0.03;
-            z-index: -1;
-            animation: float 20s infinite ease-in-out;
-        }
+        /* ===== SKULL PARTICLES ===== */
+        .skparts{position:fixed;inset:0;z-index:0;pointer-events:none;}
+        .skp{position:absolute;opacity:0;animation:skpR linear infinite;}
+        @keyframes skpR{0%{opacity:0;transform:translateY(105vh) rotate(0deg);}8%{opacity:.12;}85%{opacity:.06;}100%{opacity:0;transform:translateY(-8vh) rotate(340deg);}}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
-        }
+        /* ===== LAYOUT ===== */
+        .app{display:flex;min-height:100vh;position:relative;z-index:1;}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+        /* ===== SIDEBAR ===== */
+        .sb{width:272px;min-height:100vh;background:var(--bg-sidebar);border-right:1px solid var(--brd);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;transition:transform .4s cubic-bezier(.22,1,.36,1);}
+        .sb.hide{transform:translateX(-100%);}
+        .sb-hd{padding:24px 20px 18px;border-bottom:1px solid var(--brd);position:relative;}
+        .sb-hd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));background-size:200% 100%;animation:shim 5s ease infinite;}
+        @keyframes shim{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+        .logo{display:flex;align-items:center;gap:12px;}
+        .logo-ico{width:46px;height:46px;flex-shrink:0;filter:drop-shadow(0 0 10px var(--accent-g));}
+        .logo-ico svg{width:100%;height:100%;}
+        .logo-txt h1{font-size:17px;font-weight:900;color:var(--bone);letter-spacing:1.5px;line-height:1.15;}
+        .logo-txt span{font-size:10px;font-weight:400;color:var(--txt-m);letter-spacing:2.5px;text-transform:uppercase;}
 
-        /* Header dengan Skull */
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
+        /* Nav */
+        .sb-nav{flex:1;padding:14px 10px;overflow-y:auto;display:flex;flex-direction:column;gap:2px;}
+        .nav-sec{font-size:9px;font-weight:700;color:var(--txt-m);text-transform:uppercase;letter-spacing:2.5px;padding:18px 12px 7px;}
+        .ni{display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:9px;cursor:pointer;transition:all .22s;color:var(--txt-m);font-size:13.5px;font-weight:500;border:1px solid transparent;user-select:none;}
+        .ni:hover{background:rgba(230,57,70,.05);color:var(--txt);border-color:rgba(230,57,70,.08);}
+        .ni.on{background:linear-gradient(135deg,rgba(230,57,70,.12),rgba(230,57,70,.03));color:var(--accent-s);border-color:rgba(230,57,70,.18);}
+        .ni.on::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:55%;background:var(--accent);border-radius:0 4px 4px 0;}
+        .ni{position:relative;}
+        .ni i{width:18px;text-align:center;font-size:14px;}
+        .ni .bdg{margin-left:auto;background:var(--accent);color:#fff;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:20px;min-width:20px;text-align:center;}
+        .sb-ft{padding:14px 18px;border-top:1px solid var(--brd);text-align:center;font-size:10px;color:var(--bone-mt);letter-spacing:1.5px;}
+        .sb-ft i{color:var(--accent);margin:0 3px;}
 
-        .skull-icon {
-            font-size: 80px;
-            display: block;
-            margin-bottom: 20px;
-            animation: glow 2s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8));
-        }
+        /* ===== MAIN ===== */
+        .mc{flex:1;margin-left:272px;min-height:100vh;display:flex;flex-direction:column;transition:margin-left .4s cubic-bezier(.22,1,.36,1);}
+        .mc.exp{margin-left:0;}
 
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
-            to { filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8)); }
-        }
+        /* Topbar */
+        .tb{display:flex;align-items:center;gap:14px;padding:14px 28px;border-bottom:1px solid var(--brd);background:rgba(16,16,22,.82);backdrop-filter:blur(18px);position:sticky;top:0;z-index:50;}
+        .btn-tog{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--bg-card);border:1px solid var(--brd);border-radius:9px;color:var(--txt-m);cursor:pointer;transition:all .2s;font-size:15px;flex-shrink:0;}
+        .btn-tog:hover{background:var(--bg-card-h);color:var(--txt);border-color:var(--brd-l);}
+        .sbox{flex:1;max-width:460px;position:relative;}
+        .sbox i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--txt-m);font-size:13px;}
+        .sbox input{width:100%;padding:9px 14px 9px 38px;background:var(--bg-input);border:1px solid var(--brd);border-radius:9px;color:var(--txt);font-family:'Outfit',sans-serif;font-size:13.5px;outline:none;transition:all .22s;}
+        .sbox input::placeholder{color:var(--txt-m);}
+        .sbox input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-g);}
+        .tb-act{display:flex;gap:8px;margin-left:auto;}
+        .btn-p{display:flex;align-items:center;gap:7px;padding:9px 18px;background:linear-gradient(135deg,var(--accent),var(--accent-d));border:none;border-radius:9px;color:#fff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .22s;box-shadow:0 3px 14px var(--accent-g);white-space:nowrap;}
+        .btn-p:hover{transform:translateY(-1px);box-shadow:0 5px 22px var(--accent-g);}
+        .btn-p:active{transform:translateY(0);}
+        .btn-s{display:flex;align-items:center;gap:7px;padding:9px 14px;background:var(--bg-card);border:1px solid var(--brd);border-radius:9px;color:var(--txt-m);font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;}
+        .btn-s:hover{background:var(--bg-card-h);color:var(--txt);border-color:var(--brd-l);}
 
-        h1 {
-            font-family: 'Creepster', cursive;
-            font-size: 3.5em;
-            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient 3s ease infinite;
-            text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-            letter-spacing: 3px;
-        }
+        /* Page */
+        .pg{flex:1;padding:24px 28px;}
+        .pg-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:14px;}
+        .pg-t h2{font-size:26px;font-weight:900;color:var(--bone);line-height:1.15;display:flex;align-items:center;gap:10px;}
+        .pg-t h2 i{color:var(--accent);font-size:22px;}
+        .pg-t p{font-size:13px;color:var(--txt-m);margin-top:5px;}
+        .st-row{display:flex;gap:10px;flex-wrap:wrap;}
+        .st-ch{display:flex;align-items:center;gap:7px;padding:7px 14px;background:var(--bg-card);border:1px solid var(--brd);border-radius:9px;font-size:12px;color:var(--txt-m);}
+        .st-ch strong{color:var(--bone);font-weight:700;}
+        .st-ch i{font-size:13px;}
+        .st-ch.r i{color:var(--accent);}
+        .st-ch.g i{color:var(--gold);}
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* Table */
+        .tc{background:var(--bg-card);border:1px solid var(--brd);border-radius:13px;overflow:hidden;box-shadow:0 4px 28px var(--shd);}
+        .tw{overflow-x:auto;}
+        table{width:100%;border-collapse:collapse;}
+        thead{background:rgba(230,57,70,.05);}
+        thead th{padding:13px 18px;text-align:left;font-size:10px;font-weight:700;color:var(--txt-m);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--brd);white-space:nowrap;}
+        thead th:first-child{padding-left:22px;}
+        tbody tr{border-bottom:1px solid rgba(35,35,48,.5);transition:background .18s;}
+        tbody tr:last-child{border-bottom:none;}
+        tbody tr:hover{background:rgba(230,57,70,.025);}
+        tbody td{padding:13px 18px;font-size:13.5px;color:var(--txt);vertical-align:middle;}
+        tbody td:first-child{padding-left:22px;}
+        .rn{font-size:11px;font-weight:700;color:var(--txt-m);width:44px;}
+        .rt{font-weight:600;color:var(--bone);max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .rl{max-width:380px;}
+        .rl a{color:var(--accent-s);text-decoration:none;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:rgba(230,57,70,.05);border-radius:6px;transition:all .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:340px;}
+        .rl a:hover{background:rgba(230,57,70,.14);color:#fff;}
+        .rl a i{font-size:11px;flex-shrink:0;}
+        .ra{display:flex;gap:5px;}
+        .bi{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--brd);border-radius:7px;background:transparent;color:var(--txt-m);cursor:pointer;transition:all .2s;font-size:12px;}
+        .bi:hover{background:var(--bg-card-h);color:var(--txt);border-color:var(--brd-l);}
+        .bi.dng:hover{background:rgba(230,57,70,.1);color:var(--accent-s);border-color:rgba(230,57,70,.28);}
+        .bi.suc:hover{background:rgba(76,175,80,.1);color:#81c784;border-color:rgba(76,175,80,.28);}
 
-        .subtitle {
-            color: #888;
-            margin-top: 10px;
-            font-size: 1.1em;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
+        /* Empty */
+        .empty{text-align:center;padding:70px 20px;}
+        .empty .sk-ic{font-size:60px;color:var(--bone-mt);margin-bottom:18px;opacity:.35;animation:skp 3s ease-in-out infinite;}
+        @keyframes skp{0%,100%{opacity:.35;transform:scale(1);}50%{opacity:.55;transform:scale(1.06);}}
+        .empty h3{font-size:17px;font-weight:700;color:var(--bone-dk);margin-bottom:7px;}
+        .empty p{font-size:13px;color:var(--txt-m);}
 
-        /* Formula Box */
-        .formula-container {
-            background: rgba(20, 20, 40, 0.8);
-            border: 2px solid #ff00ff;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3),
-                        inset 0 0 30px rgba(255, 0, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
+        /* Cat badge inline */
+        .cb{font-size:10px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;}
+        .cb.anime{background:rgba(230,57,70,.12);color:#ff6b7a;}
+        .cb.movie{background:var(--gold-d);color:var(--gold);}
+        .cb.manga{background:rgba(76,175,80,.1);color:#81c784;}
+        .cb.ost{background:rgba(66,165,245,.1);color:#64b5f6;}
+        .cb.other{background:rgba(255,255,255,.04);color:var(--bone-mt);}
 
-        .formula-container::before {
-            content: '☠';
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 40px;
-            opacity: 0.2;
-            color: #00ffff;
-        }
+        /* ===== MODALS ===== */
+        .mo{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s;}
+        .mo.on{opacity:1;pointer-events:all;}
+        .md{background:var(--bg-card);border:1px solid var(--brd);border-radius:15px;width:92%;max-width:500px;box-shadow:0 20px 60px rgba(0,0,0,.55);transform:translateY(18px) scale(.97);transition:transform .32s cubic-bezier(.22,1,.36,1);overflow:hidden;}
+        .mo.on .md{transform:translateY(0) scale(1);}
+        .md-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--brd);position:relative;}
+        .md-hd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);}
+        .md-hd h3{font-size:15px;font-weight:700;color:var(--bone);display:flex;align-items:center;gap:9px;}
+        .md-hd h3 i{color:var(--accent);font-size:14px;}
+        .md-cls{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--brd);border-radius:7px;color:var(--txt-m);cursor:pointer;transition:all .2s;font-size:13px;}
+        .md-cls:hover{background:rgba(230,57,70,.1);color:var(--accent-s);border-color:rgba(230,57,70,.28);}
+        .md-bd{padding:22px;display:flex;flex-direction:column;gap:16px;}
+        .fg label{display:block;font-size:11px;font-weight:600;color:var(--txt-m);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+        .fg input,.fg select,.fg textarea{width:100%;padding:11px 14px;background:var(--bg-input);border:1px solid var(--brd);border-radius:9px;color:var(--txt);font-family:'Outfit',sans-serif;font-size:13.5px;outline:none;transition:all .22s;}
+        .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-g);}
+        .fg input::placeholder,.fg textarea::placeholder{color:var(--txt-m);}
+        .fg textarea{resize:vertical;min-height:72px;}
+        .fg .ht{font-size:10.5px;color:var(--txt-m);margin-top:5px;}
+        .fg select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2374706a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+        .fg select option{background:var(--bg-card);color:var(--txt);}
+        .md-ft{display:flex;justify-content:flex-end;gap:9px;padding:15px 22px;border-top:1px solid var(--brd);}
+        .btn-c{padding:9px 18px;background:transparent;border:1px solid var(--brd);border-radius:9px;color:var(--txt-m);font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+        .btn-c:hover{background:var(--bg-card-h);color:var(--txt);}
+        .btn-sv{padding:9px 22px;background:linear-gradient(135deg,var(--accent),var(--accent-d));border:none;border-radius:9px;color:#fff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .22s;box-shadow:0 3px 14px var(--accent-g);}
+        .btn-sv:hover{transform:translateY(-1px);box-shadow:0 5px 22px var(--accent-g);}
+        .btn-dl{padding:9px 22px;background:linear-gradient(135deg,var(--accent),var(--accent-d));border:none;border-radius:9px;color:#fff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .22s;}
+        .btn-dl:hover{box-shadow:0 5px 22px var(--accent-g);transform:translateY(-1px);}
 
-        .formula-title {
-            color: #00ffff;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            border-left: 4px solid #ff00ff;
-            padding-left: 15px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-        }
+        /* Confirm body */
+        .cfb{text-align:center;padding:8px 0;}
+        .cfb .sk-w{font-size:46px;color:var(--accent);margin-bottom:14px;animation:skp 1.5s ease-in-out infinite;}
+        .cfb h4{font-size:15px;font-weight:700;color:var(--bone);margin-bottom:6px;}
+        .cfb p{font-size:13px;color:var(--txt-m);max-width:300px;margin:0 auto;}
 
-        .formula-input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #ff00ff;
-            color: #00ff00;
-            padding: 15px;
-            font-family: 'Orbitron', monospace;
-            font-size: 1.1em;
-            border-radius: 8px;
-            margin: 10px 0;
-            transition: all 0.3s;
-        }
+        /* Import area */
+        .impa{border:2px dashed var(--brd);border-radius:11px;padding:28px 18px;text-align:center;transition:all .22s;cursor:pointer;}
+        .impa:hover,.impa.drag{border-color:var(--accent);background:rgba(230,57,70,.03);}
+        .impa i{font-size:26px;color:var(--txt-m);margin-bottom:10px;}
+        .impa p{font-size:13px;color:var(--txt-m);}
+        .impa small{font-size:11px;color:var(--bone-mt);}
 
-        .formula-input:focus {
-            outline: none;
-            border-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
+        /* ===== TOAST ===== */
+        .tcon{position:fixed;top:18px;right:18px;z-index:2000;display:flex;flex-direction:column;gap:9px;}
+        .tst{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--brd);border-radius:11px;box-shadow:0 8px 30px var(--shd);font-size:13px;color:var(--txt);animation:tin .35s cubic-bezier(.22,1,.36,1);min-width:260px;}
+        .tst.ok{border-left:3px solid #4caf50;}.tst.ok i{color:#4caf50;}
+        .tst.er{border-left:3px solid var(--accent);}.tst.er i{color:var(--accent);}
+        .tst.in{border-left:3px solid var(--gold);}.tst.in i{color:var(--gold);}
+        .tst.out{animation:tout .25s ease forwards;}
+        @keyframes tin{from{opacity:0;transform:translateX(36px);}to{opacity:1;transform:translateX(0);}}
+        @keyframes tout{to{opacity:0;transform:translateX(36px);}}
 
-        .btn-calculate {
-            background: linear-gradient(45deg, #ff00ff, #9900ff);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-family: 'Orbitron', monospace;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: 20px 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(255, 0, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
+        /* Overlay mobile */
+        .sbo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;opacity:0;pointer-events:none;transition:opacity .28s;}
+        .sbo.on{opacity:1;pointer-events:all;}
 
-        .btn-calculate:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 0, 255, 0.6);
-            background: linear-gradient(45deg, #ff33ff, #aa00ff);
-        }
-
-        .btn-calculate::before {
-            content: '⚡';
-            margin-right: 10px;
-        }
-
-        .result-box {
-            background: rgba(0, 255, 0, 0.1);
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            font-size: 1.3em;
-            color: #00ff00;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-            display: none;
-        }
-
-        .result-box.show {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Table Styling */
-        .skull-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            background: rgba(20, 20, 40, 0.6);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .skull-table th {
-            background: linear-gradient(135deg, #ff00ff, #9900ff);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            border-bottom: 3px solid #00ffff;
-        }
-
-        .skull-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(255, 0, 255, 0.3);
-            transition: all 0.3s;
-        }
-
-        .skull-table tr:hover td {
-            background: rgba(255, 0, 255, 0.1);
-            color: #00ffff;
-            transform: scale(1.02);
-        }
-
-        .skull-table tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        /* Decorative Elements */
-        .bone-divider {
-            text-align: center;
-            margin: 40px 0;
-            font-size: 30px;
-            color: #ff00ff;
-            letter-spacing: 20px;
-            opacity: 0.6;
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar{width:5px;height:5px;}
+        ::-webkit-scrollbar-track{background:transparent;}
+        ::-webkit-scrollbar-thumb{background:var(--brd);border-radius:10px;}
+        ::-webkit-scrollbar-thumb:hover{background:var(--brd-l);}
 
         /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            .skull-icon { font-size: 50px; }
-            .formula-container { padding: 20px; }
+        @media(max-width:768px){
+            .sb{transform:translateX(-100%);}
+            .sb.open{transform:translateX(0);}
+            .mc{margin-left:0!important;}
+            .tb{padding:11px 14px;}
+            .pg{padding:18px 14px;}
+            .pg-hd{flex-direction:column;align-items:flex-start;}
+            .btn-p span,.btn-s span{display:none;}
+            .sbox{max-width:100%;}
+            .rl a{max-width:160px;}
+            .rt{max-width:180px;}
         }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
     </style>
 </head>
 <body>
-    <!-- Background Skulls -->
-    <div class="bg-skull" style="top: 10%; left: 5%;">💀</div>
-    <div class="bg-skull" style="top: 60%; right: 5%; animation-delay: -5s;">☠</div>
-    <div class="bg-skull" style="bottom: 10%; left: 10%; animation-delay: -10s;">💀</div>
 
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <span class="skull-icon">☠️</span>
-            <h1>SKULL FORMULA</h1>
-            <p class="subtitle">Death Calculator v1.0</p>
+<!-- Ambient -->
+<div class="amb">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+</div>
+
+<!-- Partikel Tengkorak -->
+<div class="skparts" id="skparts"></div>
+
+<!-- Toast -->
+<div class="tcon" id="tcon"></div>
+
+<!-- Overlay mobile -->
+<div class="sbo" id="sbo"></div>
+
+<!-- Modal Form -->
+<div class="mo" id="mForm">
+    <div class="md">
+        <div class="md-hd">
+            <h3><i class="fas fa-skull-crossbones"></i><span id="mFormT">Tambah Link Baru</span></h3>
+            <button class="md-cls" onclick="cMod('mForm')"><i class="fas fa-times"></i></button>
         </div>
-
-        <!-- Formula Section -->
-        <div class="formula-container">
-            <h2 class="formula-title">🦴 Masukkan Rumus Anda</h2>
-            
-            <input type="text" class="formula-input" id="formula" 
-                   placeholder="Contoh: =A1+B1*C1">
-            
-            <input type="text" class="formula-input" id="variable1" 
-                   placeholder="Variabel 1 (A1)">
-            <input type="text" class="formula-input" id="variable2" 
-                   placeholder="Variabel 2 (B1)">
-            
-            <div style="text-align: center;">
-                <button class="btn-calculate" onclick="calculate()">
-                    Hitung Sekarang
-                </button>
+        <div class="md-bd">
+            <div class="fg">
+                <label>Judul (Kolom A)</label>
+                <input type="text" id="iTitle" placeholder="Contoh: One Piece Episode 1080" autocomplete="off">
             </div>
-
-            <div class="result-box" id="result">
-                <strong>💀 Hasil:</strong> <span id="resultValue">0</span>
+            <div class="fg">
+                <label>Link (Kolom B)</label>
+                <input type="url" id="iLink" placeholder="https://...">
+                <div class="ht">Masukkan URL lengkap dengan https://</div>
+            </div>
+            <div class="fg">
+                <label>Kategori</label>
+                <select id="iCat">
+                    <option value="anime">Anime Series</option>
+                    <option value="movie">Movie</option>
+                    <option value="manga">Manga</option>
+                    <option value="ost">OST / Soundtrack</option>
+                    <option value="other">Lainnya</option>
+                </select>
             </div>
         </div>
-
-        <div class="bone-divider">⚡  ⚡</div>
-
-        <!-- Data Table -->
-        <div class="formula-container">
-            <h2 class="formula-title">📊 Tabel Data</h2>
-            <table class="skull-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Variabel</th>
-                        <th>Nilai</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>A1</td>
-                        <td>100</td>
-                        <td style="color: #00ff00;">✓ Aktif</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>B1</td>
-                        <td>250</td>
-                        <td style="color: #00ff00;">✓ Aktif</td>
-                    </tr>
-                    <tr>
-                        <td>003</td>
-                        <td>C1</td>
-                        <td>75</td>
-                        <td style="color: #ffff00;">⚠ Pending</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="md-ft">
+            <button class="btn-c" onclick="cMod('mForm')">Batal</button>
+            <button class="btn-sv" onclick="saveData()">Simpan</button>
         </div>
     </div>
+</div>
 
-    <script>
-        function calculate() {
-            const formula = document.getElementById('formula').value;
-            const var1 = parseFloat(document.getElementById('variable1').value) || 0;
-            const var2 = parseFloat(document.getElementById('variable2').value) || 0;
-            
-            // Simple calculation example
-            let result = var1 + var2;
-            
-            const resultBox = document.getElementById('result');
-            const resultValue = document.getElementById('resultValue');
-            
-            resultValue.textContent = result.toLocaleString('id-ID');
-            resultBox.classList.add('show');
-            
-            // Add skull animation
-            setTimeout(() => {
-                resultValue.innerHTML += ' 💀';
-            }, 500);
-        }
+<!-- Modal Hapus -->
+<div class="mo" id="mDel">
+    <div class="md" style="max-width:390px">
+        <div class="md-hd">
+            <h3><i class="fas fa-exclamation-triangle"></i> Konfirmasi</h3>
+            <button class="md-cls" onclick="cMod('mDel')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="md-bd">
+            <div class="cfb">
+                <div class="sk-w"><i class="fas fa-skull"></i></div>
+                <h4>Hapus data ini?</h4>
+                <p id="delInfo">Data yang dihapus tidak dapat dikembalikan.</p>
+            </div>
+        </div>
+        <div class="md-ft" style="justify-content:center">
+            <button class="btn-c" onclick="cMod('mDel')">Batal</button>
+            <button class="btn-dl" onclick="cfDel()"><i class="fas fa-trash-alt"></i> Hapus</button>
+        </div>
+    </div>
+</div>
 
-        // Add enter key support
-        document.querySelectorAll('.formula-input').forEach(input => {
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') calculate();
-            });
-        });
-    </script>
-</body>
-</html>
+<!-- Modal Import -->
+<div class="mo" id="mImp">
+    <div class="md">
+        <div class="md-hd">
+            <h3><i class="fas fa-file-import"></i> Import Data</h3>
+            <button class="md-cls" onclick="cMod('mImp')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="md-bd">
+            <div class="impa" id="impa" onclick="document.getElementById('fIn').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Klik atau drag file CSV ke sini</p>
+                <small>Format: judul, link, kategori (per baris)</small>
+            </div>
+            <input type="file" id="fIn" accept=".csv,.txt" style="display:none" onchange="hImp(event)">
+            <div class="fg" style="margin-top:2px">
+                <label>Atau paste data manual</label>
+                <textarea id="impTxt" placeholder="Judul 1, https://link1.com, anime&#10;Judul 2, https://link2.com, movie&#10;Judul 3, https://link3.com, manga"></textarea>
+                <div class="ht">Setiap baris: judul, link, kategori (pisah koma)</div>
+            </div>
+        </div>
+        <div class="md-ft">
+            <button class="btn-c" onclick="cMod('mImp')">Batal</button>
+            <button class="btn-sv" onclick="impMan()">Import</button>
+        </div>
+    </div>
+</div>
+
+<!-- APP -->
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sb" id="sb">
+        <div class="sb-hd">
+            <div class="logo">
+                <div class="logo-ico">
+                    <svg viewBox="0 0 64 64" fill="none">
+                        <path d="M32 4C18.7 4 8 14.7 8 28c0 8.4 4.4 15.8 11 20v6c0 2.2 1.8 4 4 4h18c2.2 0 4-1.8 4-4v-6c6.6-4.2 11-11.6 11-20C56 14.7 45.3 4 32 4z" fill="var(--bone)"/>
+                        <ellipse cx="22" cy="26" rx="5" ry="6.5" fill="var(--bg-void)"/>
+                        <ellipse cx="42" cy="26" rx="5" ry="6.5" fill="var(--bg-void)"/>
+                        <ellipse cx="22" cy="24" rx="2.2" ry="2.8" fill="var(--accent)" opacity=".65"/>
+                        <ellipse cx="42" cy="24" rx="2.2" ry="2.8" fill="var(--accent)" opacity=".65"/>
+                        <path d="M26 38l6 4 6-4" stroke="var(--bg-void)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <line x1="26" y1="38" x2="26" y2="44" stroke="var(--bg-void)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="32" y1="42" x2="32" y2="48" stroke="var(--bg-void)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="38" y1="38" x2="38" y2="44" stroke="var(--bg-void)" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M20 58v-4M28 58v-4M36 58v-4M44 58v-4" stroke="var(--bone)" stroke-width="2.8" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-txt">
+                    <h1>SKULL ANIME</h1>
+                    <span>Link Archive</span>
+                </div>
+            </div>
+        </div>
+        <nav class="sb-nav" id="sbNav">
+            <div class="nav-sec">Menu Utama</div>
+            <div class="ni on" data-f="all" onclick="filt(this,'all')">
+                <i class="fas fa-skull"></i> Semua Link <span class="bdg" id="bAll">0</span>
+            </div>
+            <div class="ni" data-f="anime" onclick="filt(this,'anime')">
+                <i class="fas fa-tv"></i> Anime Series <span class="bdg" id="bAni">0</span>
+            </div>
+            <div class="ni" data-f="movie" onclick="filt(this,'movie')">
+                <i class="fas fa-film"></i> Movie <span class="bdg" id="bMov">0</span>
+            </div>
+            <div class="ni" data-f="manga" onclick="filt(this,'manga')">
+                <i class="fas fa-book-open"></i> Manga <span class="bdg" id="bMan">0</span>
+            </div>
+            <div class="ni" data-f="ost" onclick="filt(this,'ost')">
+                <i class="fas fa-music"></i> OST <span class="bdg" id="bOst">0</span>
+            </div>
+            <div class="ni" data-f="other" onclick="filt(this,'other')">
+                <i class="fas fa-ellipsis-h"></i> Lainnya <span class="bdg" id="bOth">0</span>
+            </div>
+            <div class="nav-sec">Aksi Cepat</div>
+            <div class="ni" onclick="openAdd()">
+                <i class="fas fa-plus-circle" style="color:var(--accent)"></i> Tambah Baru
+            </div>
+            <div class="ni" onclick="oMod('mImp')">
+                <i class="fas fa-upload" style="color:var(--gold)"></i> Import CSV
+            </div>
+            <div class="ni" onclick="expCSV()">
+                <i class="fas fa-download" style="color:#81c784"></i> Export CSV
+            </div>
+        </nav>
+        <div class="sb-ft"><i class="fas fa-skull"></i> SkullAnime v2.0 <i class="fas fa-skull"></i></div>
+    </aside>
+
+    <!-- Main -->
+    <main class="mc" id="mc">
+        <div class="tb">
+            <button class="btn-tog" onclick="togSB()" aria-label="Toggle sidebar"><i class="fas fa-bars"></i></button>
+            <div class="sbox">
+                <i class="fas fa-search"></i>
+                <input type="text" id="sIn" placeholder="Cari judul atau link... (Ctrl+K)" oninput="render()">
+            </div>
+            <div class="tb-act">
+                <button class="btn-s" onclick="expCSV()" title="Export"><i class="fas fa-download"></i><span>Export</span></button>
+                <button class="btn-s" onclick="oMod('mImp')" title="Import"><i class="fas fa-upload"></i><span>Import</span></button>
+                <button class="btn-p" onclick="openAdd()"><i class="fas fa-plus"></i><span>Tambah Link</span></button>
+            </div>
+        </div>
+        <div class="pg">
+            <div class="pg-hd">
+                <div class="pg-t">
+                    <h2 id="pgT"><i class="fas fa-skull"></i> Semua Link</h2>
+                    <p id="pgD">Koleksi lengkap link anime tersimpan</p>
+                </div>
+                <div class="st-row">
+                    <div class="st-ch r"><i class="fas fa-database"></i> Total: <strong id="sT">0</strong></div>
+                    <div class="st-ch g"><i class="fas fa-clock"></i> Terakhir: <strong id="sL">-</strong></div>
+                </div>
+            </div>
+            <div class="tc">
+                <div class="tw">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:44px">No</th>
+                                <th>Judul (Kolom A)</th>
+                                <th>Link (Kolom B)</th>
+                                <th style="width:100px">Kategori</th>
+                                <th style="width:105px">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbdy"></tbody>
+                    </table>
+                </div>
+                <div class="empty" id="emp" style="display:none">
+                    <div class="sk-ic"><i class="fas fa-skull"></i></div>
+                    <h3>Tidak ada data ditemukan</h3>
+                    <p>Tambahkan link baru atau ubah filter pencarian</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+/* ============================================
+   DATA DEFAULT (dari spreadsheet)
+   Kolom A = Judul | Kolom B = Link
+   ============================================ */
+const DEF = [
+    {id:1,title:"One Piece Episode 1080 Sub Indo",link:"https://example.com/one-piece-1080",cat:"anime"},
+    {id:2,title:"One Piece Episode 1081 Sub Indo",link:"https://example.com/one-piece-1081",cat:"anime"},
+    {id:3,title:"One Piece Episode 1082 Sub Indo",link:"https://example.com/one-piece-1082",cat:"anime"},
+    {id:4,title:"Jujutsu Kaisen Season 2 Eps 1-23",link:"https://example.com/jjk-s2-full",cat:"anime"},
+    {id:5,title:"Jujutsu Kaisen Season 2 Eps 24",link:"https://example.com/jjk-s2-eps24",cat:"anime"},
+    {id:6,title:"Demon Slayer Mugen Train Movie",link:"https://example.com/ds-mugen-train",cat:"movie"},
+    {id:7,title:"Demon Slayer Swordsmith Arc Eps 1-11",link:"https://example.com/ds-swordsmith",cat:"anime"},
+    {id:8,title:"Spy x Family Season 1 Full Episode",link:"https://example.com/spy-x-family-s1",cat:"anime"},
+    {id:9,title:"Spy x Family Season 2 Eps 1-12",link:"https://example.com/spy-x-family-s2",cat:"anime"},
+    {id:10,title:"Spy x Family Code White Movie",link:"https://example.com/sxf-code-white",cat:"movie"},
+    {id:11,title:"Chainsaw Man Episode 1-12 Sub Indo",link:"https://example.com/chainsaw-man-full",cat:"anime"},
+    {id:12,title:"Attack on Titan Final Season Part 3",link:"https://example.com/aot-final-s3",cat:"anime"},
+    {id:13,title:"Attack on Titan Final Season Part 4",link:"https://example.com/aot-final-s4",cat:"anime"},
+    {id:14,title:"Suzume no Tojimari Movie Sub Indo",link:"https://example.com/suzume-movie",cat:"movie"},
+    {id:15,title:"Bleach TYBW Part 2 Eps 1-13",link:"https://example.com/bleach-tybw-p2",cat:"anime"},
+    {id:16,title:"Bleach TYBW Part 3 Eps 1-14",link:"https://example.com/bleach-tybw-p3",cat:"anime"},
+    {id:17,title:"One Piece Film Red Sub Indo",link:"https://example.com/op-film-red",cat:"movie"},
+    {id:18,title:"One Piece Stampede Movie",link:"https://example.com/op-stampede",cat:"movie"},
+    {id:19,title:"Chainsaw Man Manga Chapter 1-170",link:"https://example.com/csm-manga-full",cat:"manga"},
+    {id:20,title:"Jujutsu Kaisen Manga Chapter 250+",link:"https://example.com/jjk-manga-latest",cat:"manga"},
+    {id:21,title:"One Piece Manga Chapter 1100+",link:"https://example.com/op-manga-latest",cat:"manga"},
+    {id:22,title:"Attack on Titan Manga Complete",link:"https://example.com/aot-manga-end",cat:"manga"},
+    {id:23,title:"Spy x Family Manga Chapter 90+",link:"https://example.com/sxf-manga",cat:"manga"},
+    {id:24,title:"Berserk Manga Chapter 370+",link:"https://example.com/berserk-manga",cat:"manga"},
+    {id:25,title:"One Piece OST - We Are Full Version",link:"https://example.com/op-ost-we-are",cat:"ost"},
+    {id:26,title:"Jujutsu Kaisen OP1 - Kaikai Kitan",link:"https://example.com/jjk-op1-kaikai",cat:"ost"},
+    {id:27,title:"Demon Slayer OP - Gurenge LiSA",link:"https://example.com/ds-op-gurenge",cat:"ost"},
+    {id:28,title:"Attack on Titan OP - Shinzou wo Sasageyo",link:"https://example.com/aot-op-shinzou",cat:"ost"},
+    {id:29,title:"Frieren Beyond Journey End Eps 1-28",link:"https://example.com/frieren-full",cat:"anime"},
+    {id:30,title:"Solo Leveling Season 1 Full Sub Indo",link:"https://example.com/solo-leveling-s1",cat:"anime"},
+    {id:31,title:"Solo Leveling Season 2 Arise From Shadow",link:"https://example.com/solo-leveling-s2",cat:"anime"},
+    {id:32,title:"Shangri-La Frontier Eps 1-25",link:"https://example.com/shangri-la-frontier",cat:"anime"},
+    {id:33,title:"Sword Art Online Progressive Movie 1",link:"https://example.com/sao-prog-m1",cat:"movie"},
+    {id:34,title:"Sword Art Online Progressive Movie 2",link:"https://example.com/sao-prog-m2",cat:"movie"},
+    {id:35,title:"Bocchi the Rock Episode 1-12 Sub Indo",link:"https://example.com/bocchi-rock-full",cat:"anime"},
+    {id:36,title:"Oshi no Ko Season 1 Eps 1-11",link:"https://example.com/oshi-no-ko-s1",cat:"anime"},
+    {id:37,title:"Oshi no Ko Season 2 Eps 1-13",link:"https://example.com/oshi-no-ko-s2",cat:"anime"},
+    {id:38,title:"Spy x Family OST - Mixed Nuts",link:"https://example.com/sxf-ost-mixed-nuts",cat:"ost"},
+    {id:39,title:"Frieren Manga Chapter 130+",link:"https://example.com/frieren-manga-latest",cat:"manga"},
+    {id:40,title:"Solo Leveling Manga Complete",link:"https://example.com/sl-manga-complete",cat:"manga"},
+    {id:41,title:"Kaiju No 8 Episode 1-12 Sub Indo",link:"https://example.com/kaiju-no8-full",cat:"anime"},
+    {id:42,title:"Dandadan Episode 1-12 Sub Indo",link:"https://example.com/dandadan-full",cat:"anime"},
+    {id:43,title:"Blue Lock Season 1 Eps 1-24",link:"https://example.com/blue-lock-s1",cat:"anime"},
+    {id:44,title:"Blue Lock Season 2 Eps 1-14",link:"https://example.com/blue-lock-s2",cat:"anime"},
+    {id:45,title:"Blue Lock vs U-20 Japan Movie",link:"https://example.com/blue-lock-movie",cat:"movie"},
+    {id:46,title:"Haikyuu The Movie Battle of Garbage Dump",link:"https://example.com/haikyuu-movie-garbage",cat:"movie"},
+    {id:47,title:"Kimi no Na wa Movie Sub Indo",link:"https://example.com/kimi-no-na-wa",cat:"movie"},
+    {id:48,title:"Tenki no Ko Weathering With You Movie",link:"https://example.com/tenki-no-ko",cat:"movie"},
+    {id:49,title:"Kaiju No 8 Manga Chapter 100+",link:"https://example.com/kaiju-no8-manga",cat:"manga"},
+    {id:50,title:"Blue Lock Manga Chapter 270+",link:"https://example.com/blue-lock-manga",cat:"manga"},
+];
+
+/* === STATE === */
+let D = [];
+let curF = 'all';
+let edId = null;
+let delId = null;
+
+/* === INIT === */
+function init() {
+    const s = localStorage.getItem('skullAnimeD');
+    if (s) { try { D = JSON.parse(s); } catch(e) { D = [...DEF]; } }
+    else { D = [...DEF]; }
+    render(); upBdg(); mkSkP();
+}
+
+/* === STORAGE === */
+function sav() { localStorage.setItem('skullAnimeD', JSON.stringify(D)); }
+
+/* === ESCAPE HTML === */
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+/* === DETEKSI KATEGORI === */
+function autoCat(t) {
+    const l = t.toLowerCase();
+    if (/ost|soundtrack|opening|ending|\bop\b|\bed\b|mv\s/i.test(l)) return 'ost';
+    if (/manga|chapter|ch\.?\d|komik/i.test(l)) return 'manga';
+    if (/movie|film|theater|theatre/i.test(l)) return 'movie';
+    return 'anime';
+}
+
+/* === RENDER === */
+function render() {
+    const tb = document.getElementById('tbdy');
+    const emp = document.getElementById('emp');
+    const q = document.getElementById('sIn').value.toLowerCase().trim();
+
+    let f = D;
+    if (curF !== 'all') f = f.filter(i => i.cat === curF);
+    if (q) f = f.filter(i => i.title.toLowerCase().includes(q) || i.link.toLowerCase().includes(q));
+
+    document.getElementById('sT').textContent = f.length;
+    const last = D.length > 0 ? D[D.length - 1] : null;
+    document.getElementById('sL').textContent = last ? (last.title.length > 22 ? last.title.substring(0,22)+'...' : last.title) : '-';
+
+    if (!f.length) { tb.innerHTML = ''; emp.style.display = 'block'; return; }
+    emp.style.display = 'none';
+
+    tb.innerHTML = f.map((it, idx) => `
+        <tr>
+            <td class="rn">${idx+1}</td>
+            <td class="rt" title="${esc(it.title)}">${esc(it.title)}</td>
+            <td class="rl"><a href="${esc(it.link)}" target="_blank" rel="noopener noreferrer" title="${esc(it.link)}"><i class="fas fa-external-link-alt"></i>${esc(it.link)}</a></td>
+            <td><span class="cb ${it.cat||'anime'}">${it.cat||'anime'}</span></td>
+            <td>
+                <div class="ra">
+                    <button class="bi suc" onclick="cpLn(${it.id})" title="Salin link"><i class="fas fa-copy"></i></button>
+                    <button class="bi" onclick="openEd(${it.id})" title="Edit"><i class="fas fa-pen"></i></button>
+                    <button class="bi dng" onclick="openDel(${it.id})" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </td>
+        </tr>
+    `).join('');
+}
+
+/* === BADGES === */
+function upBdg() {
+    const c = (cat) => D.filter(i => i.cat === cat).length;
+    document.getElementById('bAll').textContent = D.length;
+    document.getElementById('bAni').textContent = c('anime');
+    document.getElementById('bMov').textContent = c('movie');
+    document.getElementById('bMan').textContent = c('manga');
+    document.getElementById('bOst').textContent = c('ost');
+    document.getElementById('bOth').textContent = c('other');
+}
+
+/* === FILTER SIDEBAR === */
+function filt(el, f) {
+    document.querySelectorAll('.ni[data-f]').forEach(n => n.classList.remove('on'));
+    el.classList.add('on');
+    curF = f;
+    const T = {all:'Semua Link',anime:'Anime Series',movie:'Movie',manga:'Manga',ost:'OST / Soundtrack',other:'Lainnya'};
+    const I = {all:'fa-skull',anime:'fa-tv',movie:'fa-film',manga:'fa-book-open',ost:'fa-music',other:'fa-ellipsis-h'};
+    const Desc = {all:'Koleksi lengkap link anime tersimpan',anime:'Daftar anime series dengan link streaming',movie:'Koleksi movie anime',manga:'Link baca manga online',ost:'Soundtrack dan opening/ending anime',other:'Koleksi lainnya'};
+    document.getElementById('pgT').innerHTML = `<i class="fas ${I[f]||'fa-skull'}"></i> ${T[f]||'Semua Link'}`;
+    document.getElementById('pgD').textContent = Desc[f]||'';
+    render();
+    if (window.innerWidth <= 768) clSB();
+}
+
+/* === MODAL === */
+function oMod(id) { document.getElementById(id).classList.add('on'); document.body.style.overflow='hidden'; }
+function cMod(id) { document.getElementById(id).classList.remove('on'); document.body.style.overflow=''; }
+
+/* === TAMBAH === */
+function openAdd()
